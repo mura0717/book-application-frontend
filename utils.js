@@ -1,3 +1,4 @@
+import { FetchClient } from "./Fetcher.js";
 /**
  * Appends the provided template to the node with the id contentId
  * @param {*} template The HTML-Template to render
@@ -93,3 +94,5 @@ export function sanitizeStringWithTableRows(tableRows) {
   secureRows = secureRows.replace("<table>", "").replace("</table>", "");
   return secureRows;
 }
+
+export const fetchClient = new FetchClient();
