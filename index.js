@@ -10,11 +10,13 @@ import { initBook } from "./pages/book/index.js";
 import { initBookList } from "./pages/booklist/index.js";
 import { initBooks } from "./pages/books/index.js";
 import { initLogin } from "./pages/login/index.js";
+import { initSignup } from "./pages/signup/index.js";
 
 window.addEventListener("load", async () => {
   const bookTemplate = await loadTemplate("./pages/book/index.html");
   const booksTemplate = await loadTemplate("./pages/books/index.html");
   const loginTemplate = await loadTemplate("./pages/login/index.html");
+  const signupTemplate = await loadTemplate("./pages/signup/index.html");
   const bookListTemplate = await loadTemplate("./pages/booklist/index.html");
 
   const router = new Navigo("/", { hash: true });
@@ -40,6 +42,10 @@ window.addEventListener("load", async () => {
       "/login": () => {
         renderTemplate(loginTemplate, "content");
         initLogin();
+      },
+      "/signup": () => {
+        renderTemplate(signupTemplate, "content");
+        initSignup();
       },
       "/book/:referenceId": (param) => {
         renderTemplate(bookTemplate, "content");
