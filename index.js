@@ -1,10 +1,13 @@
 import "https://unpkg.com/navigo";
+
 import {
   loadTemplate,
   adjustForMissingHash,
   setActiveLink,
   renderTemplate,
 } from "./utils.js";
+
+import Searcher from "./models/Searcher.js";
 
 import { initBook } from "./pages/book/index.js";
 import { initBookList } from "./pages/booklist/index.js";
@@ -21,6 +24,12 @@ window.addEventListener("load", async () => {
 
   const router = new Navigo("/", { hash: true });
   window.router = router;
+
+  // Initialize searcher
+  new Searcher(
+    document.getElementById("search_input"),
+    document.getElementById("search_output")
+  );
 
   adjustForMissingHash();
   router
