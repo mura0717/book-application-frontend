@@ -1,8 +1,8 @@
-import { handleHttpErrors } from "./utils.js";
+import { handleHttpErrors } from "../utils.js";
 
-export class FetchClient {
+export default class FetchClient {
   constructor() {
-    const baseURL = "http://localhost:8080/api";
+    this.baseURL = "http://localhost:8080/api";
   }
 
   /**
