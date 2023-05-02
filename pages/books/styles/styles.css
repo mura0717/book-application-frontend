@@ -1,0 +1,16 @@
+@media (min-width: 992px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.book_card {
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.book_card:hover {
+  background-color: #c2c2c2;
+}
