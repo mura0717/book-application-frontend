@@ -56,9 +56,9 @@ window.addEventListener("load", async () => {
         renderTemplate(signupTemplate, "content");
         initSignup();
       },
-      "/book/:referenceId": (param) => {
+      "/book/:bookId": (param) => {
         renderTemplate(bookTemplate, "content");
-        initBook(param.data.referenceId);
+        initBook(param.data.bookId);
       },
     })
     .notFound(() => renderTemplate("No page for this route found", "content"))

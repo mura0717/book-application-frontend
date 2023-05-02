@@ -37,7 +37,7 @@ export default class Searcher {
       .map(
         (book) => `
         <div data-book-id="${
-          book.etag
+          book.id
         }" class="d-flex flex-row w-100 justify-content-between align-items-center p-2 search_book" style="cursor: pointer;">
             <div class="d-flex flex-row">
                 <img style="width: 37px; height: 47px; border-radius: 2px;" src="${
