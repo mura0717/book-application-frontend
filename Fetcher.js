@@ -2,8 +2,9 @@ import { handleHttpErrors } from "./utils.js";
 
 export class FetchClient {
   constructor() {
-    const baseURL = "http://localhost:8080/api";
+    this.baseURL = "http://localhost:8080/api";
   }
+  
 
   /**
    * Make a GET request to the targetted endpoint
@@ -44,6 +45,30 @@ export class FetchClient {
       return undefined;
     }
   }
+
+  /**
+   * Make a PATCH request to the targetted endpoint
+   * @param {string} endpoint
+   * @param {object} body
+   * @example const data = await fetchClient.post("/users", {"username": "test", "password": "1234"})
+   */
+  
+  async patch(endpoint, body) {
+    return await fetch(`${this.baseURL}${endpoint}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(handleHttpErrors)
+        .catch(err => {
+          console.log(err);
+          return {
+            message : err.message
+          };
+        });
+  }
+  
 
   /**
    * Make a GET request to the targetted endpoint with authorization

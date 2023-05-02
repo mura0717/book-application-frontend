@@ -1,0 +1,153 @@
+#book-cont{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 400px;
+    column-gap: 15px;
+}
+
+#poster-cont{
+    grid-row: span 5;
+    border:1px solid black;
+    justify-self: end;
+    background: #818181;
+    border-radius: 7px;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#book-title{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 4rem;
+    white-space: nowrap;
+    color: #000000;
+    margin-top: 1.5rem;
+}
+
+#book-authors{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: #565656;
+}
+
+#review-cont{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3,min-content) 1fr;
+    white-space: nowrap;
+    align-items: center;
+    column-gap: 12px;
+}
+
+#stars-cont{
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    column-gap: 12px;
+}
+
+#review-count{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #B8B8B8;
+}
+
+#fav-btn{
+    background: url("fav-image.png") no-repeat;
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    justify-self: end;
+    transition: all 0.1s ease-in-out;
+}
+
+#fav-btn:hover{
+    scale: 1.25;
+}
+
+#middle-grid{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 2fr 1fr;
+    height: 48px;
+    margin-top:1.5rem;
+}
+
+#tags-cont{
+    display: flex;
+    justify-items: start;
+    column-gap: 12px;
+    overflow-x: auto;
+}
+
+.tag-cont{
+    display: grid;
+    width: min-content;
+    padding:0.5rem;
+    align-items: center;
+    height: 2rem;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 15px;
+    color: #FFFFFF;
+    background: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+#buy-btn{
+    background: #00C5A1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border:0;
+    border-radius: 3px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#descr-cont{
+    height: 256px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: justify;
+    color: #6A6A6A;
+}
+
+#book-rec-title{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    color: #000000;
+    grid-column: span 2;
+    margin-top: 1.5rem;
+}
+
+#book-rec-cont{
+    display: flex;
+    justify-content: start;
+    height: 256px;
+    border:1px solid black;
+    grid-column: span 2;
+}
