@@ -1,4 +1,4 @@
-import { FetchClient } from "./Fetcher.js";
+import FetchClient from "./models/Fetcher.js";
 /**
  * Appends the provided template to the node with the id contentId
  * @param {*} template The HTML-Template to render

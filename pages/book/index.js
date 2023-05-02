@@ -4,7 +4,6 @@ import {createStar} from "./BookElementsFactory.js";
 const bookReference = "_ojXNuzgHRcC"
 
 export const initBook = (referenceId) => {
-  console.log(referenceId);
   setupFavButton()
   initReviewStars(2)
 };
@@ -18,7 +17,6 @@ const handleUpdateBookList = async (bookListId, bookId) => {
   const body = {"bookId" : bookId,"bookListId" :  bookListId}
   const response = await fetchClient.patch("/books/update",body)
   const responseMessage = response ? response.message : "None"
-  console.log(responseMessage)
 }
 
 const initReviewStars = value => {
