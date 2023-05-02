@@ -1,37 +1,24 @@
-import {fetchBook, fetchBookList} from "./DummyBooks.js";
-
-class UserList{
-    references
-    title
-}
-
-class Book{
-    title
-    year
-    publisher
-    description
-    image
-    authors
-}
+import {fetchBook} from "./httpBooks.js";
+import {fetchBookList} from "./dummyBookLists.js";
 
 let bookLists =[]
 let book = null
-
 
 export const init = async (reference) => {
     const bookResponse =  await fetchBook(reference)
     book = convertToBook(bookResponse)
     bookLists = await fetchBookList()
+    return "";
 }
 
 const convertToBook = bookResponse => {
-    return  {
+    return {
         title : bookResponse.volumeInfo.title,
         year : bookResponse.volumeInfo.publishedDate,
         description : bookResponse.volumeInfo.description,
         publisher : bookResponse.volumeInfo.publisher,
         authors : formatAuthors(bookResponse.volumeInfo.authors),
-        image : bookResponse.volumeInfo.imageLinks.thumpnail
+        image : bookResponse.volumeInfo.imageLinks.thumbnail
     }
 }
 

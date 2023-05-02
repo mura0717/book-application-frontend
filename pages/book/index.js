@@ -5,7 +5,7 @@ import * as Books from "./BookLists/UserBooks.js"
 const bookReference = "_ojXNuzgHRcC"
 
 export const initBook = (referenceId) => {
-  Books.init(referenceId)
+  Books.init(bookReference)
       .then(() => {
         setupFavButton()
         initReviewStars(3)
