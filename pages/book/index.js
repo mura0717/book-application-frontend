@@ -24,19 +24,19 @@ const setupFav = reference => {
 }
 
 const setupFavIcons = reference => {
-  Factory.addOnclickHandler("fav-btn-add",async () => await addFavHandler(reference)) 
+  Factory.addOnclickHandler("fav-btn-add",async () => await addToFavoritesHandler(reference)) 
   updateFavoriteStatus()
-  Factory.addOnclickHandler("fav-btn-added",async () => await addedFavHandler(reference))
+  Factory.addOnclickHandler("fav-btn-added",async () => await removeFromFavoritesHandler(reference))
 }
 
-const addFavHandler = async reference => {
-  await Books.addToFavoriteList(reference,Factory.selectValue("list-sel"))
-  updateFavoriteStatus()
+const addToFavoritesHandler = async reference => {
+  const result = await Books.addToFavoriteList(reference,Factory.selectValue("list-sel"))
+  showAddedButton(result)
 }
 
-const addedFavHandler = async reference => {
-  await Books.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
-  updateFavoriteStatus()
+const removeFromFavoritesHandler = async reference => {
+  const result = await Books.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
+  showAddedButton(!result)
 }
 
 const setupFavList = () => {
@@ -68,7 +68,11 @@ const updateFavoriteStatus = () => {
   const book = Books.getBook()
   const reference = book.reference
   const bookListReference = Factory.selectValue("list-sel")
-  if(Books.alreadyAdded(reference,bookListReference)){
+  showAddedButton(Books.alreadyAdded(reference,bookListReference))
+}
+
+const showAddedButton = show => {
+  if(show){
     Factory.updateElementDisplay("fav-btn-add",false)
     Factory.updateElementDisplay("fav-btn-added",true)
   }
