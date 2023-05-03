@@ -19,7 +19,7 @@ const setupBookDetails = () => {
   let book = Books.getBook()
   Factory.updateTextContent("book-title",book.title)
   Factory.updateTextContent("book-authors",book.authors)
-  Factory.updateTextContent("descr-cont",book.description)
+  Factory.updateInnerHtml("descr-cont",book.description)
   Factory.updateImageElement("poster-cont",book.image)
   if(book.buyLink !== null){
     Factory.showElement("buy-btn",true)
@@ -42,14 +42,13 @@ const addToFavoritesHandler = async reference => {
   const result = await BookLists.addToFavoriteList(reference,Factory.selectValue("list-sel"))
   if(!result)
     alert("Boogie Preben slår til igen! Tilkald politiet eller fyr mønter efter ham. Hvis i vælger at fyre mønter" +
-        "efter ham, kan det varmt anbefales at varme mønterne op med en lighter inde i tyrer dem i hovedet på ham. " +
-        "Det kan han så godt lide.")
-  showAddedButton(result)
+        "efter ham, kan det varmt anbefales at varme mønterne op med en lighter inde i tyrer dem i hovedet på ham.")
+  showAddToFavorites(result)
 }
 
 const removeFromFavoritesHandler = async reference => {
   const result = await BookLists.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
-  showAddedButton(!result)
+  showAddToFavorites(!result)
 }
 
 const setupFavList = () => {
@@ -61,8 +60,6 @@ const updateFavListValues = () => {
   BookLists.getBookLists().forEach((b,i) => {
     const opt = document.createElement("option")
     opt.textContent = b.title
-    if(i === 0)
-      opt.selected = true
     opt.value = b.id
     Factory.appendChildTo("list-sel",opt)
   })
@@ -79,12 +76,11 @@ const setupReviewDetails = () => {
 
 const updateFavoriteStatus = () => {
   const book = Books.getBook()
-  const reference = book.reference
   const bookListReference = Factory.selectValue("list-sel")
-  showAddedButton(BookLists.alreadyAdded(reference,bookListReference))
+  showAddToFavorites(BookLists.alreadyAdded(book.reference,bookListReference))
 }
 
-const showAddedButton = show => {
+const showAddToFavorites = show => {
   if(show){
     Factory.showElement("fav-btn-add",false)
     Factory.showElement("fav-btn-added",true)
