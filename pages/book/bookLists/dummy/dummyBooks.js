@@ -1,3 +1,4 @@
+let book = null
 
 export const fetchBook = async reference => {
     return {
@@ -18,3 +19,5 @@ export const fetchBook = async reference => {
         }
     }
 }
+
+export const getFetchedBook = () => book

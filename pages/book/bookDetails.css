@@ -2,6 +2,7 @@
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: 1fr 400px;
+    grid-auto-rows: min-content;
     column-gap: 15px;
     overflow-x: auto;
     width: 100%;
@@ -11,9 +12,9 @@
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 4rem;
-    line-height: 4rem;
-    white-space: nowrap;
+    font-size: 3rem;
+    line-height: 3.5rem;
+    white-space: pre-wrap;
     color: #000000;
     margin-top: 1.5rem;
     overflow-x: auto;
@@ -38,8 +39,8 @@
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
     color: #565656;
 }
 
@@ -100,8 +101,8 @@
     scale: 0.6;
 }
 
-#fav-btn{
-    background: url("resources/fav-image.png") no-repeat;
+#fav-btn-add{
+    background: url("resources/fav-add-image.png") no-repeat;
     background-size: cover;
     width: 24px;
     height: 24px;
@@ -111,14 +112,37 @@
     user-select: none;
 }
 
-#fav-btn:hover{
+#fav-btn-add:hover{
     scale: 1.25;
     border:1px solid white;
     box-shadow: white 0 0 15px;
     border-radius: 6px;
 }
 
-#fav-btn:active{
+#fav-btn-add:active{
+    scale: 0.6;
+}
+
+#fav-btn-added{
+    display: block;
+    background: url("resources/fav-added-image.png") no-repeat;
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    justify-self: end;
+    border:1px solid transparent;
+    transition: all 0.1s ease-in-out;
+    user-select: none;
+}
+
+#fav-btn-added:hover{
+    scale: 1.25;
+    border:1px solid white;
+    box-shadow: white 0 0 15px;
+    border-radius: 6px;
+}
+
+#fav-btn-added:active{
     scale: 0.6;
 }
 
