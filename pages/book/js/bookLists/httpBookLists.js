@@ -16,7 +16,7 @@ export const addToBookList = async (reference, listReference) => {
         bookId : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.postWithAuth(route,body)
+    const response = await fetchClient.pathWithAuth(route,body)
     return response !== undefined
     
 }

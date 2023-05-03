@@ -35,7 +35,7 @@ export const addOnclickHandler = (id, handler) => {
     el.onclick = handler
 }
 
-export const updateElementDisplay = (id,show) => {
+export const showElement = (id, show) => {
     const el = document.getElementById(id)
     el.style.display = show ? "block" : "none"
 }
