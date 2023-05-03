@@ -14,7 +14,7 @@ async function fetchInputValues(e) {
     const passwordInput = document.getElementById("input-password").value;
 
     const body = {
-        email: usernameInput,
+        username: usernameInput,
         password: passwordInput,
     };
   
