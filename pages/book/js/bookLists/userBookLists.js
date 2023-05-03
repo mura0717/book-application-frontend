@@ -1,4 +1,4 @@
-import * as BookLists from "./httpBookLists.js";
+import * as BookLists from "./dummyBookLists.js";
 
 export const init = async () => await BookLists.fetchBookList()
 

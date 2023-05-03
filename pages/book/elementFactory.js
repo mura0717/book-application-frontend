@@ -20,6 +20,9 @@ export const appendChildTo = (id,childElement) => {
 
 export const updateTextContent = (id, content) => document.getElementById(id).textContent = content
 
+export const updateInnerHtml = (id, content) => document.getElementById(id).innerHTML = DOMPurify.sanitize(content)
+
+
 export const selectValue = (id) => {
     const el = document.getElementById(id)
     return el.value
