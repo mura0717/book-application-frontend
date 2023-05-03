@@ -1,20 +1,19 @@
 import { fetchClient } from "../../../utils.js";
 
-export default class Paginator {
-  constructor(startIndex, element, next) {
-    this.currPage = startIndex;
+export default class Slicer {
+  constructor(element, moreBtn) {
     this.element = element;
-    this.nextButton = next;
+    this.moreButton = moreBtn;
     this.books = [];
-    next.onclick = this.nextSlice;
+    moreBtn.onclick = this.nextSlice;
 
-    this.getBooks().then(() => next.classList.remove("d-none"));
+    this.getBooks().then(() => moreBtn.classList.remove("d-none"));
   }
 
   getBooks = async () => {
     // Show loading
-    this.nextButton.textContent = "";
-    this.nextButton.innerHTML = DOMPurify.sanitize(`
+    this.moreButton.textContent = "";
+    this.moreButton.innerHTML = DOMPurify.sanitize(`
       <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"/>
     `);
 
@@ -25,7 +24,6 @@ export default class Paginator {
   };
 
   nextSlice = () => {
-    this.currPage += 1;
     this.getBooks();
   };
 
@@ -57,6 +55,6 @@ export default class Paginator {
       )
       .join("\n");
     this.element.innerHTML = DOMPurify.sanitize(htmlString);
-    this.nextButton.innerHTML = DOMPurify.sanitize("Vis flere");
+    this.moreButton.innerHTML = DOMPurify.sanitize("Vis flere");
   };
 }

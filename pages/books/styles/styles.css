@@ -15,12 +15,12 @@
   scale: 1.05;
 }
 
-#next_btn {
+#more_btn {
   background-color: #00c5a1;
   cursor: pointer;
   transition: 0.3s;
 }
 
-#next_btn:hover {
+#more_btn:hover {
   background-color: #00886f;
 }
