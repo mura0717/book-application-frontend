@@ -1,0 +1,26 @@
+@media (min-width: 992px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.book_card {
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.book_card:hover {
+  scale: 1.05;
+}
+
+#more_btn {
+  background-color: #00c5a1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#more_btn:hover {
+  background-color: #00886f;
+}

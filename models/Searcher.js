@@ -1,4 +1,5 @@
 import { fetchClient } from "../utils.js";
+
 export default class Searcher {
   constructor(input, output, debounceVal = 500) {
     this.output = output;
