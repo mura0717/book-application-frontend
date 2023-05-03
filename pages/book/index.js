@@ -1,3 +1,3 @@
-export const initBook = (referenceId) => {
-  console.log(referenceId);
+export const initBook = (bookId) => {
+  console.log(bookId);
 };
