@@ -31,6 +31,10 @@ const setupFavIcons = reference => {
 
 const addToFavoritesHandler = async reference => {
   const result = await Books.addToFavoriteList(reference,Factory.selectValue("list-sel"))
+  if(!result)
+    alert("Boogie Preben slår til igen! Tilkald politiet eller fyr mønter efter ham. Hvis i vælger at fyre mønter" +
+        "efter ham, kan det varmt anbefales at varme mønterne op med en lighter inde i tyrer dem i hovedet på ham. " +
+        "Det kan han så godt lide.")
   showAddedButton(result)
 }
 
