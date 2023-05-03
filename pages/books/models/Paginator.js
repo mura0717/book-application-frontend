@@ -1,41 +1,32 @@
 import { fetchClient } from "../../../utils.js";
 
 export default class Paginator {
-  constructor(startIndex, element, next, prev) {
+  constructor(startIndex, element, next) {
     this.currPage = startIndex;
     this.element = element;
     this.nextButton = next;
-    this.prevButton = prev;
+    this.books = [];
+    next.onclick = this.nextSlice;
 
-    next.onclick = this.next;
-    prev.onclick = this.previous;
-
-    this.getBooks();
+    this.getBooks().then(() => next.classList.remove("d-none"));
   }
 
   getBooks = async () => {
-    const data = await fetchClient.get(
-      `/books/pagination?startIndex=${this.currPage}`
-    );
+    // Show loading
+    this.nextButton.textContent = "";
+    this.nextButton.innerHTML = DOMPurify.sanitize(`
+      <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"/>
+    `);
+
+    const data = await fetchClient.get(`/books/slice`);
     if (!data) return;
-    this.render(data);
-    this.updateButtons();
+    this.books.push(...data);
+    this.render(this.books);
   };
 
-  next = () => {
+  nextSlice = () => {
     this.currPage += 1;
     this.getBooks();
-  };
-
-  previous = () => {
-    this.currPage -= 1;
-    this.getBooks();
-  };
-
-  updateButtons = () => {
-    if (this.currPage === 0) this.prevButton.classList.add("disabled");
-    if (this.currPage > 0 && this.prevButton.classList.contains("disabled"))
-      this.prevButton.classList.remove("disabled");
   };
 
   render = (data) => {
@@ -44,8 +35,8 @@ export default class Paginator {
         (book) => `
         <a href="/#/book/${
           book.id
-        }" class="mb-2 mb-lg-0 d-flex flex-column book_card" >
-            <img style="height: 400px;" src="${
+        }" class="mb-5 mb-lg-0 d-flex flex-column book_card">
+            <img style="height: 400px; border: 1px solid #A3A3A3;" src="${
               book.volumeInfo.imageLinks !== null
                 ? book.volumeInfo.imageLinks.thumbnail
                 : "../../assets/BlankThumbnail.png"
@@ -66,6 +57,6 @@ export default class Paginator {
       )
       .join("\n");
     this.element.innerHTML = DOMPurify.sanitize(htmlString);
-    window.scrollTo(0, 0);
+    this.nextButton.innerHTML = DOMPurify.sanitize("Vis flere");
   };
 }

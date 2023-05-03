@@ -12,5 +12,15 @@
 }
 
 .book_card:hover {
-  background-color: #c2c2c2;
+  scale: 1.05;
+}
+
+#next_btn {
+  background-color: #00c5a1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#next_btn:hover {
+  background-color: #00886f;
 }
