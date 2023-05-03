@@ -3,17 +3,8 @@
     grid-auto-flow: row;
     grid-template-columns: 1fr 400px;
     column-gap: 15px;
-}
-
-#poster-cont{
-    grid-row: span 5;
-    border:1px solid black;
-    justify-self: end;
-    border-radius: 7px;
+    overflow-x: auto;
     width: 100%;
-    display: grid;
-    justify-content: center;
-    align-items: center;
 }
 
 #book-title{
@@ -25,6 +16,22 @@
     white-space: nowrap;
     color: #000000;
     margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#book-title::-webkit-scrollbar{
+    display: none;
+}
+
+#poster-cont{
+    grid-row: span 5;
+    justify-self: end;
+    border-radius: 7px;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 #book-authors{

@@ -22,13 +22,24 @@ const convertToBook = bookResponse => {
     }
 }
 
-export const bookListTitles = () => bookLists.map(b => b.title)
+export const getBookLists = () => bookLists
 
 export const bookListId = title => {
     const filtered = bookLists.filter(b => b.title === title)
     if(filtered.length > 0)
         return filtered.at(0)
     return ""
+}
+
+export const updateBookList = (reference, listReference) => {
+    console.trace(reference)
+    console.trace(listReference)
+    return ""
+}
+
+export const getBookList = (title) => {
+    const result = bookLists.find(b => b.title === title)
+    return result !== undefined ? result : null
 }
 
 export const getBook = () => book
