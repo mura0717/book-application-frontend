@@ -1,0 +1,47 @@
+#book-title{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 3.5rem;
+    white-space: pre-wrap;
+    color: #000000;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#book-title::-webkit-scrollbar{
+    display: none;
+}
+
+#poster-cont{
+    grid-row: span 5;
+    justify-self: end;
+    border-radius: 7px;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#book-authors{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #565656;
+}
+
+#descr-cont{
+    height: 256px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: justify;
+    color: #6A6A6A;
+    margin-top:1rem;
+}

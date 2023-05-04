@@ -1,6 +1,6 @@
 import * as BookLists from "./dummyBookLists.js";
 
-export const init = async () => await BookLists.fetchBookList()
+export const fetchBookLists = async () => await BookLists.fetchBookLists()
 
 export const getBookLists = () => BookLists.getFetchedBookLists()
 

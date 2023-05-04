@@ -1,0 +1,54 @@
+#rec-section-title{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    color: #000000;
+    grid-column: span 2;
+    margin-top: 1.5rem;
+}
+
+#rec-cont{
+    display: flex;
+    justify-content: start;
+    column-gap: 40px;
+    height: 300px;
+    grid-column: span 2;
+}
+
+.rec-item{
+    width: 200px;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: 1fr min-content min-content min-content;
+    row-gap: 1px;
+}
+
+.rec-poster{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background: #818181;
+    border-radius: 3px 3px 0 0;
+}
+
+.rec-title{
+    font-size: 20px; 
+    font-weight: 700;
+}
+
+.rec-author{
+    font-size: 20px; 
+    font-weight: 500;
+}
+
+.rec-price{
+    font-size: 15px; font-weight: 400;
+}
+
+.rec-item > p{
+    margin: 0;
+}
