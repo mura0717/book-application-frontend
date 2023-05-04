@@ -53,8 +53,10 @@ export const createDiv = (id,classNames) => {
 
 export const createDivWithBackdrop = (id, imageUrl, classNames) => {
     const el = createHTMLElement("div",id,classNames)
-    el.style.background = `url('${imageUrl}')`
-    el.style.backgroundSize = "cover"
+    if(imageUrl !== null){
+        el.style.background = `url('${imageUrl}')`
+        el.style.backgroundSize = "cover"
+    }
     return el
 }
 

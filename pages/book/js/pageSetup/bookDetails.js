@@ -9,7 +9,7 @@ export const setupBookDetails = () => {
 const setupContent = () => {
     let book = Books.getBook()
     Factory.updateTextContent("book-title",book.title)
-    Factory.updateTextContent("book-authors",book.authors)
+    Factory.updateTextContent("book-authors",formatAuthors(book.authors))
     Factory.updateInnerHtml("descr-cont",book.description)
     Factory.updateImageElement("poster-cont",book.image)
     if(book.buyLink !== null){
@@ -31,4 +31,12 @@ const hideInactiveScrollbar = el => {
     timer = setTimeout(() => {
         el.className = "no-scrollbar"
     },1000)
+}
+
+const formatAuthors = authors => {
+    let str = ""
+    for (let i = 0;i < authors.length;i++){
+        str += authors[i] + ", "
+    }
+    return str.substring(0,str.length - 2)
 }

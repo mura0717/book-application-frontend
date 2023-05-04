@@ -11,20 +11,24 @@
 }
 
 #rec-cont{
-    display: flex;
-    justify-content: start;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill,200px);
+    grid-auto-rows: 400px;
     column-gap: 40px;
-    height: 300px;
+    row-gap: 20px;
+    width: 100%;
     grid-column: span 2;
     animation: fade-in 2.5s ease-in-out;
+    overflow-y: auto;
 }
 
 .rec-item{
-    width: 200px;
+    width: 100%;
     height: 100%;
     display: grid;
     grid-auto-flow: row;
-    grid-auto-rows: 1fr min-content min-content min-content;
+    grid-auto-rows: 1fr 64px 48px 24px;
     row-gap: 1px;
 }
 
@@ -39,11 +43,21 @@
 .rec-title{
     font-size: 1.25rem; 
     font-weight: 700;
+    overflow: auto;
+}
+
+.rec-title::-webkit-scrollbar{
+    display: none;
 }
 
 .rec-author{
     font-size: 1rem; 
     font-weight: 500;
+    overflow: auto;
+}
+
+.rec-author::-webkit-scrollbar{
+    display: none;
 }
 
 .rec-price{
