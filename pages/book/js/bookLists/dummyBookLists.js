@@ -1,6 +1,6 @@
 let bookLists =[]
 
-export const fetchBookList = async () => {
+export const fetchBookLists = async () => {
     bookLists = [
         {
             title : "Favoritter",

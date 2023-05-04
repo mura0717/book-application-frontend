@@ -22,16 +22,8 @@ const convertToBook = bookResponse => {
         year : bookResponse.volumeInfo.publishedDate,
         description : bookResponse.volumeInfo.description,
         publisher : bookResponse.volumeInfo.publisher,
-        authors : formatAuthors(bookResponse.volumeInfo.authors),
+        authors : bookResponse.volumeInfo.authors,
         image : bookResponse.volumeInfo.imageLinks.thumbnail,
         buyLink : bookResponse.saleInfo.buyLink
     }
-}
-
-const formatAuthors = authors => {
-    let str = ""
-    for (let i = 0;i < authors.length;i++){
-        str += authors[i] + ", "
-    }
-    return str.substring(0,str.length - 2)
 }

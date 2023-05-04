@@ -22,15 +22,19 @@ export const updateTextContent = (id, content) => document.getElementById(id).te
 
 export const updateInnerHtml = (id, content) => document.getElementById(id).innerHTML = DOMPurify.sanitize(content)
 
-
 export const selectValue = (id) => {
     const el = document.getElementById(id)
     return el.value
 }
 
 export const addOnChangeHandler = (id, handler) => {
-    const el = document.getElementById("list-sel")
+    const el = document.getElementById(id)
     el.onchange = handler
+}
+
+export const addScrollHandler = (id,handler) => {
+    const el = document.getElementById(id)
+    el.onscroll = () => handler(el)
 }
 
 export const addOnclickHandler = (id, handler) => {
@@ -41,4 +45,30 @@ export const addOnclickHandler = (id, handler) => {
 export const showElement = (id, show) => {
     const el = document.getElementById(id)
     el.style.display = show ? "block" : "none"
+}
+
+export const createDiv = (id,classNames) => {
+    return createHTMLElement("div", id, classNames)
+}
+
+export const createDivWithBackdrop = (id, imageUrl, classNames) => {
+    const el = createHTMLElement("div",id,classNames)
+    if(imageUrl !== null){
+        el.style.background = `url('${imageUrl}')`
+        el.style.backgroundSize = "cover"
+    }
+    return el
+}
+
+export const createParagraph = (text,id,classNames) => {
+    const el = createHTMLElement("p",id,classNames)
+    el.textContent = text
+    return el
+}
+
+const createHTMLElement = (tagName, id, classNames) => {
+    const el = document.createElement(tagName)
+    el.id = id ? id : el.id
+    el.className = classNames ? classNames : ""
+    return el
 }

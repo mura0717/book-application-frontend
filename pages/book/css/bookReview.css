@@ -1,0 +1,24 @@
+#review-cont{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3,min-content) 1fr min-content min-content;
+    white-space: nowrap;
+    align-items: center;
+    column-gap: 12px;
+}
+
+#stars-cont{
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    column-gap: 12px;
+}
+
+#review-count{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #B8B8B8;
+}
