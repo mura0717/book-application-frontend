@@ -28,7 +28,8 @@ window.addEventListener("load", async () => {
   // Initialize searcher
   new Searcher(
     document.getElementById("search_input"),
-    document.getElementById("search_output")
+    document.getElementById("search_output"),
+    400
   );
 
   adjustForMissingHash();
