@@ -10,8 +10,6 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    
-    <link rel="stylesheet" href="pages/booklist/bookList.css">
     <link rel="stylesheet" href="pages/book/css/bookContainers.css">
     <link rel="stylesheet" href="pages/book/css/bookDetails.css">
     <link rel="stylesheet" href="pages/book/css/bookReview.css">
@@ -20,17 +18,23 @@
     <link rel="stylesheet" href="pages/book/css/bookRecommendations.css">
     <link rel="stylesheet" href="pages/book/css/bookBuy.css">
     <link rel="stylesheet" href="pages/book/css/scrollbar.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <link rel="stylesheet" href="pages/booklists/bookList.css" />
+    <link rel="stylesheet" href="pages/book/css/bookDetails.css" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
     <link href="styles/global.css" rel="stylesheet" />
+    <link href="./pages/books/styles.css" rel="stylesheet" />
     <link href="./pages/books/styles/styles.css" rel="stylesheet" />
     <script src="index.js" type="module"></script>
   </head>
 
   <body style="font-family: 'Inter', sans-serif; background-color: #e4e4e4">
     <div>
-      <header>
+      <header class="sticky-top">
         <nav class="navbar navbar-expand-md navbar-light bg-light">
           <div class="container-fluid">
             <button
@@ -70,26 +74,7 @@
                     id="search_output"
                   ></div>
                 </div>
-                <div class="d-flex flex-row">
-                  <li class="nav-item">
-                    <a
-                      class="px-2 py-2 py-md-1 rounded-1 text-light nav-link bg-dark"
-                      style="font-size: 14px"
-                      href="/login"
-                      data-navigo
-                      >Login</a
-                    >
-                  </li>
-                  <li class="nav-item mx-2">
-                    <a
-                      class="px-2 py-2 py-md-1 rounded-1 text-light nav-link bg-primary"
-                      style="font-size: 14px"
-                      href="/signup"
-                      data-navigo
-                      >Opret</a
-                    >
-                  </li>
-                </div>
+                <div class="d-flex flex-row" id="nav-buttons"></div>
               </ul>
             </div>
           </div>
