@@ -20,11 +20,7 @@ window.addEventListener("login", () => {
   document.getElementById("nav-buttons").innerHTML =
     DOMPurify.sanitize(userStr);
 
-  document.getElementById("logout_btn").onclick = () => {
-    localStorage.removeItem("token");
-    window.dispatchEvent(logoutEvent);
-    window.router.navigate("/");
-  };
+  document.getElementById("logout_btn").onclick = () => window.dispatchEvent(logoutEvent);
 });
 
 window.addEventListener("logout", () => {
@@ -49,4 +45,6 @@ window.addEventListener("logout", () => {
         </li>
     `;
   document.getElementById("nav-buttons").innerHTML = DOMPurify.sanitize(btnStr);
+  localStorage.removeItem("token");
+  window.router.navigate("/");
 });
