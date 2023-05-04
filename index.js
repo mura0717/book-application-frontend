@@ -34,7 +34,7 @@ window.addEventListener("load", async () => {
     400
   );
 
-  // Handle user login
+  // Handle user login visuals
   if (!localStorage.getItem("token")) {
     window.dispatchEvent(logoutEvent);
   } else {
