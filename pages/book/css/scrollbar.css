@@ -1,0 +1,33 @@
+.show-scrollbar::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.show-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.show-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.show-scrollbar::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+    border: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border: 0;
+}

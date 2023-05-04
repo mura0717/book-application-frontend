@@ -20,9 +20,6 @@
     justify-self: end;
     border-radius: 7px;
     width: 100%;
-    display: grid;
-    justify-content: center;
-    align-items: center;
 }
 
 #book-authors{
@@ -44,4 +41,6 @@
     text-align: justify;
     color: #6A6A6A;
     margin-top:1rem;
+    overflow-y: auto;
+    padding-right: 10px;
 }

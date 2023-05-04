@@ -28,8 +28,13 @@ export const selectValue = (id) => {
 }
 
 export const addOnChangeHandler = (id, handler) => {
-    const el = document.getElementById("list-sel")
+    const el = document.getElementById(id)
     el.onchange = handler
+}
+
+export const addScrollHandler = (id,handler) => {
+    const el = document.getElementById(id)
+    el.onscroll = () => handler(el)
 }
 
 export const addOnclickHandler = (id, handler) => {
