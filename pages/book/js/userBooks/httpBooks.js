@@ -24,6 +24,14 @@ const convertToBook = bookResponse => {
         publisher : bookResponse.volumeInfo.publisher,
         authors : bookResponse.volumeInfo.authors,
         image : bookResponse.volumeInfo.imageLinks.thumbnail,
-        buyLink : bookResponse.saleInfo.buyLink
+        buyLink : formatBuyLink(bookResponse.saleInfo.buyLink)
     }
+}
+
+const formatBuyLink = link => {
+    if(link === undefined || link === null)
+        return null
+    const s = new RegExp("^.+?id=\\w+")
+    const results = s.exec(link)
+    return results.at(0)
 }
