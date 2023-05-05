@@ -1,5 +1,5 @@
 import * as Books from "./js/userBooks/userBooks.js"
-import * as BookLists from "./js/bookLists/userBookLists.js"
+import * as BookLists from "../../shared/bookLists/userBookLists.js"
 import {setupFav} from "./js/pageSetup/bookFavorites.js";
 import {setupReviewDetails} from "./js/pageSetup/bookReviews.js";
 import {setupBookDetails} from "./js/pageSetup/bookDetails.js";
