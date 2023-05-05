@@ -1,5 +1,5 @@
 import "https://unpkg.com/navigo";
-import "./navigo.js";
+//import "./navigo.js";
 import {
   loadTemplate,
   adjustForMissingHash,
