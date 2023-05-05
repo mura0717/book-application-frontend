@@ -1,4 +1,4 @@
-import fetchClient from "../../Fetcher.js";
+import {fetchClient} from "../utils.js";
 
 export const initLogin = () => {
 
@@ -18,7 +18,7 @@ async function fetchInputValues(e) {
         password: passwordInput,
     };
   
-    const res = await fetchClient.postWithAuth("auth/login", body);
+    const res = await fetchClient.post("/auth/login", body);
     window.router.navigate("/booklist");
 
 
