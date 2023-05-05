@@ -1,5 +1,5 @@
 import * as Factory from "./../elementFactory.js";
-import * as BookLists from "./../bookLists/userBookLists.js";
+import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
 
 export const setupFav = reference => {

@@ -18,7 +18,6 @@ export const addToBookList = async (reference, listReference) => {
     }
     const response = await fetchClient.pathWithAuth(route,body)
     return response !== undefined
-    
 }
 
 export const removeFromBookList = async (reference, listReference) => {
