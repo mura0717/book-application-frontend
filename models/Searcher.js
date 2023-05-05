@@ -4,6 +4,7 @@ export default class Searcher {
   constructor(input, output, debounceVal = 500) {
     this.output = output;
     this.input = input;
+    this.sessionCache = {};
     input.addEventListener("input", debounce(this.search, debounceVal));
     input.addEventListener("focus", (e) => this.search(e));
     input.addEventListener("focusout", () => this.unrender());
@@ -13,8 +14,14 @@ export default class Searcher {
   search = async (e) => {
     const inputValue = e.target.value;
     if (!inputValue) return this.unrender();
+
+    if (this.sessionCache[inputValue]) {
+      return this.render(this.sessionCache[inputValue]);
+    }
+
     const data = await fetchClient.get(`/books/search?query=${inputValue}`);
     if (!data) return this.unrender();
+    this.sessionCache[inputValue] = data;
     this.render(data);
   };
 

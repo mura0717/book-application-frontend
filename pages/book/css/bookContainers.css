@@ -1,0 +1,17 @@
+#book-cont{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 400px;
+    grid-auto-rows: min-content;
+    column-gap: 15px;
+    overflow-x: auto;
+    width: 100%;
+}
+
+#middle-grid{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 2fr 1fr;
+    height: 48px;
+    margin-top:1.5rem;
+}

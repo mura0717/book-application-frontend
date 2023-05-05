@@ -1,32 +1,24 @@
+import {fetchClient} from "../../../../utils.js";
+
 let bookLists =[]
 
+const route = "/books/bookLists"
+
 export const fetchBookList = async () => {
-    bookLists = [
-        {
-            title : "Favoritter",
-            references : [],
-            id : "1"
-        },
-        {
-            title : "Vil gerne købe",
-            references : [],
-            id : "2"
-        },
-        {
-            title : "Interessante",
-            references : [],
-            id : "3"
-        }]
+    const response = await fetchClient.getWithAuth(route)
+    bookLists = response !== undefined ? response : bookLists
 }
 
 export const getFetchedBookLists = () => bookLists
 
 export const addToBookList = async (reference, listReference) => {
-    const list = bookLists.find(b => b.id === listReference)
-    if(list === undefined)
-        return false
-    list.references.push(reference)
-    return true
+    const body = {
+        bookId : reference,
+        bookListId : listReference
+    }
+    const response = await fetchClient.pathWithAuth(route,body)
+    return response !== undefined
+    
 }
 
 export const removeFromBookList = async (reference, listReference) => {

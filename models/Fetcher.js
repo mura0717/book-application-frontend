@@ -5,7 +5,6 @@ export default class FetchClient {
     this.baseURL = "http://localhost:8080/api";
   }
   
-
   /**
    * Make a GET request to the targetted endpoint
    * @param {string} endpoint
@@ -50,7 +49,7 @@ export default class FetchClient {
    * Make a PATCH request to the targetted endpoint
    * @param {string} endpoint
    * @param {object} body
-   * @example const data = await fetchClient.post("/users", {"username": "test", "password": "1234"})
+   * @example const data = await fetchClient.patch("/users", {"username": "test", "password": "1234"})
    */
   
   async patch(endpoint, body) {
@@ -108,6 +107,32 @@ export default class FetchClient {
     try {
       return await fetch(`${this.baseURL}${endpoint}`, {
         method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then(handleHttpErrors);
+    } catch (err) {
+      console.log(err);
+      return undefined;
+    }
+  }
+
+  /**
+   * Make a PATCH request to the targetted endpoint with authorization
+   * @param {string} endpoint
+   * @param {object} body
+   * @example const data = await fetchClient.patchWithAuth("/users", {"username": "test", "password": "1234"})
+   */
+  async pathWithAuth(endpoint, body) {
+    if (!hasToken()) {
+      console.trace("No token found");
+      return;
+    }
+    try {
+      return await fetch(`${this.baseURL}${endpoint}`, {
+        method: "PATCH",
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",

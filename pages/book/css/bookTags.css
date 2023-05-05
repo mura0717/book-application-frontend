@@ -1,0 +1,23 @@
+#tags-cont{
+    display: flex;
+    justify-items: start;
+    column-gap: 12px;
+    overflow-x: auto;
+}
+
+.tag-cont{
+    display: grid;
+    width: min-content;
+    padding:0.5rem;
+    align-items: center;
+    height: 2rem;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 15px;
+    color: #FFFFFF;
+    background: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
