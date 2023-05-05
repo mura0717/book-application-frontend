@@ -17,7 +17,7 @@ export const fetchRecommendations = (authors, title) => {
                 "authors": "Noam Chomsky, Bingo Leif",
                 "priceAmount": 15000,
                 "currency": "zloty",
-                "reference" : "abcd"
+                "id" : "abcd"
             }
         ]
     }
