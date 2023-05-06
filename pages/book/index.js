@@ -10,12 +10,10 @@ export const initBook = (referenceId) => {
         setupFav(referenceId)
         setupReviewDetails()
         setupBookDetails()
-      })/*
-      .then(() => {
+      }).then(() => {
             Books.fetchRecommendations()
               .then(() => setupRecommendations())
     })
-    */
 };
 
 const init = async bookReference => {

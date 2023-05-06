@@ -1,10 +1,14 @@
 import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
+import {signedIn} from "../../../../shared/users/bookUsers.js";
 
 export const setupFav = reference => {
-    setupFavIcons(reference)
-    setupFavList()
+    if(signedIn()){
+        Factory.updateDisplayMode("fav-cont","flex")
+        setupFavIcons(reference)
+        setupFavList()
+    }
 }
 
 const setupFavIcons = reference => {

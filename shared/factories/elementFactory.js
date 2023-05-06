@@ -47,6 +47,11 @@ export const showElement = (id, show) => {
     el.style.display = show ? "block" : "none"
 }
 
+export const updateDisplayMode = (id, mode) => {
+    const el = document.getElementById(id)
+    el.style.display = mode
+}
+
 export const createDiv = (id,classNames) => {
     return createHTMLElement("div", id, classNames)
 }
