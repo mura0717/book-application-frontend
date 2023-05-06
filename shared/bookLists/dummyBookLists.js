@@ -5,16 +5,19 @@ export const fetchBookLists = async () => {
         {
             title : "Favoritter",
             references : [],
+            listCount : 5,
             id : "1"
         },
         {
             title : "Vil gerne købe",
             references : [],
+            listCount : 4,
             id : "2"
         },
         {
             title : "Interessante",
             references : [],
+            listCount : 3,
             id : "3"
         }]
 }

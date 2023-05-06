@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+#book-cont::-webkit-scrollbar{
+    display: none;
+}
+
 #middle-grid{
     display: grid;
     grid-auto-flow: row;
