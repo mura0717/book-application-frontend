@@ -11,3 +11,5 @@ export const addToFavoriteList = async (reference, listReference) => await BookL
 export const removeFromFavoriteList = async (reference, listReference) => await BookLists.removeFromBookList(reference,listReference)
 
 export const alreadyAdded = (reference, listReference) => BookLists.exists(reference,listReference)
+
+export const fetchBookList = async (id) => await BookLists.fetchBookList(id) 

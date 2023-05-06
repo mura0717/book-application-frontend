@@ -61,3 +61,8 @@ export const exists = (reference, listReference) => {
     const bookReference = list.references.find(r => r === reference)
     return bookReference !== undefined
 }
+
+export const fetchBookList = async (id) => {
+   await fetchBookLists();
+   return getBookList(id);
+}
