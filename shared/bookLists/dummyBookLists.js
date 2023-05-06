@@ -6,19 +6,25 @@ export const fetchBookLists = async () => {
             title : "Favoritter",
             references : [],
             listCount : 5,
-            id : "1"
+            id : "1",
+            createdAt : "2002-10-10",
+            updatedAt : "2020-10-10"
         },
         {
             title : "Vil gerne købe",
             references : [],
             listCount : 4,
-            id : "2"
+            id : "2",
+            createdAt : "2002-10-10",
+            updatedAt : "2020-10-10"
         },
         {
             title : "Interessante",
             references : [],
             listCount : 3,
-            id : "3"
+            id : "3",
+            createdAt  : "2002-10-10",
+            updatedAt : "2020-10-10"
         }]
 }
 
