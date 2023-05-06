@@ -51,6 +51,12 @@ export const createDiv = (id,classNames) => {
     return createHTMLElement("div", id, classNames)
 }
 
+export const createDivWithText = (id,classNames, text) => {
+    const el = createHTMLElement("div", id, classNames)
+    el.textContent = text
+    return el
+}
+
 export const createDivWithBackdrop = (id, imageUrl, classNames) => {
     const el = createHTMLElement("div",id,classNames)
     if(imageUrl !== null){
