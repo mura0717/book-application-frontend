@@ -4,7 +4,7 @@ export default class FetchClient {
   constructor() {
     this.baseURL = "http://localhost:8080/api";
   }
-  
+
   /**
    * Make a GET request to the targetted endpoint
    * @param {string} endpoint
@@ -51,7 +51,7 @@ export default class FetchClient {
    * @param {object} body
    * @example const data = await fetchClient.patch("/users", {"username": "test", "password": "1234"})
    */
-  
+
   async patch(endpoint, body) {
     return await fetch(`${this.baseURL}${endpoint}`, {
       method: "PATCH",
@@ -59,15 +59,15 @@ export default class FetchClient {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(handleHttpErrors)
-        .catch(err => {
-          console.log(err);
-          return {
-            message : err.message
-          };
-        });
+    })
+      .then(handleHttpErrors)
+      .catch((err) => {
+        console.log(err);
+        return {
+          message: err.message,
+        };
+      });
   }
-  
 
   /**
    * Make a GET request to the targetted endpoint with authorization
@@ -88,7 +88,6 @@ export default class FetchClient {
         },
       }).then(handleHttpErrors);
     } catch (err) {
-      console.log(err);
       return undefined;
     }
   }

@@ -95,4 +95,14 @@ export function sanitizeStringWithTableRows(tableRows) {
   return secureRows;
 }
 
+export const ensureProtectedRoute = async (done) => {
+  const data = await fetchClient.getWithAuth("/auth/checkhealh");
+  if (!data || data === false) {
+    router.navigate("/login");
+    done(false);
+  } else {
+    done();
+  }
+};
+
 export const fetchClient = new FetchClient();

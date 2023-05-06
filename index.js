@@ -5,6 +5,8 @@ import {
   adjustForMissingHash,
   setActiveLink,
   renderTemplate,
+  fetchClient,
+  ensureProtectedRoute,
 } from "./utils.js";
 
 import Searcher from "./models/Searcher.js";
@@ -54,9 +56,15 @@ window.addEventListener("load", async () => {
         renderTemplate(booksTemplate, "content");
         initBooks();
       },
-      "/booklists": () => {
-        renderTemplate(booklistsTemplate, "content");
-        initBookLists();
+      "/booklists": {
+        as: "booklists",
+        uses: () => {
+          renderTemplate(booklistsTemplate, "content");
+          initBookLists();
+        },
+        hooks: {
+          before: async (done) => ensureProtectedRoute(done),
+        },
       },
       "/login": () => {
         renderTemplate(loginTemplate, "content");
