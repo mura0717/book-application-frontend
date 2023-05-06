@@ -29,7 +29,7 @@ function setUpBookLists (){
 function createListElement (bookList){
     const html = `<li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                    <a class="fw-bold" href="/#/bookList/ "+ ${bookList.id}>${bookList.title}</a>
+                    <a class="fw-bold" href="/#/booklist/${bookList.id}">${bookList.title}</a>
                     <div>${bookList.createdAt}</div>
                   </div>
                   <span class="badge bg-dark rounded-pill">${bookList.listCount + " bøger"}</span>

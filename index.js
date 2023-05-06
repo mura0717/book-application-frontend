@@ -61,9 +61,9 @@ window.addEventListener("load", async () => {
         initBookLists();
       },
 
-      "/booklist": () => {
+      "/booklist/:id": (param) => {
         renderTemplate(booklistTemplate, "content");
-        initBookList();
+        initBookList(param.data.id);
       },
 
       "/login": () => {
