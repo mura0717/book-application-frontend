@@ -19,7 +19,6 @@
     row-gap: 20px;
     width: 100%;
     grid-column: span 2;
-    animation: fade-in 2.5s ease-in-out;
     overflow-y: auto;
 }
 
@@ -30,6 +29,14 @@
     grid-auto-flow: row;
     grid-auto-rows: 1fr 64px 48px 24px;
     row-gap: 1px;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    animation: fade-in 2.5s ease-in-out;
+}
+
+.rec-item:hover{
+    border:3px solid blue;
+    box-shadow: 0 0 3px blue;
 }
 
 .rec-poster{

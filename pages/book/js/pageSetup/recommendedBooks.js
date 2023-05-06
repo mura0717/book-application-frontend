@@ -3,12 +3,19 @@ import * as Factory from "./../elementFactory.js"
 
 export const setupRecommendations = () => {
     const recs = Books.getRecommendations()
-    const items = recs.map(rec => createItem(rec))
+    const items = recs.map(toHtmlElement)
     const cont = document.getElementById("rec-cont")
     for (let i = 0; i < items.length; i++) {
         const item = items.at(i)
         cont.appendChild(item)
     }
+}
+
+const toHtmlElement = rec => {
+    const el = createItem(rec)
+    const reference = rec.reference
+    el.onclick = () => window.location.href = `/#/book/${reference}`
+    return el
 }
 
 const createItem = rec => {
