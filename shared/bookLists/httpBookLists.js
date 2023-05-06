@@ -20,6 +20,13 @@ export const addToBookList = async (reference, listReference) => {
     return response !== undefined
 }
 
+export const getBookList = (id) => {
+    const found = bookLists.find(list => list.id === id)
+    if(found === undefined)
+        return null
+    return found
+}
+
 export const removeFromBookList = async (reference, listReference) => {
     const list = bookLists.find(b => b.id === listReference)
     if(list === undefined)
