@@ -23,7 +23,16 @@ function setUpBookLists (){
 }
 
 function createListElement (bookList){
-    return "test"
+    const html = `<li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">${bookList.title}</div>
+                    Title
+                  </div>
+                  <span class="badge bg-primary rounded-pill">${bookList.listCount}</span>
+            </li>`
+    const el = document.createElement("div")
+    el.innerHTML = html
+    return el
 }
 
 /* export const initBook = (referenceId) => {
@@ -43,11 +52,11 @@ const init = async bookReference => {
 } 
 
 <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Subheading</div>
-            Cras justo odio
-          </div>
-          <span class="badge bg-primary rounded-pill">14</span>
-        </li>
+  <div class="ms-2 me-auto">
+    <div class="fw-bold">Subheading</div>
+    Cras justo odio
+  </div>
+  <span class="badge bg-primary rounded-pill">14</span>
+</li>
 
 */
