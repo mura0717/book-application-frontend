@@ -13,7 +13,7 @@
 #rec-cont{
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fill,200px);
+    grid-template-columns: repeat(5,200px);
     grid-auto-rows: 400px;
     column-gap: 40px;
     row-gap: 20px;
@@ -74,6 +74,14 @@
 
 .rec-item > p{
     margin: 0;
+}
+
+.rec-loading{
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    background: url("../resources/rec-loading.gif");
+    background-size: cover;
 }
 
 @keyframes fade-in {
