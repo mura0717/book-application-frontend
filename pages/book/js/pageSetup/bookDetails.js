@@ -1,5 +1,5 @@
 import * as Books from "./../userBooks/userBooks.js";
-import * as Factory from "./../elementFactory.js";
+import * as Factory from "./../../../../shared/factories/elementFactory.js";
 
 export const setupBookDetails = () => {
     setupContent()

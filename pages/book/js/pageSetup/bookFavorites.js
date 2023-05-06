@@ -1,4 +1,4 @@
-import * as Factory from "./../elementFactory.js";
+import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
 
