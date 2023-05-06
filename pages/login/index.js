@@ -1,4 +1,4 @@
-import {fetchClient} from "../../utils.js";
+import {login} from "../../shared/users/bookUsers.js";
 
 export const initLogin = () => {
 
@@ -8,22 +8,16 @@ export const initLogin = () => {
 
 async function  handleSubmit(e) {
     e.preventDefault();
-
-    const body = fetchInputValues();
-
-    const res = await fetchClient.post("/auth/login", body);
-    
-    if (localStorage) {
-        localStorage.setItem("token", res.token);
-    } else {
-        console.log("Local storage not available");
+    const credentials = fetchInputValues();
+    if(await login(credentials.username,credentials.password)){
+        await window.router.navigate("/booklists");
     }
-    
-
-    window.router.navigate("/booklists");
+    else{
+        console.log("Login failed")
+        // TODO: Add error message
+        // TODO: Maybe clear input forms
+    }
 };
-
-
 
 function fetchInputValues() {
 
