@@ -4,7 +4,7 @@ let bookLists =[]
 
 const route = "/books/bookLists"
 
-export const fetchBookList = async () => {
+export const fetchBookLists = async () => {
     const response = await fetchClient.getWithAuth(route)
     bookLists = response !== undefined ? response : bookLists
 }
@@ -42,4 +42,8 @@ export const exists = (reference, listReference) => {
         return false
     const bookReference = list.references.find(r => r === reference)
     return bookReference !== undefined
+}
+
+export const fetchBookList = async (id) => {
+    
 }
