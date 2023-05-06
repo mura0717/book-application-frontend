@@ -6,17 +6,24 @@ import {setupBookDetails} from "./js/pageSetup/bookDetails.js";
 import {setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
 
 export const initBook = (referenceId) => {
-    init(referenceId).then(() => {
-        setupFav(referenceId)
-        setupReviewDetails()
-        setupBookDetails()
-      }).then(() => {
-            Books.fetchRecommendations()
-              .then(() => setupRecommendations())
-    })
+    init(referenceId)
+        .then(initBookDetails)
+        .then(initRecommendations)
 };
 
 const init = async bookReference => {
     await Books.fetchBookDetails(bookReference)
     await BookLists.fetchBookLists()
+    return bookReference
+}
+
+const initBookDetails = referenceId => {
+    setupBookDetails()
+    setupFav(referenceId)
+    setupReviewDetails()
+}
+
+const initRecommendations = async () => {
+    await Books.fetchRecommendations()
+    setupRecommendations()
 }
