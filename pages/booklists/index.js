@@ -23,7 +23,6 @@ function setUpBookLists (){
         const listElement = createListElement(bookList);
         populatedListsElement.appendChild(listElement);
     }
-
 }
 
 function createListElement (bookList){
