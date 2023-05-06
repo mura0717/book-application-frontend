@@ -4,15 +4,16 @@ import * as HttpBookLists from '../../shared/bookLists/httpBookLists.js';
 
 export const initBookList = id => {
     console.log(id)
-    const bookList = BookLists.getBookList(id)
+    BookLists.fetchBookList(id).then((bookList)=>{
+        console.log(bookList.title)
+        const el = Factory.createDivWithText("id","classNames", "text");
+        setUpListName(id)
+        setUpBooks(id)
+        setUpListTotal
+        
+    })
    
-    console.log(bookList.title)
-
-
-    const el = Factory.createDivWithText("id","classNames", "text");
-    setUpListName(id)
-    setUpBooks(id)
-    setUpListTotal
+  
 };
 
 function setUpListName (id) {
