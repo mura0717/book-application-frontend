@@ -1,3 +1,23 @@
 <template>
+    <h2 stylee="font: Inter">Min Boglister</h2>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-12" id="books"></div>
+        </div>
+      </div>
+      <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="dateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h1 class="modal-title" id="dateModalLabel"></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Luk</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </template>
 

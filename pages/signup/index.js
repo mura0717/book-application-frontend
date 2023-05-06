@@ -1,4 +1,4 @@
-import {fetchClient} from "../utils.js";
+import {fetchClient} from "../../utils.js";
 
 export const initSignup = () => {
 

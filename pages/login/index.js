@@ -1,25 +1,37 @@
-import {fetchClient} from "../utils.js";
+import {fetchClient} from "../../utils.js";
 
 export const initLogin = () => {
 
     const form = document.querySelector("form");
-    form.onsubmit = fetchInputValues;
+    form.onsubmit = handleSubmit;
 };
 
-async function fetchInputValues(e) {
-    
+async function  handleSubmit(e) {
     e.preventDefault();
+
+    const body = fetchInputValues();
+
+    const res = await fetchClient.post("/auth/login", body);
+    
+    if (localStorage) {
+        localStorage.setItem("token", res.token);
+    } else {
+        console.log("Local storage not available");
+    }
+    
+
+    window.router.navigate("/booklists");
+};
+
+
+
+function fetchInputValues() {
 
     const usernameInput = document.getElementById("input-username").value;
     const passwordInput = document.getElementById("input-password").value;
 
-    const body = {
+    return {
         username: usernameInput,
         password: passwordInput,
     };
-  
-    const res = await fetchClient.post("/auth/login", body);
-    window.router.navigate("/booklist");
-
-
 };
