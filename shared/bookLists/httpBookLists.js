@@ -1,5 +1,4 @@
 import {fetchClient} from "../../../../utils.js";
-import {fetchBookLists} from "./dummyBookLists";
 
 let bookLists =[]
 

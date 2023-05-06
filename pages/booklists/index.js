@@ -40,7 +40,7 @@ function createListElement (bookList){
 
 function setUpListTotal (){
     const listCount = BookLists.getBookLists().length
-    Factory.updateTextContent("listcount-id", listCount + " Boglister");
+    Factory.updateTextContent("listCount-id", listCount + " Boglister");
 
 }
 

@@ -4,15 +4,16 @@ import * as HttpBookLists from '../../shared/bookLists/httpBookLists.js';
 
 export const initBookList = id => {
     BookLists.fetchBookList(id).then((bookList)=>{
-        Factory.updateTextContent("listName-id",bookList.toString())
+        Factory.updateTextContent("listName-id",bookList.title)
         setUpBooks(bookList)
+        setUpListTotal(bookList)
     })
 };
 
-function setUpBooks (booklist){
+function setUpBooks (bookList){
 
     const populatedBooksElement = document.getElementById("books-id");
-    const references = booklist.references;
+    const books = bookList.books;
 
     for (let i = 0; i < books.length; i++) {
         const book = books.at(i);
@@ -26,8 +27,8 @@ function createBookElement (book){
     const html = `<li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                     <a class="fw-bold" href="/#/book/${book.id}">${book.title}</a>
-                    <div id="createdAt-id">${book.author}</div>
-                    <div id="category">${book.category}</div>
+                    <div id="authors-id">${book.authors}</div>
+                    <div id="categories-id">${book.categories}</div>
                   </div>
             </li>`
     const el = document.createElement("div")
@@ -35,8 +36,8 @@ function createBookElement (book){
     return el
 }
 
-function setUpListTotal (){
-    const listCount = BookLists.getBookLists().length
-    Factory.updateTextContent("bookCount-id", listCount + " Bøger");
+function setUpListTotal (bookList){
+    const booksCount = bookList.books.length;
+    Factory.updateTextContent("booksCount-id", booksCount + " Bøger");
 
 }
