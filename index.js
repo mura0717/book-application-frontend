@@ -16,6 +16,7 @@ import { initBooks } from "./pages/books/index.js";
 import { initLogin } from "./pages/login/index.js";
 import { initSignup } from "./pages/signup/index.js";
 import { loginEvent, logoutEvent } from "./setup/nav_setup.js";
+import { initBookList } from "./pages/booklist/index.js";
 
 window.addEventListener("load", async () => {
   const bookTemplate = await loadTemplate("./pages/book/index.html");
@@ -23,6 +24,7 @@ window.addEventListener("load", async () => {
   const loginTemplate = await loadTemplate("./pages/login/index.html");
   const signupTemplate = await loadTemplate("./pages/signup/index.html");
   const booklistsTemplate = await loadTemplate("./pages/booklists/index.html");
+  const booklistTemplate = await loadTemplate("./pages/booklist/index.html");
 
   const router = new Navigo("/", { hash: true });
   window.router = router;
@@ -58,6 +60,12 @@ window.addEventListener("load", async () => {
         renderTemplate(booklistsTemplate, "content");
         initBookLists();
       },
+
+      "/booklist": () => {
+        renderTemplate(booklistTemplate, "content");
+        initBookList();
+      },
+
       "/login": () => {
         renderTemplate(loginTemplate, "content");
         initLogin();
