@@ -62,7 +62,7 @@ window.addEventListener("load", async () => {
           initBookLists();
         },
         hooks: {
-          before: async (done) => enforceProtectedRouteGuard(done),
+          before: (done) => enforceProtectedRouteGuard(done),
         },
       },
       "/login": {
@@ -72,7 +72,7 @@ window.addEventListener("load", async () => {
           initLogin();
         },
         hooks: {
-          before: async (done) => ensureNotLoggedInGuard(done),
+          before: (done) => ensureNotLoggedInGuard(done),
         },
       },
       "/signup": {
@@ -82,7 +82,7 @@ window.addEventListener("load", async () => {
           initSignup();
         },
         hooks: {
-          before: async (done) => ensureNotLoggedIn(done),
+          before: (done) => ensureNotLoggedInGuard(done),
         },
       },
       "/book/:bookId": (param) => {
