@@ -11,6 +11,7 @@ const setupContent = () => {
     Factory.updateTextContent("book-title",book.title)
     Factory.updateTextContent("book-authors",formatAuthors(book.authors))
     Factory.updateInnerHtml("descr-cont",book.description)
+    Factory.updateInnerHtml("poster-cont","")
     Factory.updateImageElement("poster-cont",book.image)
     if(book.buyLink !== null){
         Factory.showElement("buy-btn",true)

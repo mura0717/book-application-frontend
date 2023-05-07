@@ -76,7 +76,7 @@ window.addEventListener("load", async () => {
         before: (done) => enforceProtectedRouteGuard(done),
       },
       hooks: {
-        before: (done) => ensureNotLoggedInGuard(done),
+        before: (done) => enforceProtectedRouteGuard(done),
       },
       "/login": {
         as: "login",

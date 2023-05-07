@@ -24,6 +24,8 @@ const initBookDetails = referenceId => {
 }
 
 const initRecommendations = async () => {
+    /*
     await Books.fetchRecommendations()
     setupRecommendations()
+     */
 }
