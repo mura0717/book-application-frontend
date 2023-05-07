@@ -1,6 +1,6 @@
 import { fetchClient } from "../utils.js";
 
-export const ensureProtectedRoute = async (done) => {
+export const enforceProtectedRouteGuard = async (done) => {
   if (!localStorage.getItem("token")) {
     router.navigate("/login");
     done(false);
@@ -15,9 +15,10 @@ export const ensureProtectedRoute = async (done) => {
   }
 };
 
-export const ensureNotLoggedIn = async (done) => {
+export const ensureNotLoggedInGuard = async (done) => {
   if (!localStorage.getItem("token")) {
     done();
+    return;
   }
   const data = await fetchClient.getWithAuth("/auth/checkhealth");
   if (data && data !== false) {

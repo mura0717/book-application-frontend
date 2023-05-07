@@ -8,9 +8,9 @@ import {
 } from "./utils.js";
 
 import {
-  ensureNotLoggedIn,
-  ensureProtectedRoute,
-} from "./auth/auth_handlers.js";
+  enforceProtectedRouteGuard,
+  ensureNotLoggedInGuard,
+} from "./auth/AuthGuards.js";
 
 import Searcher from "./models/Searcher.js";
 import "./setup/nav_setup.js";
@@ -62,7 +62,7 @@ window.addEventListener("load", async () => {
           initBookLists();
         },
         hooks: {
-          before: async (done) => ensureProtectedRoute(done),
+          before: async (done) => enforceProtectedRouteGuard(done),
         },
       },
       "/login": {
@@ -72,7 +72,7 @@ window.addEventListener("load", async () => {
           initLogin();
         },
         hooks: {
-          before: async (done) => ensureNotLoggedIn(done),
+          before: async (done) => ensureNotLoggedInGuard(done),
         },
       },
       "/signup": {
