@@ -13,4 +13,4 @@ export const fetchRecommendations = async (authors, title) => {
         recommendations = response
 }
 
-export const  getRecommendations = () => recommendations.recommendations
+export const  getRecommendations = () => recommendations
