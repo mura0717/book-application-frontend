@@ -73,7 +73,7 @@ window.addEventListener("load", async () => {
         initBookList(param.data.id);
       },
       hooks: {
-        before: (done) => ensureNotLoggedInGuard(done),
+        before: (done) => enforceProtectedRouteGuard(done),
       },
       "/login": {
         as: "login",
