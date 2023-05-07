@@ -7,6 +7,11 @@ import {
   renderTemplate,
 } from "./utils.js";
 
+import {
+  enforceProtectedRouteGuard,
+  ensureNotLoggedInGuard,
+} from "./auth/AuthGuards.js";
+
 import Searcher from "./models/Searcher.js";
 import "./setup/nav_setup.js";
 
@@ -15,8 +20,9 @@ import { initBookLists } from "./pages/booklists/index.js";
 import { initBooks } from "./pages/books/index.js";
 import { initLogin } from "./pages/login/index.js";
 import { initSignup } from "./pages/signup/index.js";
-import { loginEvent, logoutEvent } from "./setup/nav_setup.js";
 import { initBookList } from "./pages/booklist/index.js";
+import { initNavLoginButtons } from "./setup/nav_setup.js";
+
 
 window.addEventListener("load", async () => {
   const bookTemplate = await loadTemplate("./pages/book/index.html");
@@ -37,11 +43,7 @@ window.addEventListener("load", async () => {
   );
 
   // Handle user login visuals
-  if (!localStorage.getItem("token")) {
-    window.dispatchEvent(logoutEvent);
-  } else {
-    window.dispatchEvent(loginEvent);
-  }
+  initNavLoginButtons();
 
   adjustForMissingHash();
   router
@@ -56,9 +58,15 @@ window.addEventListener("load", async () => {
         renderTemplate(booksTemplate, "content");
         initBooks();
       },
-      "/booklists": () => {
-        renderTemplate(booklistsTemplate, "content");
-        initBookLists();
+      "/booklists": {
+        as: "booklists",
+        uses: () => {
+          renderTemplate(booklistsTemplate, "content");
+          initBookLists();
+        },
+        hooks: {
+          before: (done) => enforceProtectedRouteGuard(done),
+        },
       },
 
       "/booklist/:id": (param) => {
@@ -67,12 +75,28 @@ window.addEventListener("load", async () => {
       },
 
       "/login": () => {
-        renderTemplate(loginTemplate, "content");
-        initLogin();
+          renderTemplate(loginTemplate, "content");
+          initLogin();
       },
-      "/signup": () => {
-        renderTemplate(signupTemplate, "content");
-        initSignup();
+      "/login": {
+        as: "login",
+        uses: () => {
+          renderTemplate(loginTemplate, "content");
+          initLogin();
+        },
+        hooks: {
+          before: (done) => ensureNotLoggedInGuard(done),
+        },
+      },
+      "/signup": {
+        as: "signup",
+        uses: () => {
+          renderTemplate(signupTemplate, "content");
+          initSignup();
+        },
+        hooks: {
+          before: (done) => ensureNotLoggedInGuard(done),
+        },
       },
       "/book/:bookId": (param) => {
         renderTemplate(bookTemplate, "content");
