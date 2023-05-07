@@ -1,3 +1,5 @@
+import { fetchClient } from "../utils.js";
+
 export const loginEvent = new Event("login");
 export const logoutEvent = new Event("logout");
 
@@ -50,3 +52,17 @@ window.addEventListener("logout", () => {
   document.getElementById("nav-buttons").innerHTML = DOMPurify.sanitize(btnStr);
   localStorage.removeItem("token");
 });
+
+export const initNavLoginButtons = async () => {
+  if (!localStorage.getItem("token")) {
+    window.dispatchEvent(logoutEvent);
+    return;
+  }
+
+  const data = await fetchClient.getWithAuth("/auth/checkhealth");
+  if (!data || data === false) {
+    window.dispatchEvent(logoutEvent);
+    return;
+  }
+  window.dispatchEvent(loginEvent);
+};
