@@ -68,15 +68,12 @@ window.addEventListener("load", async () => {
           before: (done) => enforceProtectedRouteGuard(done),
         },
       },
-
       "/booklist/:id": (param) => {
         renderTemplate(booklistTemplate, "content");
         initBookList(param.data.id);
       },
-
-      "/login": () => {
-          renderTemplate(loginTemplate, "content");
-          initLogin();
+      hooks: {
+        before: (done) => ensureNotLoggedInGuard(done),
       },
       "/login": {
         as: "login",
