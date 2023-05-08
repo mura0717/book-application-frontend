@@ -10,7 +10,7 @@ async function  handleSubmit(e) {
     e.preventDefault();
     const credentials = fetchInputValues();
     if(await login(credentials.username,credentials.password)){
-        await window.router.navigate("/booklists");
+        await window.router.navigate("/");
     }
     else{
         console.log("Login failed")
