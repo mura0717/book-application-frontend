@@ -46,7 +46,7 @@ window.addEventListener("load", async () => {
   initNavLoginButtons();
 
   adjustForMissingHash();
-  router
+  await router
     .hooks({
       before(done, match) {
         setActiveLink("topnav", match.url);
@@ -68,12 +68,15 @@ window.addEventListener("load", async () => {
           before: (done) => enforceProtectedRouteGuard(done),
         },
       },
-      "/booklist/:id": (param) => {
-        renderTemplate(booklistTemplate, "content");
-        initBookList(param.data.id);
-      },
-      hooks: {
-        before: (done) => enforceProtectedRouteGuard(done),
+        "/booklist/:id": {
+          as: "booklist",
+              uses: (param) => {
+            renderTemplate(booklistTemplate, "content");
+            initBooklist(param.data.id)
+          },
+        hooks: {
+            before: (done) => enforceProtectedRouteGuard(done),
+          },
       },
       "/login": {
         as: "login",
@@ -102,6 +105,6 @@ window.addEventListener("load", async () => {
     })
     .notFound(() => renderTemplate("No page for this route found", "content"))
     .resolve();
-});
+  });
 
 window.onerror = (e) => alert(e);
