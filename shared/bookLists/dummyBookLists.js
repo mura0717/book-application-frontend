@@ -5,19 +5,29 @@ export const fetchBookLists = async () => {
         {
             title : "Favoritter",
             references : [],
-            id : "1"
+            listCount : 5,
+            id : "1",
+            createdAt : "2002-10-10",
+            updatedAt : "2020-10-10"
         },
         {
             title : "Vil gerne købe",
             references : [],
-            id : "2"
+            listCount : 4,
+            id : "2",
+            createdAt : "2002-10-10",
+            updatedAt : "2020-10-10"
         },
         {
             title : "Interessante",
             references : [],
-            id : "3"
+            listCount : 3,
+            id : "3",
+            createdAt  : "2002-10-10",
+            updatedAt : "2020-10-10"
         }]
 }
+
 
 export const getFetchedBookLists = () => bookLists
 
@@ -27,6 +37,13 @@ export const addToBookList = async (reference, listReference) => {
         return false
     list.references.push(reference)
     return true
+}
+
+export const getBookList = (id) => {
+    const found = bookLists.find(list => list.id === id)
+    if(found === undefined)
+        return null
+    return found
 }
 
 export const removeFromBookList = async (reference, listReference) => {
@@ -44,4 +61,38 @@ export const exists = (reference, listReference) => {
         return false
     const bookReference = list.references.find(r => r === reference)
     return bookReference !== undefined
+}
+
+export const fetchBookList = async (id) => {
+   await fetchBookLists();
+
+   const bookList = {
+    title : "Favoritter",
+    books : [
+        {
+            title : "Harry Potter 1",
+            authors : "J.K.Rowling",
+            categories : ["Ficton","Fantasy"],
+            priceAmount : "299",
+            currency : "kr"
+        },
+        {
+            title : "Harry Potter 2",
+            authors : "J.K.Rowling",
+            categories : ["Ficton","Fantasy"],
+            priceAmount : "399",
+            currency : "kr"
+        },
+        {
+            title : "Harry Potter 3",
+            authors : "J.K.Rowling",
+            categories : ["Ficton","Fantasy"],
+            priceAmount : "499",
+            currency : "kr"
+        }
+    ],
+    listCount : 3,
+    id : "1"
+}
+   return bookList;
 }

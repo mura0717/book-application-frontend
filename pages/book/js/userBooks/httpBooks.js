@@ -7,26 +7,12 @@ let books = []
 
 export const fetchBook = async (reference) => {
     const uri = route + "?reference=" + reference
-    const response = await fetchClient.get(uri)
-    book = convertToBook(response)
+    book = await fetchClient.get(uri)
 }
 
 export const getFetchedBook = () => book
 
 export const getFetchedBooks = () => books
-
-const convertToBook = bookResponse => {
-    return {
-        reference : bookResponse.id,
-        title : bookResponse.volumeInfo.title,
-        year : bookResponse.volumeInfo.publishedDate,
-        description : bookResponse.volumeInfo.description,
-        publisher : bookResponse.volumeInfo.publisher,
-        authors : bookResponse.volumeInfo.authors,
-        image : bookResponse.volumeInfo.imageLinks.thumbnail,
-        buyLink : formatBuyLink(bookResponse.saleInfo.buyLink)
-    }
-}
 
 const formatBuyLink = link => {
     if(link === undefined || link === null)

@@ -1,4 +1,4 @@
-import * as Factory from "./../elementFactory.js";
+import * as Factory from "./../../../../shared/factories/elementFactory.js";
 
 export const setupReviewDetails = () => {
     for (let i = 0;i<5;i++){

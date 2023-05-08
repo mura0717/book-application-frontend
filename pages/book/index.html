@@ -1,16 +1,20 @@
 <template>
     <div id="book-cont">
         <div id="book-title">Henter bogtitle</div>
-        <div id="poster-cont"></div>
+        <div id="poster-cont">
+            <div class="loading-icon"></div>
+        </div>
         <p id="book-authors">Henter forfatter</p>
         <div id="review-cont">
             <div id="stars-cont"></div>
             &bull;
             <div id="review-count">22 anmeldelser</div>
-            <select id="list-sel"></select>
-            <button id="create-list-btn">+</button>
-            <div id="fav-btn-add"></div>
-            <div id="fav-btn-added"></div>
+            <div id="fav-cont">
+                <select id="list-sel"></select>
+                <button id="create-list-btn">+</button>
+                <div id="fav-btn-add"></div>
+                <div id="fav-btn-added"></div>
+            </div>
         </div>
         <div id="middle-grid">
             <div id="tags-cont">
@@ -23,7 +27,23 @@
             Henter beskrivelse
         </div>
         <p id="rec-section-title">Anbefalinger</p>
-        <div id="rec-cont"></div>
+        <div id="rec-cont">
+            <div class="rec-loading">
+                <div class="loading-icon"></div>
+            </div>
+            <div class="rec-loading">
+                <div class="loading-icon"></div>
+            </div>
+            <div class="rec-loading">
+                <div class="loading-icon"></div>
+            </div>
+            <div class="rec-loading">
+                <div class="loading-icon"></div>
+            </div>
+            <div class="rec-loading">
+                <div class="loading-icon"></div>
+            </div>
+        </div>
     </div>
     <br>
 </template>

@@ -1,16 +1,21 @@
-import * as Factory from "./../elementFactory.js";
+import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
+import {signedIn} from "../../../../shared/users/bookUsers.js";
 
 export const setupFav = reference => {
-    setupFavIcons(reference)
-    setupFavList()
+    if(signedIn()){
+        Factory.updateDisplayMode("fav-cont","flex")
+        setupFavIcons(reference)
+        setupFavList()
+        updateFavoriteStatus()
+    }
 }
 
 const setupFavIcons = reference => {
     Factory.addOnclickHandler("fav-btn-add",async () => await addToFavoritesHandler(reference))
-    updateFavoriteStatus()
     Factory.addOnclickHandler("fav-btn-added",async () => await removeFromFavoritesHandler(reference))
+    
 }
 
 const addToFavoritesHandler = async reference => {

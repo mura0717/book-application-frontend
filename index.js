@@ -1,5 +1,5 @@
 import "https://unpkg.com/navigo";
-
+//import "./navigo.js";
 import {
   loadTemplate,
   adjustForMissingHash,
@@ -20,7 +20,9 @@ import { initBookLists } from "./pages/booklists/index.js";
 import { initBooks } from "./pages/books/index.js";
 import { initLogin } from "./pages/login/index.js";
 import { initSignup } from "./pages/signup/index.js";
+import { initBookList } from "./pages/booklist/index.js";
 import { initNavLoginButtons } from "./setup/nav_setup.js";
+
 
 window.addEventListener("load", async () => {
   const bookTemplate = await loadTemplate("./pages/book/index.html");
@@ -28,6 +30,7 @@ window.addEventListener("load", async () => {
   const loginTemplate = await loadTemplate("./pages/login/index.html");
   const signupTemplate = await loadTemplate("./pages/signup/index.html");
   const booklistsTemplate = await loadTemplate("./pages/booklists/index.html");
+  const booklistTemplate = await loadTemplate("./pages/booklist/index.html");
 
   const router = new Navigo("/", { hash: true });
   window.router = router;
@@ -43,7 +46,7 @@ window.addEventListener("load", async () => {
   initNavLoginButtons();
 
   adjustForMissingHash();
-  router
+  await router
     .hooks({
       before(done, match) {
         setActiveLink("topnav", match.url);
@@ -64,6 +67,16 @@ window.addEventListener("load", async () => {
         hooks: {
           before: (done) => enforceProtectedRouteGuard(done),
         },
+      },
+        "/booklist/:id": {
+          as: "booklist",
+              uses: (param) => {
+            renderTemplate(booklistTemplate, "content");
+            initBookList(param.data.id)
+          },
+        hooks: {
+            before: (done) => enforceProtectedRouteGuard(done),
+          },
       },
       "/login": {
         as: "login",
@@ -92,6 +105,6 @@ window.addEventListener("load", async () => {
     })
     .notFound(() => renderTemplate("No page for this route found", "content"))
     .resolve();
-});
+  });
 
 window.onerror = (e) => alert(e);

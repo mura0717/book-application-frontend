@@ -1,7 +1,8 @@
 import * as Books from "./../userBooks/userBooks.js"
-import * as Factory from "./../elementFactory.js"
+import * as Factory from "./../../../../shared/factories/elementFactory.js"
 
 export const setupRecommendations = () => {
+    clearLoading()
     const recs = Books.getRecommendations()
     const items = recs.map(toHtmlElement)
     const cont = document.getElementById("rec-cont")
@@ -14,7 +15,7 @@ export const setupRecommendations = () => {
 const toHtmlElement = rec => {
     const el = createItem(rec)
     const reference = rec.reference
-    el.onclick = () => window.location.href = `/#/book/${reference}`
+    el.onclick = () => window.router.navigate(`/#/book/${reference}`)
     return el
 }
 
@@ -31,4 +32,9 @@ const createItem = rec => {
     cont.appendChild(authorsCont)
     cont.appendChild(priceCont)
     return cont
+}
+
+const clearLoading = () => {
+    const el = document.getElementById("rec-cont")
+    el.innerHTML = ""
 }
