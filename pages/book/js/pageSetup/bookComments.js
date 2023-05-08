@@ -1,21 +1,26 @@
 import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as UserComments from "../userComments/userComments.js";
+import * as UserBooks from "../userBooks/userBooks.js"
 import {createStarElements, updateStarElements, updateWithStars} from "./bookStarReviews.js";
+import {signedIn} from "../../../../shared/users/bookUsers.js";
+
 
 let toggleForm = false
 let currentStars = 0
 
-export const setupBookComments = bookReference => {
+export const setupBookComments = () => {
     createIntroSection()
     setupAddForm()
-    UserComments.fetchComments(bookReference)
+    UserComments.fetchComments(UserBooks.getBook().reference)
         .then(createCommentSection)
 }
 
 const createIntroSection = () => {
     Factory.appendChildTo("comment-section-bar",Factory.createDiv("comment-section-title","","Anmeldelser"))
-    const btn = Factory.createButton("create-comment-btn","","Opret anmeldelse",handleAddClicked)
-    Factory.appendChildTo("comment-section-bar",btn)
+    if(signedIn()){
+        const btn = Factory.createButton("create-comment-btn","","Opret anmeldelse",handleAddClicked)
+        Factory.appendChildTo("comment-section-bar",btn)
+    }
 }
 
 const handleAddClicked = () => {
@@ -39,7 +44,7 @@ const closeCreateForm = () => {
     document.getElementById("create-form-wrapper").style.height = "0"
 }
 
-const setupAddForm = () => {
+const setupAddForm = bookReference => {
     setupUserRating()
     Factory.addOnclickHandler("comment-add-btn",addButtonClicked)
 }
@@ -48,7 +53,7 @@ const addButtonClicked = async () => {
     if(currentStars < 1)
         return
     const textBox = document.getElementById("comment-text-ipt")
-    const comment = await UserComments.addComment(textBox.value,currentStars)
+    const comment = await UserComments.addComment(UserBooks.getBook().reference,textBox.value,currentStars)
     if(comment == null)
         return
     const htmlDiv = toHtmlContainer(comment)

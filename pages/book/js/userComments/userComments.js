@@ -1,10 +1,11 @@
-import * as Comments from "./dummyComments.js"
+import * as Comments from "./httpComments.js"
 
 export const fetchComments = async bookReference => await Comments.fetchComments(bookReference)
 
-export const addComment = async (text, rating) => await Comments.addUserComment({
+export const addComment = async (bookReference,text, rating) => await Comments.addUserComment({
         review : text,
-        rating : rating
+        rating : rating,
+        bookReference : bookReference
     }
 ) 
 
