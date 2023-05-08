@@ -2,10 +2,10 @@ import {fetchClient} from "../../../../utils.js";
 
 let bookLists =[]
 
-const route = "/books/bookLists"
+const bookList = "/books/bookLists"
 
 export const fetchBookLists = async () => {
-    const response = await fetchClient.getWithAuth(route)
+    const response = await fetchClient.getWithAuth(bookList)
     bookLists = response !== undefined ? response : bookLists
 }
 
@@ -16,7 +16,7 @@ export const addToBookList = async (reference, listReference) => {
         bookId : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.pathWithAuth(route,body)
+    const response = await fetchClient.pathWithAuth(bookList,body)
     return response !== undefined
 }
 

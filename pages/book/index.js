@@ -9,6 +9,7 @@ export const initBook = (referenceId) => {
     init(referenceId)
         .then(initBookDetails)
         .then(initRecommendations)
+        .catch(handleFetchError)
 };
 
 const init = async bookReference => {
@@ -24,8 +25,13 @@ const initBookDetails = referenceId => {
 }
 
 const initRecommendations = async () => {
+    console.log("Rec called")
     /*
     await Books.fetchRecommendations()
     setupRecommendations()
      */
+}
+
+const handleFetchError = () => {
+    console.log("Fetch error")
 }
