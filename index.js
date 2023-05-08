@@ -68,27 +68,15 @@ window.addEventListener("load", async () => {
           before: (done) => enforceProtectedRouteGuard(done),
         },
       },
-<<<<<<< HEAD
-      "/booklist/:id": (param) => {
-        renderTemplate(booklistTemplate, "content");
-        initBookList(param.data.id);
-      }
-      hooks: {
-        before: (done) => enforceProtectedRouteGuard(done),
-      },
-      hooks: {
-        before: (done) => enforceProtectedRouteGuard(done),
-=======
         "/booklist/:id": {
           as: "booklist",
               uses: (param) => {
             renderTemplate(booklistTemplate, "content");
-            initBooklist(param.data.id)
+            initBookList(param.data.id)
           },
         hooks: {
             before: (done) => enforceProtectedRouteGuard(done),
           },
->>>>>>> mhDev
       },
       "/login": {
         as: "login",
