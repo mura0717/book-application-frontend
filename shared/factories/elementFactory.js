@@ -52,13 +52,10 @@ export const updateDisplayMode = (id, mode) => {
     el.style.display = mode
 }
 
-export const createDiv = (id,classNames) => {
-    return createHTMLElement("div", id, classNames)
-}
-
-export const createDivWithText = (id,classNames, text) => {
+export const createDiv = (id,classNames, text) => {
     const el = createHTMLElement("div", id, classNames)
-    el.textContent = text
+    if(text !== undefined)
+        el.textContent = text
     return el
 }
 
