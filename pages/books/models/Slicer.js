@@ -5,21 +5,27 @@ export default class Slicer {
     this.element = element;
     this.moreButton = moreBtn;
     this.books = [];
+    this.filter = null;
     moreBtn.onclick = this.nextSlice;
 
     this.getBooks().then(() => moreBtn.classList.remove("d-none"));
   }
 
-  getBooks = async () => {
+  getBooks = async (reRender = false) => {
     // Show loading
     this.moreButton.textContent = "";
     this.moreButton.innerHTML = DOMPurify.sanitize(`
       <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"/>
     `);
 
-    const data = await fetchClient.get(`/books/slice`);
+    let url = `/books/slice`;
+
+    if (this.filter) {
+      url += `?filter=${this.filter}`;
+    }
+    const data = await fetchClient.get(url);
     if (!data) return;
-    this.books.push(...data);
+    reRender ? (this.books = data) : this.books.push(...data);
     this.render(this.books);
   };
 

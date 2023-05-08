@@ -23,7 +23,6 @@ import { initSignup } from "./pages/signup/index.js";
 import { initBookList } from "./pages/booklist/index.js";
 import { initNavLoginButtons } from "./setup/nav_setup.js";
 
-
 window.addEventListener("load", async () => {
   const bookTemplate = await loadTemplate("./pages/book/index.html");
   const booksTemplate = await loadTemplate("./pages/books/index.html");
@@ -65,18 +64,18 @@ window.addEventListener("load", async () => {
           initBookLists();
         },
         hooks: {
-          before: (done) => enforceProtectedRouteGuard(done),
+          before: async (done) => await enforceProtectedRouteGuard(done),
         },
       },
-        "/booklist/:id": {
-          as: "booklist",
-              uses: (param) => {
-            renderTemplate(booklistTemplate, "content");
-            initBookList(param.data.id)
-          },
+      "/booklist/:id": {
+        as: "booklist",
+        uses: (param) => {
+          renderTemplate(booklistTemplate, "content");
+          initBookList(param.data.id);
+        },
         hooks: {
-            before: (done) => enforceProtectedRouteGuard(done),
-          },
+          before: async (done) => await enforceProtectedRouteGuard(done),
+        },
       },
       "/login": {
         as: "login",
@@ -105,6 +104,6 @@ window.addEventListener("load", async () => {
     })
     .notFound(() => renderTemplate("No page for this route found", "content"))
     .resolve();
-  });
+});
 
 window.onerror = (e) => alert(e);

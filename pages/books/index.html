@@ -3,6 +3,22 @@
     <h2 class="fw-bold">En bred vifte af bøger</h2>
     <div>Find den næste bog til din bogsamling</div>
   </div>
+  <div class="d-flex flex-row align-items-center mb-3">
+    <select
+      aria-placeholder="Genre"
+      id="genre-filter"
+      class="px-2 bg-black border-0 rounded-1 text-light fw-bold py-2"
+    >
+      <option value="genre" disabled selected>Genre</option>
+      <option value="fiction">Fiction</option>
+      <option value="novel">Novel</option>
+      <option value="romance">Romance</option>
+    </select>
+    <div
+      id="unselect-select"
+      style="cursor: pointer; padding-left: 0.5rem"
+    ></div>
+  </div>
   <div class="grid gap-5 w-100" id="book_cards"></div>
   <div class="w-100 d-flex justify-content-center">
     <div
