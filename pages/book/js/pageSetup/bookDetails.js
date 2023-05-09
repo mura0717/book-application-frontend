@@ -1,6 +1,11 @@
 import * as Books from "./../userBooks/userBooks.js";
 import * as Factory from "./../../../../shared/factories/elementFactory.js";
 
+export const setupBookPlaceholders = () => {
+    const posterLoader = Factory.createDiv("","loading-icon")
+    Factory.appendChildTo("poster-cont",posterLoader)
+}
+
 export const setupBookDetails = () => {
     setupContent()
     setupEventHandlers()

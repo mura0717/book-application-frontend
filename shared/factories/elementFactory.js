@@ -47,18 +47,23 @@ export const showElement = (id, show) => {
     el.style.display = show ? "block" : "none"
 }
 
+export const createButton = (id, classNames, text, clickHandler) => {
+    const btn = createHTMLElement("button",id,classNames)
+    btn.textContent = text
+    if(clickHandler !== undefined)
+        btn.onclick = clickHandler
+    return btn
+}
+
 export const updateDisplayMode = (id, mode) => {
     const el = document.getElementById(id)
     el.style.display = mode
 }
 
-export const createDiv = (id,classNames) => {
-    return createHTMLElement("div", id, classNames)
-}
-
-export const createDivWithText = (id,classNames, text) => {
+export const createDiv = (id,classNames, text) => {
     const el = createHTMLElement("div", id, classNames)
-    el.textContent = text
+    if(text !== undefined)
+        el.textContent = text
     return el
 }
 

@@ -1,9 +1,7 @@
 <template>
     <div id="book-cont">
         <div id="book-title">Henter bogtitle</div>
-        <div id="poster-cont">
-            <div class="loading-icon"></div>
-        </div>
+        <div id="poster-cont"></div>
         <p id="book-authors">Henter forfatter</p>
         <div id="review-cont">
             <div id="stars-cont"></div>
@@ -23,27 +21,19 @@
             </div>
             <button id="buy-btn">Køb bog</button>
         </div>
-        <div id="descr-cont" class="no-scrollbar">
-            Henter beskrivelse
-        </div>
+        <div id="descr-cont" class="no-scrollbar">Henter beskrivelse</div>
         <p id="rec-section-title">Anbefalinger</p>
-        <div id="rec-cont">
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
+        <div id="rec-cont"></div>
+        <div id="comment-section-bar">
+            <div id="comment-section-title">Anmeldelser</div>
+        </div>
+        <div id="create-form-wrapper">
+            <div id="create-comment-form">
+                <textarea id="comment-text-ipt"></textarea>
+                <div id="user-rating"></div>
+                <button id="comment-add-btn">Tilføj</button>
             </div>
         </div>
+        <div id="comment-cont"></div>
     </div>
-    <br>
 </template>
