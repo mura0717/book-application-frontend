@@ -1,14 +1,17 @@
 import * as Books from "./js/userBooks/userBooks.js"
 import * as BookLists from "../../shared/bookLists/userBookLists.js"
 import {setupFav} from "./js/pageSetup/bookFavorites.js";
-import {setupReviewDetails} from "./js/pageSetup/bookReviews.js";
-import {setupBookDetails} from "./js/pageSetup/bookDetails.js";
-import {setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
+import {setupBookComments} from "./js/pageSetup/bookComments.js";
+import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
+import {setupRecPlaceholders, setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
+import {updateWithStars} from "./js/pageSetup/bookStarReviews.js";
 
 export const initBook = (referenceId) => {
+    setupPlaceholders()
     init(referenceId)
+        .then()
         .then(initBookDetails)
-        .then(initRecommendations)
+        //.then(initRecommendations)
         .catch(handleFetchError)
 };
 
@@ -18,18 +21,26 @@ const init = async bookReference => {
     return bookReference
 }
 
+const setupPlaceholders = () => {
+    setupBookPlaceholders()
+    setupRecPlaceholders()
+}
+
 const initBookDetails = referenceId => {
+    setupStars()
     setupBookDetails()
     setupFav(referenceId)
-    setupReviewDetails()
+    setupBookComments(referenceId)
+}
+
+const setupStars = () => {
+    const cont = document.getElementById("stars-cont")
+    updateWithStars(cont,3)
 }
 
 const initRecommendations = async () => {
-    console.log("Rec called")
-    /*
     await Books.fetchRecommendations()
     setupRecommendations()
-     */
 }
 
 const handleFetchError = () => {

@@ -3,9 +3,6 @@ import * as BookLists from '../../shared/bookLists/userBookLists.js';
 
 
 export const initBookLists = () => {
-
-    const el = Factory.createDivWithText("id","classNames", "text");
-
     BookLists.fetchBookLists().then(()=>{
         setUpListTotal()
         setUpBookLists()
