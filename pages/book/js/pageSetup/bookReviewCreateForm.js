@@ -65,4 +65,5 @@ const showCreateFrom = () => {
 const closeCreateForm = () => {
     Factory.updateTextContent("create-comment-btn","Opret anmeldelse")
     document.getElementById("create-form-wrapper").style.height = "0"
+    window.scroll(0,520)
 }
