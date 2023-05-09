@@ -25,6 +25,6 @@ export const addUserComment = async reviewRequest => {
     const response = await fetchClient.postWithAuth(addRoute,comment)
     if(response === undefined)
         return null
-    userComments.push(comment)
-    return comment
+    userComments.push(response)
+    return response
 }

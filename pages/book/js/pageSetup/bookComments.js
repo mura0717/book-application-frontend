@@ -4,23 +4,21 @@ import * as UserBooks from "../userBooks/userBooks.js"
 import {createStarElements, updateStarElements, updateWithStars} from "./bookStarReviews.js";
 import {signedIn} from "../../../../shared/users/bookUsers.js";
 
-
 let toggleForm = false
 let currentStars = 0
 
 export const setupBookComments = () => {
-    createIntroSection()
+    showAddButton()
     setupAddForm()
     UserComments.fetchComments(UserBooks.getBook().reference)
         .then(createCommentSection)
 }
 
-const createIntroSection = () => {
-    Factory.appendChildTo("comment-section-bar",Factory.createDiv("comment-section-title","","Anmeldelser"))
-    if(signedIn()){
-        const btn = Factory.createButton("create-comment-btn","","Opret anmeldelse",handleAddClicked)
-        Factory.appendChildTo("comment-section-bar",btn)
-    }
+const showAddButton = () => {
+    if (!signedIn())
+        return;
+    const btn = Factory.createButton("create-comment-btn", "", "Opret anmeldelse", handleAddClicked)
+    Factory.appendChildTo("comment-section-bar", btn)
 }
 
 const handleAddClicked = () => {
@@ -35,7 +33,6 @@ const showCreateFrom = () => {
     Factory.updateTextContent("create-comment-btn","Luk")
     const el = document.getElementById("create-form-wrapper")
     el.style.height = "275px"
-    const rect = el.getBoundingClientRect()
     window.scroll(0,520 + 275)
 }
 
