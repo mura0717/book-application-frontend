@@ -21,12 +21,11 @@ async function handleSignUp(e) {
 
     try{
         const response = await fetchClient.post("/user-with-role", body)
-        console.log(body)
 
         if (response){
             showSuccessModal();
-            storeCredentials(body.username, body.password);
             addLoginEventListener(body.username, body.password);
+            
         } else { 
             handleErrorModal("Sign up failed. Try again.");
             clearForm();
@@ -65,22 +64,16 @@ function showSuccessModal(){
 
     const modal = new bootstrap.Modal(document.getElementById("signUp-modal"));
     modal.show();
+
     
 }
 
-function storeCredentials(username, password) {
-
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
-
-}
-
-  function addLoginEventListener(username, password) {
+function addLoginEventListener(username, password) {
     const loginButton = document.getElementById("login-button");
     loginButton.addEventListener("click", async () => {
-      await login(username, password);
-      await window.router.navigate("/");
-    });
+        login(username, password);
+        window.router.navigate("/");
+});
 }
 
 
