@@ -9,11 +9,11 @@
     width: 128px;
     height: 100%;
     justify-self: end;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     padding-left: 6px;
 }
 
-#create-list-btn{
+#show-create-fav-form{
     width: 24px;
     height: 100%;
     font-size: 2rem;
@@ -26,14 +26,14 @@
     user-select: none;
 }
 
-#create-list-btn:hover{
+#show-create-fav-form:hover{
     scale: 1.25;
     border:1px solid white;
     box-shadow: white 0 0 15px;
     border-radius: 6px;
 }
 
-#create-list-btn:active{
+#show-create-fav-form:active{
     scale: 0.6;
 }
 

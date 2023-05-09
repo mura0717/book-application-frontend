@@ -2,13 +2,15 @@ import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
 import {signedIn} from "../../../../shared/users/bookUsers.js";
+import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 
-export const setupFav = reference => {
+export const setupFav = async reference => {
     if(signedIn()){
         Factory.updateDisplayMode("fav-cont","flex")
         setupFavIcons(reference)
-        setupFavList()
+        setupCreateFavoriteButton()
         updateFavoriteStatus()
+        await setupFavList()
     }
 }
 
@@ -31,18 +33,20 @@ const removeFromFavoritesHandler = async reference => {
     showAddToFavorites(!result)
 }
 
-const setupFavList = () => {
+const setupFavList = async () => {
     Factory.addOnChangeHandler("list-sel",async () => updateFavoriteStatus())
-    updateFavListValues()
+    await updateFavListValues()
 }
 
-const updateFavListValues = () => {
-    BookLists.getBookLists().forEach((b,i) => {
+const updateFavListValues = async () => {
+    const bookLists = await BookLists.getBookLists()
+    for (let i = 0; i < bookLists.length; i++) {
+        const bookList = bookLists.at(i)
         const opt = document.createElement("option")
-        opt.textContent = b.title
-        opt.value = b.id
+        opt.textContent = bookList.title
+        opt.value = bookList.id
         Factory.appendChildTo("list-sel",opt)
-    })
+    }
 }
 
 const updateFavoriteStatus = () => {

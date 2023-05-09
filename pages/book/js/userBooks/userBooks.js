@@ -1,13 +1,5 @@
-import * as HttpBooks from "./httpBooks.js";
-import * as DummyBoooks from "./dummyBooks.js"
-import * as DummyRecommendations from "./dummyRecommedations.js"
-import * as HttpRecommendations from "./httpRecommendations.js"
-
-const useDummyBooks = false
-const useDummyRecommendations = false
-
-const Books = !useDummyBooks ? HttpBooks : DummyBoooks
-const recommendations = !useDummyRecommendations ? HttpRecommendations : DummyRecommendations
+import * as Books from "./httpBooks.js";
+import * as recommendations from "./httpRecommendations.js"
 
 export const fetchBookDetails = async (reference) => {
     await Books.fetchBook(reference)

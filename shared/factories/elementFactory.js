@@ -38,6 +38,13 @@ export const showElement = (id, show) => {
     el.style.display = show ? "block" : "none"
 }
 
+export const createOption = (text,value) => {
+    const el = document.createElement("option")
+    el.textContent = text
+    el.value = value
+    return el
+}
+
 export const createButton = (id, classNames, text, clickHandler) => {
     const btn = createHTMLElement("button",id,classNames)
     btn.textContent = text

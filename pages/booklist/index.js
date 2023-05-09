@@ -1,6 +1,5 @@
 import * as Factory from '../../shared/factories/elementFactory.js';
 import * as BookLists from '../../shared/bookLists/userBookLists.js';
-import * as HttpBookLists from '../../shared/bookLists/httpBookLists.js';
 
 export const initBookList = id => {
     BookLists.fetchBookList(id).then((bookList)=>{

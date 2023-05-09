@@ -1,5 +1,4 @@
 import * as Books from "./js/userBooks/userBooks.js"
-import * as BookLists from "../../shared/bookLists/userBookLists.js"
 import {setupFav} from "./js/pageSetup/bookFavorites.js";
 import {setupBookComments} from "./js/pageSetup/bookComments.js";
 import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
@@ -9,7 +8,7 @@ import {setupAddForm} from "./js/pageSetup/bookReviewCreateForm.js";
 
 export const initBook = (referenceId) => {
     setupPlaceholders()
-    init(referenceId)
+    Books.fetchBookDetails(referenceId)
         .then(initBookDetails)
         .then(setupAddForm)
         .then(setupBookComments)
@@ -18,28 +17,22 @@ export const initBook = (referenceId) => {
         .catch(handleFetchError)
 };
 
-const init = async bookReference => {
-    await Books.fetchBookDetails(bookReference)
-    await BookLists.fetchBookLists()
-    return bookReference
-}
-
 const setupPlaceholders = () => {
     setupBookPlaceholders()
     setupRecPlaceholders()
 }
 
-const initBookDetails = referenceId => {
+const initBookDetails = async referenceId => {
     updateAverageRating()
     setupBookDetails()
-    setupFav(referenceId)
+    await setupFav(referenceId)
 }
 
 const initRecommendations = async () => {
-    await Books.fetchRecommendations()
-    setupRecommendations()
+    Books.fetchRecommendations()
+        .then(setupRecommendations)
 }
 
-const handleFetchError = () => {
-    console.log("Fetch error")
+const handleFetchError = e => {
+    console.log(e)
 }

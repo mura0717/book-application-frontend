@@ -64,35 +64,32 @@ export const exists = (reference, listReference) => {
 }
 
 export const fetchBookList = async (id) => {
-   await fetchBookLists();
-
-   const bookList = {
-    title : "Favoritter",
-    books : [
-        {
-            title : "Harry Potter 1",
-            authors : "J.K.Rowling",
-            categories : ["Ficton","Fantasy"],
-            priceAmount : "299",
-            currency : "kr"
-        },
-        {
-            title : "Harry Potter 2",
-            authors : "J.K.Rowling",
-            categories : ["Ficton","Fantasy"],
-            priceAmount : "399",
-            currency : "kr"
-        },
-        {
-            title : "Harry Potter 3",
-            authors : "J.K.Rowling",
-            categories : ["Ficton","Fantasy"],
-            priceAmount : "499",
-            currency : "kr"
-        }
-    ],
-    listCount : 3,
-    id : "1"
-}
-   return bookList;
+    return {
+       title: "Favoritter",
+       books: [
+           {
+               title: "Harry Potter 1",
+               authors: "J.K.Rowling",
+               categories: ["Ficton", "Fantasy"],
+               priceAmount: "299",
+               currency: "kr"
+           },
+           {
+               title: "Harry Potter 2",
+               authors: "J.K.Rowling",
+               categories: ["Ficton", "Fantasy"],
+               priceAmount: "399",
+               currency: "kr"
+           },
+           {
+               title: "Harry Potter 3",
+               authors: "J.K.Rowling",
+               categories: ["Ficton", "Fantasy"],
+               priceAmount: "499",
+               currency: "kr"
+           }
+       ],
+       listCount: 3,
+       id: "1"
+   };
 }

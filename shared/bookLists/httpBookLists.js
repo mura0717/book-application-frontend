@@ -2,29 +2,43 @@ import {fetchClient} from "../../utils.js";
 
 let bookLists =[]
 
-const bookList = "/books/bookLists"
+const fetchAllRoute = "/bookLists"
+const fetchSingleRoute = "/bookLists/"
+const updateRoute = "/bookLists/update"
+const createRoute = "/bookLists/create"
+
+let hasFetched = false
 
 export const fetchBookLists = async () => {
-    const response = await fetchClient.getWithAuth(bookList)
+    const response = await fetchClient.getWithAuth(fetchAllRoute)
     bookLists = response !== undefined ? response : bookLists
+    hasFetched = true
+    return response
 }
 
-export const getFetchedBookLists = () => bookLists
+export const getBookLists = async () => {
+    const response = await fetchClient.getWithAuth(fetchAllRoute)
+    if(response === undefined)
+        return []
+    hasFetched = true
+    return response
+}
 
 export const addToBookList = async (reference, listReference) => {
     const body = {
-        bookId : reference,
+        bookReference : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.pathWithAuth(bookList,body)
+    const response = await fetchClient.pathWithAuth(updateRoute,body)
     return response !== undefined
 }
 
-export const getBookList = (id) => {
-    const found = bookLists.find(list => list.id === id)
-    if(found === undefined)
+export const getBookList = async (id) => {
+    const query = `?id=${id}`
+    const response = await fetchClient.getWithAuth(fetchSingleRoute + query)
+    if(response === undefined)
         return null
-    return found
+    return response
 }
 
 export const removeFromBookList = async (reference, listReference) => {
@@ -44,6 +58,10 @@ export const exists = (reference, listReference) => {
     return bookReference !== undefined
 }
 
-export const fetchBookList = async (id) => {
-    
+export const createBookList = async title => {
+    const body = {title : title}
+    const response = await fetchClient.postWithAuth(createRoute,body)
+    if(response === undefined)
+        return null
+    return response.title
 }

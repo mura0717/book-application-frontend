@@ -5,16 +5,15 @@ import * as BookLists from '../../shared/bookLists/userBookLists.js';
 export const initBookLists = () => {
     BookLists.fetchBookLists().then(()=>{
         setUpListTotal()
-        setUpBookLists()
+            .then(setUpBookLists)
     })
     
 };
 
-function setUpBookLists (){
+async function setUpBookLists (){
 
     const populatedListsElement = document.getElementById("bookLists-id");
-    const bookLists = BookLists.getBookLists();
-
+    const bookLists = await BookLists.getBookLists();
     for (let i = 0; i < bookLists.length; i++) {
         const bookList = bookLists.at(i);
         const listElement = createListElement(bookList);
@@ -35,8 +34,9 @@ function createListElement (bookList){
     return el
 }
 
-function setUpListTotal (){
-    const listCount = BookLists.getBookLists().length
+async function setUpListTotal (){
+    const bookLists = await BookLists.getBookLists()
+    const listCount = bookLists.length
     Factory.updateTextContent("listCount-id", listCount + " Boglister");
 
 }
