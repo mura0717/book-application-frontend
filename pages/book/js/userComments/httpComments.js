@@ -5,7 +5,7 @@ let userComments = []
 const fetchRoute = "/books/reviews"
 const addRoute = "/books/add"
 
-export const fetchComments = async bookReference => {
+export const fetchComments = async bookReference =>  {
     const fullRoute = `${fetchRoute}?bookReference=${bookReference}`
     const response = await fetchClient.get(fullRoute)
     if(!response)
