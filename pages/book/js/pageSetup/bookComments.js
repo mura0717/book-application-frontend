@@ -1,7 +1,7 @@
 import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as UserComments from "../userComments/userComments.js";
 import * as UserBooks from "../userBooks/userBooks.js"
-import {createStarElements, updateStarElements, updateWithStars} from "./bookStarReviews.js";
+import {createStarElements, updateAverageRating, updateStarElements, updateWithStars} from "./bookRatings.js";
 import {signedIn} from "../../../../shared/users/bookUsers.js";
 
 let toggleForm = false
@@ -11,6 +11,7 @@ export const setupBookComments = () => {
     showAddButton()
     setupAddForm()
     UserComments.fetchComments(UserBooks.getBook().reference)
+        .then(updateAverageRating)
         .then(createCommentSection)
 }
 
@@ -56,6 +57,7 @@ const addButtonClicked = async () => {
     const htmlDiv = toHtmlContainer(comment)
     Factory.appendChildTo("comment-cont",htmlDiv)
     closeCreateForm()
+    updateAverageRating()
 }
 
 const setupUserRating = () => {
@@ -73,6 +75,9 @@ const setupUserRating = () => {
 
 const createCommentSection = () => {
     const comments = UserComments.getComments()
+    if(comments.length === 0)
+        return
+    Factory.updateInnerHtml("comment-cont", "")
     for (let i = 0; i < comments.length; i++) {
         const comment = comments.at(i)
         const commentItem = toHtmlContainer(comment)

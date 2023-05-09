@@ -1,4 +1,11 @@
 import * as Factory from "../../../../shared/factories/elementFactory.js";
+import * as Comments from "../userComments/userComments.js";
+
+export const updateAverageRating = () => {
+    const rating = getAverageRating()
+    const cont = document.getElementById("stars-cont")
+    updateWithStars(cont,rating)
+}
 
 export const updateWithStars = (el,stars) => {
     el.innerHTML = ""
@@ -25,4 +32,19 @@ export const updateStarElements = (elements,stars) => {
         else
             el.className = "bad-star"
     }
+}
+
+const getAverageRating = () => {
+    const comments = Comments.getComments()
+    return average(comments)
+}
+
+const average = (comments) => {
+    const count = comments.length
+    if(count === 0)
+        return 0
+    const sum = comments
+        .map(c => c.rating)
+        .reduce((r, acc) => acc + r,0)
+    return Math.floor(sum /  count)
 }

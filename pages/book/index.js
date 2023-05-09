@@ -4,7 +4,7 @@ import {setupFav} from "./js/pageSetup/bookFavorites.js";
 import {setupBookComments} from "./js/pageSetup/bookComments.js";
 import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
 import {setupRecPlaceholders, setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
-import {updateWithStars} from "./js/pageSetup/bookStarReviews.js";
+import {updateAverageRating} from "./js/pageSetup/bookRatings.js";
 
 export const initBook = (referenceId) => {
     setupPlaceholders()
@@ -27,16 +27,13 @@ const setupPlaceholders = () => {
 }
 
 const initBookDetails = referenceId => {
-    setupStars()
+    updateAverageRating()
     setupBookDetails()
     setupFav(referenceId)
     setupBookComments(referenceId)
 }
 
-const setupStars = () => {
-    const cont = document.getElementById("stars-cont")
-    updateWithStars(cont,3)
-}
+
 
 const initRecommendations = async () => {
     await Books.fetchRecommendations()

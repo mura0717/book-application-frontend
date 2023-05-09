@@ -5,6 +5,21 @@
     column-gap: 12px;
 }
 
+
+.good-star{
+    background: url("../resources/yellow-star.png");
+    background-size: cover;
+    height: 24px;
+    width: 24px;
+}
+
+.bad-star{
+    background: url("../resources/blank-star.png");
+    background-size: cover;
+    height: 24px;
+    width: 24px;
+}
+
 #review-count{
     font-family: 'Inter', serif;
     font-style: normal;
@@ -66,20 +81,6 @@
 
 #comment-text-ipt{
     grid-column: span 2;
-}
-
-.good-star{
-    background: url("../resources/yellow-star.png");
-    background-size: cover;
-    height: 24px;
-    width: 24px;
-}
-
-.bad-star{
-    background: url("../resources/blank-star.png");
-    background-size: cover;
-    height: 24px;
-    width: 24px;
 }
 
 #user-rating{
@@ -156,4 +157,14 @@
 .comment-text{
     grid-column: span 3;
     
+}
+
+#comment-no-reviews{
+    white-space: nowrap;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    text-align: center;
 }
