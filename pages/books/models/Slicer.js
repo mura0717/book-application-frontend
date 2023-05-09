@@ -21,7 +21,7 @@ export default class Slicer {
     let url = `/books/slice`;
 
     if (this.filter) {
-      url += `?filter=${this.filter}`;
+      url += `?genre=${this.filter}`;
     }
     const data = await fetchClient.get(url);
     if (!data) return;
