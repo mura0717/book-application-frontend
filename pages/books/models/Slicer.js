@@ -40,11 +40,15 @@ export default class Slicer {
         <a href="/#/book/${
           book.id
         }" class="mb-5 mb-lg-0 d-flex flex-column book_card">
-            <img style="height: 400px;" src="${
+            <img src="${
               book.volumeInfo.imageLinks !== null
                 ? book.volumeInfo.imageLinks.thumbnail
                 : "../../assets/BlankThumbnail.png"
-            }" class="rounded-1"/>
+            }" class="rounded-1 book_img"/>
+            <div class="book-info rounded-1">
+              <div class="fw-bold text-light">${book.volumeInfo.title}</div>
+              <p>${book.volumeInfo.description}</p>
+            </div>
             <div class="d-flex flex-column mt-2">
                 <div class="fw-bold text-dark">${book.volumeInfo.title}</div>
                 <div style="color: #565656">${book.volumeInfo.authors}</div>

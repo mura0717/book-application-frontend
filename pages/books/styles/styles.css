@@ -9,6 +9,7 @@
   transition: 0.3s;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 }
 
 .book_card:hover {
@@ -23,4 +24,30 @@
 
 #more_btn:hover {
   background-color: #00886f;
+}
+
+.book-info {
+  height: 0;
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  background: rgb(27, 27, 27, 0.5);
+  position: absolute;
+  visibility: hidden;
+  overflow-y: scroll;
+  transition: linear 0.3s;
+}
+
+.book_img {
+  height: 400px;
+}
+
+.book-info p {
+  color: white;
+}
+
+.book_card:hover .book-info {
+  background: black;
+  visibility: visible;
+  height: 400px;
 }
