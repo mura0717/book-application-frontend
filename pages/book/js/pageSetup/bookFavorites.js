@@ -4,17 +4,18 @@ import * as Books from "./../userBooks/userBooks.js";
 import {signedIn} from "../../../../shared/users/bookUsers.js";
 import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 
-export const setupFav = async reference => {
+export const setupFav = async () => {
     if(signedIn()){
         Factory.updateDisplayMode("fav-cont","flex")
-        setupFavIcons(reference)
+        setupFavIcons()
         setupCreateFavoriteButton()
         updateFavoriteStatus()
         await setupFavList()
     }
 }
 
-const setupFavIcons = reference => {
+const setupFavIcons = () => {
+    const reference = Books.getBook().reference
     Factory.addOnclickHandler("fav-btn-add",async () => await addToFavoritesHandler(reference))
     Factory.addOnclickHandler("fav-btn-added",async () => await removeFromFavoritesHandler(reference))
     
@@ -35,11 +36,14 @@ const removeFromFavoritesHandler = async reference => {
 
 const setupFavList = async () => {
     Factory.addOnChangeHandler("list-sel",async () => updateFavoriteStatus())
-    await updateFavListValues()
+    const bookLists = await BookLists.getListTitles()
+    if(bookLists.length > 0)
+        await populateFavList(bookLists)
+    else
+        populateWithEmptyNotify()
 }
 
-const updateFavListValues = async () => {
-    const bookLists = await BookLists.getBookLists()
+const populateFavList = async bookLists => {
     for (let i = 0; i < bookLists.length; i++) {
         const bookList = bookLists.at(i)
         const opt = document.createElement("option")
@@ -47,6 +51,11 @@ const updateFavListValues = async () => {
         opt.value = bookList.id
         Factory.appendChildTo("list-sel",opt)
     }
+}
+
+const populateWithEmptyNotify = () => {
+    const opt = Factory.createOption("Ingen lister","-1")
+    Factory.appendChildTo("list-sel",opt)
 }
 
 const updateFavoriteStatus = () => {

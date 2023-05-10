@@ -7,8 +7,6 @@ export const fetchBookDetails = async (reference) => {
 
 export const getBook = () => Books.getFetchedBook()
 
-export const getBooks = () => Books.getFetchedBooks()
-
 export const fetchRecommendations = async () => {
     const book = Books.getFetchedBook()
     await recommendations.fetchRecommendations(book.authors,book.title)

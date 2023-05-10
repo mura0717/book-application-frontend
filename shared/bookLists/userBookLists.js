@@ -1,10 +1,8 @@
 import * as BookLists from "./httpBookLists.js";
 
-export const fetchBookLists = async () => await BookLists.fetchBookLists()
-
 export const getBookLists = async () => await BookLists.getBookLists()
 
-export const getListTitles = async () => undefined
+export const getListTitles = async () => await BookLists.getListTitles()
 
 export const addToFavoriteList = async (reference, listReference) => await BookLists.addToBookList(reference,listReference)
 

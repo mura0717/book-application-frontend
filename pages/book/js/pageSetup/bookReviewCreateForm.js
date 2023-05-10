@@ -8,7 +8,7 @@ import {signedIn} from "../../../../shared/users/bookUsers.js";
 let toggleForm = false
 let currentStars = 0
 
-export const setupAddForm = bookReference => {
+export const setupCreateReviewForm = () => {
     showAddButton()
     setupUserRating()
     Factory.addOnclickHandler("comment-add-btn",addButtonClicked)
@@ -60,6 +60,7 @@ const showCreateFrom = () => {
     const el = document.getElementById("create-form-wrapper")
     el.style.height = "275px"
     window.scroll(0,520 + 275)
+    
 }
 
 const closeCreateForm = () => {

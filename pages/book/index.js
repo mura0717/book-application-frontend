@@ -4,17 +4,14 @@ import {setupBookComments} from "./js/pageSetup/bookComments.js";
 import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
 import {setupRecPlaceholders, setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
 import {updateAverageRating} from "./js/pageSetup/bookRatings.js";
-import {setupAddForm} from "./js/pageSetup/bookReviewCreateForm.js";
+import {setupCreateReviewForm} from "./js/pageSetup/bookReviewCreateForm.js";
 
-export const initBook = (referenceId) => {
+export const initBook = async (referenceId) => {
     setupPlaceholders()
-    Books.fetchBookDetails(referenceId)
-        .then(initBookDetails)
-        .then(setupAddForm)
-        .then(setupBookComments)
-        .then(updateAverageRating)
-        //.then(initRecommendations)
-        .catch(handleFetchError)
+    await Books.fetchBookDetails(referenceId)
+    //initRecommendations().then()
+    await initBookDetails()
+    await initReviewDetails()
 };
 
 const setupPlaceholders = () => {
@@ -22,17 +19,19 @@ const setupPlaceholders = () => {
     setupRecPlaceholders()
 }
 
-const initBookDetails = async referenceId => {
+const initBookDetails = async () => {
     updateAverageRating()
     setupBookDetails()
-    await setupFav(referenceId)
+    await setupFav()
+}
+
+const initReviewDetails =  async () => {
+    setupCreateReviewForm()
+    await setupBookComments()
+    updateAverageRating()
 }
 
 const initRecommendations = async () => {
     Books.fetchRecommendations()
         .then(setupRecommendations)
-}
-
-const handleFetchError = e => {
-    console.log(e)
 }

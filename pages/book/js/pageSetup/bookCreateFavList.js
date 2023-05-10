@@ -32,6 +32,14 @@ const requestCreateList = async () => {
     if(bookList == null)
         return
     const option = Factory.createOption(bookList.title,bookList.id)
+    removeEmptyNotify()
     Factory.appendChildTo("list-sel",option)
     hideCreateForm()
+}
+
+const removeEmptyNotify = () => {
+    const el = document.getElementById("list-sel")
+    const value = el.value
+    if(value === "-1")
+        el.innerHTML = ""
 }
