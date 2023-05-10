@@ -2,21 +2,20 @@ import * as Factory from '../../shared/factories/elementFactory.js';
 import * as BookLists from '../../shared/bookLists/userBookLists.js';
 
 
-export const initBookLists = () => {
+export const initBookLists = async () => {
 
-    const el = Factory.createDivWithText("id","classNames", "text");
+    const bookLists = await BookLists.getBookLists();
 
     BookLists.fetchBookLists().then(()=>{
-        setUpListTotal()
-        setUpBookLists()
+        setUpListTotal(bookLists)
+        setUpBookLists(bookLists)
     })
     
 };
 
-function setUpBookLists (){
+function setUpBookLists (bookLists){
 
     const populatedListsElement = document.getElementById("bookLists-id");
-    const bookLists = BookLists.getBookLists();
 
     for (let i = 0; i < bookLists.length; i++) {
         const bookList = bookLists.at(i);
@@ -38,7 +37,7 @@ function createListElement (bookList){
     return el
 }
 
-function setUpListTotal (){
+function setUpListTotal (bookLists){
     const listCount = BookLists.getBookLists().length
     Factory.updateTextContent("listCount-id", listCount + " Boglister");
 

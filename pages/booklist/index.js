@@ -22,10 +22,11 @@ function setUpBooks (bookList){
     }
 
 }
-
+//Added image to book
 function createBookElement (book){
     const html = `<li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
+                    <img src="${book.image}" alt="Bog cover" width="100" height="100">
                     <a class="fw-bold" href="/#/book/${book.id}">${book.title}</a>
                     <div id="authors-id">${book.authors}</div>
                     <div id="categories-id">${book.categories}</div>
