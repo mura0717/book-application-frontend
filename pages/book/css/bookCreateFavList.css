@@ -1,7 +1,7 @@
 #create-fav-cont{
     width: 0;
     height: 40px;
-    background-color: darkgray;
+    background-color: gray;
     overflow: hidden;
     transition: width 0.5s ease-in-out;
     display: flex;

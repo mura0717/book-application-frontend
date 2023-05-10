@@ -4,6 +4,7 @@
     align-items: center;
 }
 
+
 #show-create-fav-form{
     width: 24px;
     height: 40px;
@@ -12,22 +13,18 @@
     padding: 0;
     line-height: 2rem;
     border:1px solid transparent;
-    background-color: darkgray;
+    background-color: rgba(128,128,128,1);
     border-radius: 0 12px 12px 0;
     transition: all 0.1s ease;
     user-select: none;
     color: white;
 }
-
 #show-create-fav-form:hover{
-    scale: 1.25;
-    border:1px solid white;
-    box-shadow: white 0 0 15px;
-    border-radius: 6px;
+    background-color: rgba(128,128,128,0.8);
 }
 
 #show-create-fav-form:active{
-    scale: 0.6;
+    scale: 0.95;
 }
 
 #fav-btn-add{
