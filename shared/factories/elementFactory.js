@@ -1,12 +1,3 @@
-export const createImageElement = (url, dim) => {
-    const el = document.createElement("div")
-    el.style.background = `url('${url}')`
-    el.style.backgroundSize = "cover"
-    el.style.width = dim
-    el.style.height = dim
-    return el
-}
-
 export const updateImageElement = (id, imageUrl) => {
     let el = document.getElementById(id)
     el.style.background = `url('${imageUrl}')`
@@ -47,18 +38,30 @@ export const showElement = (id, show) => {
     el.style.display = show ? "block" : "none"
 }
 
+export const createOption = (text,value) => {
+    const el = document.createElement("option")
+    el.textContent = text
+    el.value = value
+    return el
+}
+
+export const createButton = (id, classNames, text, clickHandler) => {
+    const btn = createHTMLElement("button",id,classNames)
+    btn.textContent = text
+    if(clickHandler !== undefined)
+        btn.onclick = clickHandler
+    return btn
+}
+
 export const updateDisplayMode = (id, mode) => {
     const el = document.getElementById(id)
     el.style.display = mode
 }
 
-export const createDiv = (id,classNames) => {
-    return createHTMLElement("div", id, classNames)
-}
-
-export const createDivWithText = (id,classNames, text) => {
+export const createDiv = (id,classNames, text) => {
     const el = createHTMLElement("div", id, classNames)
-    el.textContent = text
+    if(text !== undefined)
+        el.textContent = text
     return el
 }
 

@@ -1,14 +1,26 @@
 import * as Books from "./../userBooks/userBooks.js"
 import * as Factory from "./../../../../shared/factories/elementFactory.js"
 
+export const setupRecPlaceholders = () => {
+    for (let i = 0; i < 5; i++) {
+        const loadingCont = Factory.createDiv("","rec-loading")
+        const loadingDiv = Factory.createDiv("","loading-icon")
+        loadingCont.appendChild(loadingDiv)
+        Factory.appendChildTo("rec-cont",loadingCont)
+    }
+}
+
 export const setupRecommendations = () => {
-    clearLoading()
+    Factory.updateInnerHtml("rec-cont","")
+    createRecommendations()
+}
+
+const createRecommendations = () => {
     const recs = Books.getRecommendations()
     const items = recs.map(toHtmlElement)
-    const cont = document.getElementById("rec-cont")
     for (let i = 0; i < items.length; i++) {
         const item = items.at(i)
-        cont.appendChild(item)
+        Factory.appendChildTo("rec-cont",item)
     }
 }
 
@@ -32,9 +44,4 @@ const createItem = rec => {
     cont.appendChild(authorsCont)
     cont.appendChild(priceCont)
     return cont
-}
-
-const clearLoading = () => {
-    const el = document.getElementById("rec-cont")
-    el.innerHTML = ""
 }

@@ -1,37 +1,37 @@
 import * as Books from "./js/userBooks/userBooks.js"
-import * as BookLists from "../../shared/bookLists/userBookLists.js"
 import {setupFav} from "./js/pageSetup/bookFavorites.js";
-import {setupReviewDetails} from "./js/pageSetup/bookReviews.js";
-import {setupBookDetails} from "./js/pageSetup/bookDetails.js";
-import {setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
+import {setupBookComments} from "./js/pageSetup/bookComments.js";
+import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
+import {setupRecPlaceholders, setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
+import {updateAverageRating} from "./js/pageSetup/bookRatings.js";
+import {setupCreateReviewForm} from "./js/pageSetup/bookReviewCreateForm.js";
 
-export const initBook = (referenceId) => {
-    init(referenceId)
-        .then(initBookDetails)
-        .then(initRecommendations)
-        .catch(handleFetchError)
+export const initBook = async (referenceId) => {
+    setupPlaceholders()
+    await Books.fetchBookDetails(referenceId)
+    //initRecommendations().then()
+    await initBookDetails()
+    await initReviewDetails()
 };
 
-const init = async bookReference => {
-    await Books.fetchBookDetails(bookReference)
-    await BookLists.fetchBookLists()
-    return bookReference
+const setupPlaceholders = () => {
+    setupBookPlaceholders()
+    setupRecPlaceholders()
 }
 
-const initBookDetails = referenceId => {
+const initBookDetails = async () => {
+    updateAverageRating()
     setupBookDetails()
-    setupFav(referenceId)
-    setupReviewDetails()
+    await setupFav()
+}
+
+const initReviewDetails =  async () => {
+    setupCreateReviewForm()
+    await setupBookComments()
+    updateAverageRating()
 }
 
 const initRecommendations = async () => {
-    console.log("Rec called")
-    /*
-    await Books.fetchRecommendations()
-    setupRecommendations()
-     */
-}
-
-const handleFetchError = () => {
-    console.log("Fetch error")
+    Books.fetchRecommendations()
+        .then(setupRecommendations)
 }

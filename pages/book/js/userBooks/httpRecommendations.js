@@ -9,7 +9,7 @@ let recommendations = {
 export const fetchRecommendations = async (authors, title) => {
     const fullRoute = `${route}?author=${authors.at(0)}&title=${title}`
     const response = await fetchClient.get(fullRoute)
-    if(response !== undefined)
+    if(response)
         recommendations = response
 }
 

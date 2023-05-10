@@ -1,17 +1,28 @@
 <template>
     <div id="book-cont">
         <div id="book-title">Henter bogtitle</div>
-        <div id="poster-cont">
-            <div class="loading-icon"></div>
-        </div>
+        <div id="poster-cont"></div>
         <p id="book-authors">Henter forfatter</p>
         <div id="review-cont">
             <div id="stars-cont"></div>
             &bull;
-            <div id="review-count">22 anmeldelser</div>
+            <div id="comment-count">22 anmeldelser</div>
             <div id="fav-cont">
-                <select id="list-sel"></select>
-                <button id="create-list-btn">+</button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Personlige lister
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton" id="dropdown-cont">
+                        <div id="list-sel">
+                            
+                        </div>
+                    </ul>
+                </div>
+                <div id="create-fav-cont">
+                    <input type="text" id="create-fav-ipt">
+                    <button id="create-fav-list-btn" >Tilføj</button>
+                </div>
+                <button id="show-create-fav-form">+</button>
                 <div id="fav-btn-add"></div>
                 <div id="fav-btn-added"></div>
             </div>
@@ -23,27 +34,23 @@
             </div>
             <button id="buy-btn">Køb bog</button>
         </div>
-        <div id="descr-cont" class="no-scrollbar">
-            Henter beskrivelse
-        </div>
+        <div id="descr-cont" class="no-scrollbar">Henter beskrivelse</div>
         <p id="rec-section-title">Anbefalinger</p>
-        <div id="rec-cont">
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
+        <div id="rec-cont"></div>
+        <div id="comment-section-bar">
+            <div id="comment-section-title">Anmeldelser</div>
+        </div>
+        <div id="create-form-wrapper">
+            <div id="create-comment-form">
+                <textarea id="comment-text-ipt"></textarea>
+                <div id="user-rating"></div>
+                <button id="comment-add-btn">Tilføj</button>
             </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
-            </div>
-            <div class="rec-loading">
-                <div class="loading-icon"></div>
+        </div>
+        <div id="comment-cont">
+            <div id="comment-no-reviews">
+                Det ser ud til ingen har givet en anmeldelse af denne bog. Vær den første til at give en anmeldelse.
             </div>
         </div>
     </div>
-    <br>
 </template>
