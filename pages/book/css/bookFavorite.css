@@ -2,28 +2,21 @@
     display: none;
     justify-content: end;
     align-items: center;
-    column-gap: 6px;
-}
-
-#list-sel{
-    width: 128px;
-    height: 100%;
-    justify-self: end;
-    border-radius: 0.75rem;
-    padding-left: 6px;
 }
 
 #show-create-fav-form{
     width: 24px;
-    height: 100%;
+    height: 40px;
     font-size: 2rem;
     font-weight: bold;
     padding: 0;
     line-height: 2rem;
     border:1px solid transparent;
-    background-color: transparent;
+    background-color: darkgray;
+    border-radius: 0 12px 12px 0;
     transition: all 0.1s ease;
     user-select: none;
+    color: white;
 }
 
 #show-create-fav-form:hover{
@@ -42,6 +35,7 @@
     background-size: cover;
     width: 29px;
     height: 24px;
+    margin-left: 12px;
     justify-self: end;
     border:1px solid transparent;
     transition: all 0.1s ease-in-out;

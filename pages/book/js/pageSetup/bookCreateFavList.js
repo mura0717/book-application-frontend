@@ -18,7 +18,7 @@ const showFormHandler = () => {
 
 const showCreateForm = () => {
     const cont = document.getElementById("create-fav-cont")
-    cont.style.width = "304px"
+    cont.style.width = "258px"
 }
 
 const hideCreateForm = () => {

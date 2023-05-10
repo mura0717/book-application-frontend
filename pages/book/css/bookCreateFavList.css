@@ -1,24 +1,43 @@
 #create-fav-cont{
     width: 0;
+    height: 40px;
+    background-color: darkgray;
     overflow: hidden;
     transition: width 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
 }
 
 #create-fav-ipt{
     border-radius: 0.75rem;
-    width: 256px;
+    width: 192px;
     padding-left: 6px;
+    margin-left: 6px;
 }
 
 #create-fav-list-btn{
-    background: #000000;
+    background: transparent;
+    border:0;
     border-radius:  0 0 4px 0;
     width: 48px;
     height: 24px;
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 0.6rem;
-    line-height: 0.8rem;
-    color: #FFFFFF;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    margin-right: 6px;
+    color: white;
+}
+
+#dropdownMenuButton{
+    width: 160px;
+    height: 40px;
+    border-radius: 12px 0 0 12px;
+}
+
+#dropdown-cont{
+    width: 192px;
+    padding: 6px;
 }
