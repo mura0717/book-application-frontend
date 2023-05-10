@@ -7,31 +7,38 @@ import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 export const setupFav = async () => {
     if(signedIn()){
         Factory.updateDisplayMode("fav-cont","flex")
-        setupFavIcons()
+        await setupFavButtons()
         setupCreateFavoriteButton()
-        updateFavoriteStatus()
+        await updateFavoriteStatus()
         await setupFavList()
     }
 }
 
-const setupFavIcons = () => {
+const setupFavButtons = async () => {
     const reference = Books.getBook().reference
-    Factory.addOnclickHandler("fav-btn-add",async () => await addToFavoritesHandler(reference))
-    Factory.addOnclickHandler("fav-btn-added",async () => await removeFromFavoritesHandler(reference))
-    
+    const listReference = Factory.selectValue("list-sel")
+    if (await BookLists.alreadyAdded(reference, listReference))
+        showAddedButton(true)
+    Factory.addOnclickHandler("fav-btn-add", async () => await addToFavoritesHandler(reference))
+    Factory.addOnclickHandler("fav-btn-added", async () => await removeFromFavoritesHandler(reference))
 }
 
 const addToFavoritesHandler = async reference => {
-    const result = await BookLists.addToFavoriteList(reference,Factory.selectValue("list-sel"))
-    if(!result)
-        alert("Boogie Preben slår til igen! Tilkald politiet eller fyr mønter efter ham. Hvis i vælger at fyre mønter" +
-            "efter ham, kan det varmt anbefales at varme mønterne op med en lighter inde i tyrer dem i hovedet på ham.")
-    showAddToFavorites(result)
+    const selectedValue = Factory.selectValue("list-sel")
+    if(!selectedValue){
+        alert("Du har ingen liste at tilføje til. Vær venlig at oprette en.")
+        return
+    }
+    const result = await BookLists.addToFavoriteList(reference,selectedValue)
+    if(!result.status)
+        alert(result.message)
+    else
+        showAddedButton(true)
 }
 
 const removeFromFavoritesHandler = async reference => {
     const result = await BookLists.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
-    showAddToFavorites(!result)
+    showAddedButton(!result)
 }
 
 const setupFavList = async () => {
@@ -39,8 +46,6 @@ const setupFavList = async () => {
     const bookLists = await BookLists.getListTitles()
     if(bookLists.length > 0)
         await populateFavList(bookLists)
-    else
-        populateWithEmptyNotify()
 }
 
 const populateFavList = async bookLists => {
@@ -53,24 +58,19 @@ const populateFavList = async bookLists => {
     }
 }
 
-const populateWithEmptyNotify = () => {
-    const opt = Factory.createOption("Ingen lister","-1")
-    Factory.appendChildTo("list-sel",opt)
-}
-
-const updateFavoriteStatus = () => {
+const updateFavoriteStatus = async () => {
     const book = Books.getBook()
     const bookListReference = Factory.selectValue("list-sel")
-    showAddToFavorites(BookLists.alreadyAdded(book.reference,bookListReference))
+    showAddedButton(await BookLists.alreadyAdded(book.reference,bookListReference))
 }
 
-const showAddToFavorites = show => {
+const showAddedButton = show => {
     if(show){
         Factory.showElement("fav-btn-add",false)
         Factory.showElement("fav-btn-added",true)
     }
     else{
-        Factory.showElement("fav-btn-added",false)
         Factory.showElement("fav-btn-add",true)
+        Factory.showElement("fav-btn-added",false)
     }
 }

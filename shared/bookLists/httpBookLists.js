@@ -2,7 +2,7 @@ import {fetchClient} from "../../utils.js";
 
 const fetchAllRoute = "/bookLists"
 const fetchSingleRoute = "/bookLists/"
-const updateRoute = "/bookLists/update"
+const addToRoute = "/bookLists/addToBookList"
 const createRoute = "/bookLists/create"
 const fetchTitlesRoute = "/bookLists/titles"
 
@@ -18,11 +18,13 @@ export const getBookLists = async () => {
 
 export const addToBookList = async (reference, listReference) => {
     const body = {
-        bookReference : reference,
+        bookId : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.pathWithAuth(updateRoute,body)
-    return response !== undefined
+    const response = await fetchClient.patchWithAuth(addToRoute,body)
+    if(!response)
+        return {status : false, message : "Connection error"}
+    return response
 }
 
 export const getListTitles = async () => {
@@ -48,7 +50,7 @@ export const removeFromBookList = async (reference, listReference) => {
     return false
 }
 
-export const exists = (reference, listReference) => {
+export const exists = async (reference, listReference) => {
     /*
         Needs to implement endpoint for this functionality
      */

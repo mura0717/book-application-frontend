@@ -17,17 +17,25 @@ const showFormHandler = () => {
 }
 
 const showCreateForm = () => {
-    const cont = document.getElementById("create-fav-cont")
-    cont.style.width = "258px"
+    const createCont = document.getElementById("create-fav-cont")
+    createCont.style.width = "258px"
+    const listSelector = document.getElementById("list-sel")
+    listSelector.style.width = "0";
 }
 
 const hideCreateForm = () => {
     const cont = document.getElementById("create-fav-cont")
     cont.style.width = "0"
+    const listSelector = document.getElementById("list-sel")
+    listSelector.style.width = "258px";
 }
 
 const requestCreateList = async () => {
     const name = document.getElementById("create-fav-ipt").value
+    if(name === ""){
+        alert("Du skal angive en titel")
+        return
+    }
     const bookList = await UserBookLists.createBookList(name)
     if(bookList == null)
         return

@@ -2,6 +2,7 @@
     width: 0;
     height: 40px;
     background-color: gray;
+    border:0;
     overflow: hidden;
     transition: width 0.5s ease-in-out;
     display: flex;
@@ -29,15 +30,4 @@
     line-height: 1rem;
     margin-right: 6px;
     color: white;
-}
-
-#dropdownMenuButton{
-    width: 160px;
-    height: 40px;
-    border-radius: 12px 0 0 12px;
-}
-
-#dropdown-cont{
-    width: 192px;
-    padding: 6px;
 }

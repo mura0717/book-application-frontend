@@ -124,7 +124,7 @@ export default class FetchClient {
    * @param {object} body
    * @example const data = await fetchClient.patchWithAuth("/users", {"username": "test", "password": "1234"})
    */
-  async pathWithAuth(endpoint, body) {
+  async patchWithAuth(endpoint, body) {
     if (!hasToken()) {
       console.trace("No token found");
       return;
