@@ -1,7 +1,5 @@
-let bookLists =[]
-
-export const fetchBookLists = async () => {
-    bookLists = [
+export const getBookLists = async () => {
+    return [
         {
             title : "Favoritter",
             references : [],
@@ -28,22 +26,42 @@ export const fetchBookLists = async () => {
         }]
 }
 
+export const getListTitles = () => []
 
-export const getFetchedBookLists = () => bookLists
 
 export const addToBookList = async (reference, listReference) => {
-    const list = bookLists.find(b => b.id === listReference)
-    if(list === undefined)
-        return false
-    list.references.push(reference)
-    return true
+    
 }
 
-export const getBookList = (id) => {
-    const found = bookLists.find(list => list.id === id)
-    if(found === undefined)
-        return null
-    return found
+export const getBookList = async (id) => {
+    return {
+        title: "Favoritter",
+        books: [
+            {
+                title: "Harry Potter 1",
+                authors: "J.K.Rowling",
+                categories: ["Ficton", "Fantasy"],
+                priceAmount: "299",
+                currency: "kr"
+            },
+            {
+                title: "Harry Potter 2",
+                authors: "J.K.Rowling",
+                categories: ["Ficton", "Fantasy"],
+                priceAmount: "399",
+                currency: "kr"
+            },
+            {
+                title: "Harry Potter 3",
+                authors: "J.K.Rowling",
+                categories: ["Ficton", "Fantasy"],
+                priceAmount: "499",
+                currency: "kr"
+            }
+        ],
+        listCount: 3,
+        id: "1"
+    };
 }
 
 export const removeFromBookList = async (reference, listReference) => {

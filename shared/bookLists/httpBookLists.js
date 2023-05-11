@@ -5,6 +5,7 @@ const fetchSingleRoute = "/bookLists/"
 const addToRoute = "/bookLists/addToBookList"
 const createRoute = "/bookLists/create"
 const fetchTitlesRoute = "/bookLists/titles"
+const duplicateRoute = "/bookLists/alreadyExists"
 
 let hasFetched = false
 
@@ -51,10 +52,11 @@ export const removeFromBookList = async (reference, listReference) => {
 }
 
 export const exists = async (reference, listReference) => {
-    /*
-        Needs to implement endpoint for this functionality
-     */
-    return false
+    const query = `?bookListId=${listReference}&bookReference=${reference}`
+    const response = await fetchClient.getWithAuth(duplicateRoute + query)
+    if(!response)
+        return false
+    return response
 }
 
 export const createBookList = async title => {
