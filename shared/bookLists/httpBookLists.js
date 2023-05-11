@@ -1,19 +1,9 @@
 import {fetchClient} from "../../utils.js";
 
-const fetchAllRoute = "/bookLists"
-const fetchSingleRoute = "/bookLists/"
-const addToRoute = "/bookLists/addToBookList"
-const createRoute = "/bookLists/create"
-const fetchTitlesRoute = "/bookLists/titles"
-const duplicateRoute = "/bookLists/alreadyExists"
-
-let hasFetched = false
-
 export const getBookLists = async () => {
-    const response = await fetchClient.getWithAuth(fetchAllRoute)
+    const response = await fetchClient.getWithAuth("/bookLists")
     if(response === undefined)
         return []
-    hasFetched = true
     return response
 }
 
@@ -22,38 +12,41 @@ export const addToBookList = async (reference, listReference) => {
         bookId : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.patchWithAuth(addToRoute,body)
+    const response = await fetchClient.patchWithAuth("/bookLists/addToBookList",body)
     if(!response)
         return {status : false, message : "Connection error"}
     return response
 }
 
 export const getListTitles = async () => {
-    const response = await fetchClient.getWithAuth(fetchTitlesRoute)
+    const response = await fetchClient.getWithAuth("/bookLists/titles")
     if(!response)
         return []
-    hasFetched = true
     return response
 }
 
 export const getBookList = async (id) => {
     const query = `?id=${id}`
-    const response = await fetchClient.getWithAuth(fetchSingleRoute + query)
+    const response = await fetchClient.getWithAuth("/bookLists/" + query)
     if(response === undefined)
         return null
     return response
 }
 
 export const removeFromBookList = async (reference, listReference) => {
-    /*
-        Needs to implement endpoint for this functionality
-     */
-    return false
+    const body = {
+        bookId : reference,
+        bookListId : listReference
+    }
+    const response = await fetchClient.patchWithAuth("/bookLists/removeFromBookList",body)
+    if(!response)
+        return false
+    return response
 }
 
 export const exists = async (reference, listReference) => {
     const query = `?bookListId=${listReference}&bookReference=${reference}`
-    const response = await fetchClient.getWithAuth(duplicateRoute + query)
+    const response = await fetchClient.getWithAuth("/bookLists/alreadyExists" + query)
     if(!response)
         return false
     return response
@@ -83,7 +76,7 @@ export const exists = async (reference, listReference) => {
 
 export const createBookList = async title => {
     const body = {title : title}
-    const response = await fetchClient.postWithAuth(createRoute,body)
+    const response = await fetchClient.postWithAuth("/bookLists/create",body)
     if(!response)
         return {status : false, message : "Connection error"}
     return response
