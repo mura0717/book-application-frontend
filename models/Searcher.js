@@ -49,23 +49,15 @@ export default class Searcher {
         }" class="d-flex flex-row w-100 justify-content-between align-items-center p-2 search_book" style="cursor: pointer;">
             <div class="d-flex flex-row">
                 <img style="width: 37px; height: 47px; border-radius: 2px;" src="${
-                  book.volumeInfo.imageLinks
-                    ? book.volumeInfo.imageLinks.smallThumbnail
-                    : "../assets/BlankThumbnail.png"
+                  book.smallThumbnail ?? "../assets/BlankThumbnail.png"
                 }"/>
                 <div class="d-flex flex-column justify-content-between mx-2">
-                    <div class="fw-bold text-dark">${
-                      book.volumeInfo.title
-                    }</div>
-                    <div style="color: #565656;">${
-                      book.volumeInfo.authors
-                    }</div>
+                    <div class="fw-bold text-dark">${book.title}</div>
+                    <div style="color: #565656;">${book.authors}</div>
                 </div>
             </div>
             <div style="color: #808080;">${
-              book.saleInfo.retailPrice.amount.toFixed(2) +
-              " " +
-              book.saleInfo.retailPrice.currencyCode
+              book.retailPrice.toFixed(2) + " " + book.currencyCode
             }</div>
         </div>
     `

@@ -41,22 +41,18 @@ export default class Slicer {
           book.id
         }" class="mb-5 mb-lg-0 d-flex flex-column book_card">
             <img src="${
-              book.volumeInfo.imageLinks !== null
-                ? book.volumeInfo.imageLinks.thumbnail
-                : "../../assets/BlankThumbnail.png"
+              book.thumbnail ?? "../../assets/BlankThumbnail"
             }" class="rounded-1 book_img"/>
             <div class="book-info rounded-1">
-              <div class="fw-bold text-light">${book.volumeInfo.title}</div>
-              <p>${book.volumeInfo.description}</p>
+              <div class="fw-bold text-light">${book.title}</div>
+              <p>${book.description}</p>
             </div>
             <div class="d-flex flex-column mt-2">
-                <div class="fw-bold text-dark">${book.volumeInfo.title}</div>
-                <div style="color: #565656">${book.volumeInfo.authors}</div>
+                <div class="fw-bold text-dark">${book.title}</div>
+                <div style="color: #565656">${book.authors}</div>
                 <div style="color: #808080;">${
-                  book.saleInfo.retailPrice
-                    ? book.saleInfo.retailPrice.amount.toFixed(2) +
-                      " " +
-                      book.saleInfo.retailPrice.currencyCode
+                  book.retailPrice
+                    ? book.retailPrice.toFixed(2) + " " + book.currencyCode
                     : "Ikke til salg"
                 }</div>
             </div>
