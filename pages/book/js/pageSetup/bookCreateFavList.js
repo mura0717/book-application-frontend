@@ -31,17 +31,18 @@ const hideCreateForm = () => {
 }
 
 const requestCreateList = async () => {
-    const name = document.getElementById("create-fav-ipt").value
-    if(name === ""){
-        alert("Du skal angive en titel")
+    const value = document.getElementById("create-fav-ipt").value
+    if(value === "-1")
+        return
+    const response = await UserBookLists.createBookList(value)
+    if(!response.status){
+        alert(response.message)
         return
     }
-    const bookList = await UserBookLists.createBookList(name)
-    if(bookList == null)
-        return
-    const option = Factory.createOption(bookList.title,bookList.id)
+    const option = Factory.createOption(response.title,response.id)
     removeEmptyNotify()
     Factory.appendChildTo("list-sel",option)
+    document.getElementById("create-fav-ipt").value = ""
     hideCreateForm()
 }
 

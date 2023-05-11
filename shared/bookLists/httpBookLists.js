@@ -59,10 +59,32 @@ export const exists = async (reference, listReference) => {
     return response
 }
 
+/*
+    Til Kaan:
+    Ex. fail:
+        
+        {
+            status : false,
+            message : "Booklist already exists",
+            title : null,
+            id : null,
+            listCount : 0,
+        }
+    ex. success:
+    
+        {
+            status : true,
+            message : "",
+            title : "The game",
+            id : Abbcd89,
+            listCount : 3,
+        }
+ */
+
 export const createBookList = async title => {
     const body = {title : title}
     const response = await fetchClient.postWithAuth(createRoute,body)
     if(!response)
-        return null
+        return {status : false, message : "Connection error"}
     return response
 }

@@ -61,7 +61,8 @@ const populateFavList = async bookLists => {
 const updateFavoriteStatus = async () => {
     const book = Books.getBook()
     const bookListReference = Factory.selectValue("list-sel")
-    showAddedButton(await BookLists.alreadyAdded(book.reference,bookListReference))
+    if(bookListReference !== "-1")
+        showAddedButton(await BookLists.alreadyAdded(book.reference,bookListReference))
 }
 
 const showAddedButton = show => {
