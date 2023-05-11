@@ -53,6 +53,7 @@
 }
 
 #fav-btn-added{
+    display: none;
     background: url("../resources/fav-added-image.png") no-repeat;
     background-size: cover;
     width: 48px;

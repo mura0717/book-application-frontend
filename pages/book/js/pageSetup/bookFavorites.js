@@ -7,18 +7,16 @@ import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 export const setupFav = async () => {
     if(signedIn()){
         Factory.updateDisplayMode("fav-cont","flex")
-        await setupFavButtons()
-        setupCreateFavoriteButton()
-        await updateFavoriteStatus()
         await setupFavList()
+        await setupFavButtons()
+        await updateFavoriteStatus()
     }
 }
 
 const setupFavButtons = async () => {
+    setupCreateFavoriteButton()
+    await updateFavoriteStatus()
     const reference = Books.getBook().reference
-    const listReference = Factory.selectValue("list-sel")
-    if (await BookLists.alreadyAdded(reference, listReference))
-        showAddedButton(true)
     Factory.addOnclickHandler("fav-btn-add", async () => await addToFavoritesHandler(reference))
     Factory.addOnclickHandler("fav-btn-added", async () => await removeFromFavoritesHandler(reference))
 }
@@ -44,8 +42,10 @@ const removeFromFavoritesHandler = async reference => {
 const setupFavList = async () => {
     Factory.addOnChangeHandler("list-sel",async () => updateFavoriteStatus())
     const bookLists = await BookLists.getListTitles()
-    if(bookLists.length > 0)
+    if(bookLists.length > 0) {
+        Factory.updateInnerHtml("list-sel","")
         await populateFavList(bookLists)
+    }
 }
 
 const populateFavList = async bookLists => {
