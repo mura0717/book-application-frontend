@@ -1,7 +1,7 @@
-import * as Factory from "./../../../../shared/factories/elementFactory.js";
-import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
-import * as Books from "./../userBooks/userBooks.js";
-import {signedIn} from "../../../../shared/users/bookUsers.js";
+import * as Factory from "./../../../../../shared/factories/elementFactory.js";
+import * as BookLists from "../../../../../shared/bookLists/userBookLists.js";
+import * as Books from "./../../userBooks/userBooks.js";
+import {signedIn} from "../../../../../shared/users/bookUsers.js";
 import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 
 export const setupFav = async () => {
@@ -22,7 +22,7 @@ const setupFavButtons = async () => {
 }
 
 const addToFavoritesHandler = async reference => {
-    const selectedValue = Factory.selectValue("list-sel")
+    const selectedValue = Factory.getInputValue("list-sel")
     if(!selectedValue){
         alert("Du har ingen liste at tilføje til. Vær venlig at oprette en.")
         return
@@ -35,7 +35,7 @@ const addToFavoritesHandler = async reference => {
 }
 
 const removeFromFavoritesHandler = async reference => {
-    const result = await BookLists.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
+    const result = await BookLists.removeFromFavoriteList(reference,Factory.getInputValue("list-sel"))
     showAddedButton(!result)
 }
 
@@ -60,7 +60,7 @@ const populateFavList = async bookLists => {
 
 const updateFavoriteStatus = async () => {
     const book = Books.getBook()
-    const bookListReference = Factory.selectValue("list-sel")
+    const bookListReference = Factory.getInputValue("list-sel")
     if(bookListReference !== "-1")
         showAddedButton(await BookLists.alreadyAdded(book.reference,bookListReference))
 }

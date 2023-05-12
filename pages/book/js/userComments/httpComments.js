@@ -16,13 +16,8 @@ export const fetchComments = async bookReference =>  {
 
 export const getUserComments = () => userComments
 
-export const addUserComment = async reviewRequest => {
-    const comment = {
-        "review" : reviewRequest.review,
-        "rating" : reviewRequest.rating,
-        "bookReference" : reviewRequest.bookReference
-    }
-    const response = await fetchClient.postWithAuth(addRoute,comment)
+export const addUserComment = async reviewModel => {
+    const response = await fetchClient.postWithAuth(addRoute,reviewModel)
     if(response === undefined)
         return null
     userComments.push(response)
