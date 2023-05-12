@@ -29,11 +29,20 @@
     background-color: lightgray;
 }
 
-.user-logo{
+.user-menu{
     height: 32px;
     width: 32px;
     background: url("../../resources/hamburger-logo.png");
     background-size: cover;
+    border: none;
+    outline: none;
+}
+
+.user-logo{
+    height: 32px;
+    width: 32px;
+    background-color: gray;
+    border-radius: 45px;
     border: none;
     outline: none;
 }

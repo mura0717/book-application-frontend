@@ -2,12 +2,12 @@ import {fetchClient} from "../../../../utils.js";
 
 let userComments = []
 
-const fetchRoute = "/books/reviews"
-const addRoute = "/books/add"
+const fetchRoute = "/reviews"
+const addRoute = "/reviews/update"
 
 export const fetchComments = async bookReference =>  {
     const fullRoute = `${fetchRoute}?bookReference=${bookReference}`
-    const response = await fetchClient.get(fullRoute)
+    const response = await fetchClient.getWithAuth(fullRoute)
     if(!response)
         return false
     userComments = response

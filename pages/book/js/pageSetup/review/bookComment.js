@@ -5,8 +5,14 @@ import * as BookComments from "../../userComments/userComments.js"
 
 export const toHtmlContainer = comment => {
     const commentItem = Factory.createDiv("","comment-item")
-    const menu = userMenu()
-    setupUpdateHandler(commentItem,menu,comment)
+    let menu
+    if(comment.editable){
+        menu = userMenu()
+        setupUpdateHandler(commentItem,menu,comment)
+    }
+    else{
+        menu = Factory.createDiv("","user-logo")
+    }
     commentItem.appendChild(menu)
     commentItem.appendChild(Factory.createDiv("","user-name",comment.username))
     const rating = Factory.createDiv("","comment-rating")
@@ -19,7 +25,7 @@ export const toHtmlContainer = comment => {
 const userMenu = () => {
     const html = `
             <div class="dropdown">
-              <button class="user-logo"" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="user-menu"" data-bs-toggle="dropdown" aria-expanded="false">
               </button>
               <div class="dropdown-menu" aria-labelledby="user-logo">
                 <button class="menu-btn">Opdater</button>
