@@ -12,12 +12,14 @@ export const showReviewForm = (parent,resultHandler) => {
     show(resultHandler)
 }
 
-export const updateReviewForm = (model,resultHandler) => {
+export const isVisible = () => parentContainer != null && parentContainer.innerHTML !== ""
+
+export const updateReviewForm = (parent,model,resultHandler) => {
     if(parent.innerHTML !== "")
         return
     parentContainer = parent
     reviewModel = model
-    show()
+    show(resultHandler)
 }
 
 export const closeReviewForm = () => {
@@ -29,6 +31,7 @@ const show = (resultHandler) => {
     const createform = Factory.createDiv("create-comment-form")
     const textArea = Factory.createTextArea("comment-text-ipt","",
         e => reviewModel.review = e.target.value)
+    textArea.value = reviewModel.review
     createform.appendChild(textArea)
     createform.appendChild(createUserRating())
     const addButton = Factory.createButton("comment-add-btn","","Gem",
@@ -39,8 +42,8 @@ const show = (resultHandler) => {
 }
 
 const handleClick = async (clickHandler) => {
-    await clickHandler(reviewModel)
-    closeReviewForm()
+    if(await clickHandler(reviewModel))
+        closeReviewForm()
 }
 
 const createUserRating = () => {

@@ -31,7 +31,7 @@
 }
 
 #fav-btn-add{
-    background: url("../resources/fav-add-image.png") no-repeat;
+    background: url("../../resources/fav-add-image.png") no-repeat;
     background-size: cover;
     width: 48px;
     height: 40px;
@@ -54,7 +54,7 @@
 
 #fav-btn-added{
     display: none;
-    background: url("../resources/fav-added-image.png") no-repeat;
+    background: url("../../resources/fav-added-image.png") no-repeat;
     background-size: cover;
     width: 48px;
     height: 40px;

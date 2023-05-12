@@ -2,10 +2,47 @@ import * as Factory from "./../../../../../shared/factories/elementFactory.js";
 import * as UserComments from "../../userComments/userComments.js";
 import * as UserBooks from "../../userBooks/userBooks.js"
 import * as BookRatings from "./bookRatings.js";
+import {signedIn} from "../../../../../shared/users/bookUsers.js";
+import * as ReviewForm from "./bookUpdateReview.js";
+import {toHtmlContainer} from "./bookComment.js";
 
 export const setupBookComments = async () => {
+    showAddButton()
     await UserComments.fetchComments(UserBooks.getBook().reference)
     createCommentSection()
+}
+
+const showAddButton = () => {
+    if (!signedIn())
+        return;
+    const btn = Factory.createButton("create-comment-btn", "",
+        "Opret anmeldelse",handleAdd)
+    Factory.appendChildTo("comment-section-bar", btn)
+}
+
+const handleAdd = () => {
+    const cont = document.getElementById("create-form-wrapper")
+    if(!ReviewForm.isVisible()){
+        ReviewForm.showReviewForm(cont,addReview)
+        Factory.updateTextContent("create-comment-btn","Luk")
+    }
+    else{
+        ReviewForm.closeReviewForm()
+        Factory.updateTextContent("create-comment-btn","Opret anmeldelse")
+    }
+}
+
+export const addReview = async reviewModel => {
+    if(reviewModel.rating < 1)
+        return false
+    reviewModel.bookReference = UserBooks.getBook().reference
+    const comment = await UserComments.addComment(reviewModel)
+    if(comment == null)
+        return false
+    const htmlDiv = toHtmlContainer(comment)
+    Factory.appendChildTo("comment-cont",htmlDiv)
+    BookRatings.updateAverageRating()
+    return true
 }
 
 const createCommentSection = () => {
@@ -18,27 +55,4 @@ const createCommentSection = () => {
         const commentItem = toHtmlContainer(comment)
         Factory.appendChildTo("comment-cont",commentItem)
     }
-}
-
-export const addButtonClicked = async reviewModel => {
-    if(reviewModel.rating < 1)
-        return
-    reviewModel.bookReference = UserBooks.getBook().reference
-    const comment = await UserComments.addComment(reviewModel)
-    if(comment == null)
-        return
-    const htmlDiv = toHtmlContainer(comment)
-    Factory.appendChildTo("comment-cont",htmlDiv)
-    BookRatings.updateAverageRating()
-}
-
-const toHtmlContainer = comment => {
-    const commentItem = Factory.createDiv("","comment-item")
-    commentItem.appendChild(Factory.createDiv("","user-logo"))
-    commentItem.appendChild(Factory.createDiv("","user-name",comment.username))
-    const rating = Factory.createDiv("","comment-rating")
-    BookRatings.updateWithStars(rating,comment.rating)
-    commentItem.appendChild(rating)
-    commentItem.appendChild(Factory.createDiv("","comment-text",comment.review))
-    return commentItem
 }
