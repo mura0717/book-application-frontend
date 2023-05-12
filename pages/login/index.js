@@ -6,16 +6,15 @@ export const initLogin = () => {
     form.onsubmit = handleSubmit;
 };
 
-async function  handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
     const credentials = fetchInputValues();
     if(await login(credentials.username,credentials.password)){
         await window.router.navigate("/");
     }
     else{
-        console.log("Login failed")
-        // TODO: Add error message
-        // TODO: Maybe clear input forms
+        handleErrorModal("Login failed. Wrong username or password.")
+        clearForm();
     }
 };
 
@@ -29,3 +28,21 @@ function fetchInputValues() {
         password: passwordInput,
     };
 };
+
+function handleErrorModal(errorMessage){
+
+    const modal = new bootstrap.Modal(document.getElementById("error-modal"));
+    const modalTitle = document.querySelector("#error-modal .modal-title");
+    const modalBody = document.querySelector("#error-modal .modal-body");
+
+    modalTitle.textContent = "Error";
+    modalBody.innerHTML = `<p>${errorMessage}</p>`;
+    modal.show();
+
+}
+
+function clearForm(){
+
+    const form = document.getElementById("form");
+    form.reset();
+}

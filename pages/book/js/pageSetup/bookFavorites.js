@@ -2,62 +2,76 @@ import * as Factory from "./../../../../shared/factories/elementFactory.js";
 import * as BookLists from "../../../../shared/bookLists/userBookLists.js";
 import * as Books from "./../userBooks/userBooks.js";
 import {signedIn} from "../../../../shared/users/bookUsers.js";
+import {setupCreateFavoriteButton} from "./bookCreateFavList.js";
 
-export const setupFav = reference => {
+export const setupFav = async () => {
     if(signedIn()){
         Factory.updateDisplayMode("fav-cont","flex")
-        setupFavIcons(reference)
-        setupFavList()
-        updateFavoriteStatus()
+        await setupFavList()
+        await setupFavButtons()
+        await updateFavoriteStatus()
     }
 }
 
-const setupFavIcons = reference => {
-    Factory.addOnclickHandler("fav-btn-add",async () => await addToFavoritesHandler(reference))
-    Factory.addOnclickHandler("fav-btn-added",async () => await removeFromFavoritesHandler(reference))
-    
+const setupFavButtons = async () => {
+    setupCreateFavoriteButton()
+    await updateFavoriteStatus()
+    const reference = Books.getBook().reference
+    Factory.addOnclickHandler("fav-btn-add", async () => await addToFavoritesHandler(reference))
+    Factory.addOnclickHandler("fav-btn-added", async () => await removeFromFavoritesHandler(reference))
 }
 
 const addToFavoritesHandler = async reference => {
-    const result = await BookLists.addToFavoriteList(reference,Factory.selectValue("list-sel"))
-    if(!result)
-        alert("Boogie Preben slår til igen! Tilkald politiet eller fyr mønter efter ham. Hvis i vælger at fyre mønter" +
-            "efter ham, kan det varmt anbefales at varme mønterne op med en lighter inde i tyrer dem i hovedet på ham.")
-    showAddToFavorites(result)
+    const selectedValue = Factory.selectValue("list-sel")
+    if(!selectedValue){
+        alert("Du har ingen liste at tilføje til. Vær venlig at oprette en.")
+        return
+    }
+    const result = await BookLists.addToFavoriteList(reference,selectedValue)
+    if(!result.status)
+        alert(result.message)
+    else
+        showAddedButton(true)
 }
 
 const removeFromFavoritesHandler = async reference => {
     const result = await BookLists.removeFromFavoriteList(reference,Factory.selectValue("list-sel"))
-    showAddToFavorites(!result)
+    showAddedButton(!result)
 }
 
-const setupFavList = () => {
+const setupFavList = async () => {
     Factory.addOnChangeHandler("list-sel",async () => updateFavoriteStatus())
-    updateFavListValues()
+    const bookLists = await BookLists.getListTitles()
+    if(bookLists.length > 0) {
+        Factory.updateInnerHtml("list-sel","")
+        await populateFavList(bookLists)
+    }
 }
 
-const updateFavListValues = () => {
-    BookLists.getBookLists().forEach((b,i) => {
+const populateFavList = async bookLists => {
+    for (let i = 0; i < bookLists.length; i++) {
+        const bookList = bookLists.at(i)
         const opt = document.createElement("option")
-        opt.textContent = b.title
-        opt.value = b.id
+        opt.textContent = bookList.title
+        opt.value = bookList.id
         Factory.appendChildTo("list-sel",opt)
-    })
+    }
 }
 
-const updateFavoriteStatus = () => {
+const updateFavoriteStatus = async () => {
     const book = Books.getBook()
     const bookListReference = Factory.selectValue("list-sel")
-    showAddToFavorites(BookLists.alreadyAdded(book.reference,bookListReference))
+    if(bookListReference !== "-1")
+        showAddedButton(await BookLists.alreadyAdded(book.reference,bookListReference))
 }
 
-const showAddToFavorites = show => {
+const showAddedButton = show => {
     if(show){
         Factory.showElement("fav-btn-add",false)
         Factory.showElement("fav-btn-added",true)
     }
     else{
-        Factory.showElement("fav-btn-added",false)
         Factory.showElement("fav-btn-add",true)
+        Factory.showElement("fav-btn-added",false)
     }
 }

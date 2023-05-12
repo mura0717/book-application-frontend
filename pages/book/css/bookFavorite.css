@@ -2,46 +2,40 @@
     display: none;
     justify-content: end;
     align-items: center;
-    column-gap: 6px;
-}
-
-#list-sel{
-    width: 128px;
-    height: 100%;
+    border-radius: 12px 0 0 12px;
+    overflow: hidden;
+    width: min-content;
     justify-self: end;
-    border-radius: 12px;
-    padding-left: 6px;
 }
 
-#create-list-btn{
+#show-create-fav-form{
     width: 24px;
-    height: 100%;
+    height: 40px;
     font-size: 2rem;
     font-weight: bold;
     padding: 0;
     line-height: 2rem;
     border:1px solid transparent;
-    background-color: transparent;
+    background-color: rgba(128,128,128,1);
+    border-radius: 0 12px 12px 0;
     transition: all 0.1s ease;
     user-select: none;
+    color: white;
+}
+#show-create-fav-form:hover{
+    background-color: rgba(128,128,128,0.8);
 }
 
-#create-list-btn:hover{
-    scale: 1.25;
-    border:1px solid white;
-    box-shadow: white 0 0 15px;
-    border-radius: 6px;
-}
-
-#create-list-btn:active{
-    scale: 0.6;
+#show-create-fav-form:active{
+    scale: 0.95;
 }
 
 #fav-btn-add{
     background: url("../resources/fav-add-image.png") no-repeat;
     background-size: cover;
-    width: 24px;
-    height: 24px;
+    width: 48px;
+    height: 40px;
+    margin-left: 12px;
     justify-self: end;
     border:1px solid transparent;
     transition: all 0.1s ease-in-out;
@@ -49,22 +43,22 @@
 }
 
 #fav-btn-add:hover{
-    scale: 1.25;
     border:1px solid white;
     box-shadow: white 0 0 15px;
     border-radius: 6px;
 }
 
 #fav-btn-add:active{
-    scale: 0.6;
+    scale: 0.9;
 }
 
 #fav-btn-added{
-    display: block;
+    display: none;
     background: url("../resources/fav-added-image.png") no-repeat;
     background-size: cover;
-    width: 24px;
-    height: 24px;
+    width: 48px;
+    height: 40px;
+    margin-left: 12px;
     justify-self: end;
     border:1px solid transparent;
     transition: all 0.1s ease-in-out;
@@ -80,4 +74,15 @@
 
 #fav-btn-added:active{
     scale: 0.6;
+}
+
+#list-sel{
+    width: 258px;
+    height: 40px;
+    background-color: rgba(128,128,128,1);
+    border:0;
+    color: white;
+    display: grid;
+    justify-content: center;
+    transition: width 0.5s ease-in-out;
 }

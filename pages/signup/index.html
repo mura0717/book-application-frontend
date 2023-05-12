@@ -1,3 +1,5 @@
+
+
 <template>
   <h2 style="margin-bottom: 3em; margin-top: 2em">Sign Up</h2>
 
@@ -37,4 +39,39 @@
       </button>
     </div>
   </form>
+<!-- Modal -->
+  <div class="modal" tabindex="-1" data-backdrop="static" id="signUp-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sign Up Response</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>User created successfully. Click for login.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="login-button">Log In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Modal -->
+  <div class="modal" tabindex="-1" id="error-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
 </template>
+
+

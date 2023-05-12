@@ -97,9 +97,9 @@ window.addEventListener("load", async () => {
           before: (done) => ensureNotLoggedInGuard(done),
         },
       },
-      "/book/:bookId": (param) => {
+      "/book/:bookId": async (param) => {
         renderTemplate(bookTemplate, "content");
-        initBook(param.data.bookId);
+        await initBook(param.data.bookId);
       },
     })
     .notFound(() => renderTemplate("No page for this route found", "content"))

@@ -1,49 +1,83 @@
-import {fetchClient} from "../../../../utils.js";
+import {fetchClient} from "../../utils.js";
 
-let bookLists =[]
-
-const bookList = "/books/bookLists"
-
-export const fetchBookLists = async () => {
-    const response = await fetchClient.getWithAuth(bookList)
-    bookLists = response !== undefined ? response : bookLists
+export const getBookLists = async () => {
+    const response = await fetchClient.getWithAuth("/bookLists")
+    if(response === undefined)
+        return []
+    return response
 }
-
-export const getFetchedBookLists = () => bookLists
 
 export const addToBookList = async (reference, listReference) => {
     const body = {
         bookId : reference,
         bookListId : listReference
     }
-    const response = await fetchClient.pathWithAuth(bookList,body)
-    return response !== undefined
+    const response = await fetchClient.patchWithAuth("/bookLists/addToBookList",body)
+    if(!response)
+        return {status : false, message : "Connection error"}
+    return response
 }
 
-export const getBookList = (id) => {
-    const found = bookLists.find(list => list.id === id)
-    if(found === undefined)
+export const getListTitles = async () => {
+    const response = await fetchClient.getWithAuth("/bookLists/titles")
+    if(!response)
+        return []
+    return response
+}
+
+export const getBookList = async (id) => {
+    const query = `?id=${id}`
+    const response = await fetchClient.getWithAuth("/bookLists/" + query)
+    if(response === undefined)
         return null
-    return found
+    return response
 }
 
 export const removeFromBookList = async (reference, listReference) => {
-    const list = bookLists.find(b => b.id === listReference)
-    if(list === undefined)
+    const body = {
+        bookId : reference,
+        bookListId : listReference
+    }
+    const response = await fetchClient.patchWithAuth("/bookLists/removeFromBookList",body)
+    if(!response)
         return false
-    let index = list.references.indexOf(reference)
-    list.references.splice(index,1)
-    return true
+    return response
 }
 
-export const exists = (reference, listReference) => {
-    const list = bookLists.find(b => b.id === listReference)
-    if(list === undefined)
+export const exists = async (reference, listReference) => {
+    const query = `?bookListId=${listReference}&bookReference=${reference}`
+    const response = await fetchClient.getWithAuth("/bookLists/alreadyExists" + query)
+    if(!response)
         return false
-    const bookReference = list.references.find(r => r === reference)
-    return bookReference !== undefined
+    return response
 }
 
-export const fetchBookList = async (id) => {
+/*
+    Til Kaan:
+    Ex. fail:
+        
+        {
+            status : false,
+            message : "Booklist already exists",
+            title : null,
+            id : null,
+            listCount : 0,
+        }
+    ex. success:
     
+        {
+            status : true,
+            message : "",
+            title : "The game",
+            id : Abbcd89,
+            listCount : 3,
+        }
+ */
+
+export const createBookList = async title => {
+    const body = {title : title}
+    const response = await fetchClient.postWithAuth("/bookLists/create",body)
+    if(!response)
+        return {status : false, message : "Connection error"}
+    return response
 }
