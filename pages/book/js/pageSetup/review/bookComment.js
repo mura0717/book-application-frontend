@@ -65,7 +65,6 @@ const updateElement = (el,reviewModel) => {
 
 const deleteComment = async (el,reviewModel) => {
     const parent = document.getElementById("comment-cont")
-    if(await BookComments.removeComment(reviewModel.reviewId)){
+    if(await BookComments.removeComment(reviewModel.reviewId))
         parent.removeChild(el)
-    }
 }
