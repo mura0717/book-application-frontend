@@ -24,7 +24,8 @@ export const updateReviewForm = (parent,model,resultHandler) => {
 
 export const closeReviewForm = () => {
     window.scroll(0,520)
-    parentContainer.innerHTML = ""
+    const cont = document.getElementById("create-comment-form")
+    parentContainer.removeChild(cont)
 }
 
 const show = (resultHandler) => {

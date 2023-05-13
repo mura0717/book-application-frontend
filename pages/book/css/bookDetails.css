@@ -19,7 +19,8 @@
     grid-row: span 5;
     justify-self: end;
     border-radius: 7px;
-    width: 100%;
+    width: 400px;
+    height: 644px;
     display: grid;
     align-items: center;
     justify-content: center;
