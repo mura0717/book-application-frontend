@@ -39,10 +39,13 @@ const userMenu = () => {
 }
 
 const setupUpdateHandler = (model,menuElement, comment) => {
-    const btn = menuElement.querySelector(".menu-btn")
     const formCont = document.getElementById("create-form-wrapper")
-    btn.onclick = () => ReviewForm.updateReviewForm(formCont,comment,
+    const buttons = menuElement.getElementsByClassName("menu-btn")
+    const updateButton = buttons.item(0)
+    updateButton.onclick = () => ReviewForm.updateReviewForm(formCont,comment,
         async reviewModel => await updateComment(model,reviewModel))
+    const removeButton = buttons.item(1)
+    removeButton.onclick = async () => await deleteComment(model,comment)
 }
 
 const updateComment = async (el,reviewModel) => {
@@ -58,4 +61,11 @@ const updateElement = (el,reviewModel) => {
     reviewText.textContent = reviewModel.review
     const ratingElement = el.querySelector(".comment-rating")
     BookRatings.updateWithStars(ratingElement,reviewModel.rating)
+}
+
+const deleteComment = async (el,reviewModel) => {
+    const parent = document.getElementById("comment-cont")
+    if(await BookComments.removeComment(reviewModel.reviewId)){
+        parent.removeChild(el)
+    }
 }
