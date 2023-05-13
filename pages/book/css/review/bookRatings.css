@@ -6,14 +6,14 @@
 }
 
 .good-star{
-    background: url("../resources/yellow-star.png");
+    background: url("../../resources/yellow-star.png");
     background-size: cover;
     height: 24px;
     width: 24px;
 }
 
 .bad-star{
-    background: url("../resources/blank-star.png");
+    background: url("../../resources/blank-star.png");
     background-size: cover;
     height: 24px;
     width: 24px;

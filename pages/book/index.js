@@ -1,10 +1,9 @@
 import * as Books from "./js/userBooks/userBooks.js"
-import {setupFav} from "./js/pageSetup/bookFavorites.js";
-import {setupBookComments} from "./js/pageSetup/bookComments.js";
+import {setupFav} from "./js/pageSetup/favorite/bookFavorites.js";
+import {addReview, setupBookComments} from "./js/pageSetup/review/bookComments.js";
 import {setupBookDetails, setupBookPlaceholders} from "./js/pageSetup/bookDetails.js";
 import {setupRecPlaceholders, setupRecommendations} from "./js/pageSetup/recommendedBooks.js";
-import {updateAverageRating} from "./js/pageSetup/bookRatings.js";
-import {setupCreateReviewForm} from "./js/pageSetup/bookReviewCreateForm.js";
+import {updateAverageRating} from "./js/pageSetup/review/bookRatings.js";
 
 export const initBook = async (referenceId) => {
     setupPlaceholders()
@@ -26,7 +25,6 @@ const initBookDetails = async () => {
 }
 
 const initReviewDetails =  async () => {
-    setupCreateReviewForm()
     await setupBookComments()
     updateAverageRating()
 }

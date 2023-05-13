@@ -13,8 +13,7 @@
 }
 
 #create-form-wrapper{
-    height: 0;
-    transition: all 0.5s ease-in-out;
+    height: min-content;
     overflow: hidden;
     grid-column: span 2;
 }

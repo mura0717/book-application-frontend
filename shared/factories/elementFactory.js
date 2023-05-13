@@ -13,7 +13,7 @@ export const updateTextContent = (id, content) => document.getElementById(id).te
 
 export const updateInnerHtml = (id, content) => document.getElementById(id).innerHTML = DOMPurify.sanitize(content)
 
-export const selectValue = (id) => {
+export const getInputValue = (id) => {
     const el = document.getElementById(id)
     return el.value
 }
@@ -48,7 +48,7 @@ export const createOption = (text,value) => {
 export const createButton = (id, classNames, text, clickHandler) => {
     const btn = createHTMLElement("button",id,classNames)
     btn.textContent = text
-    if(clickHandler !== undefined)
+    if(clickHandler)
         btn.onclick = clickHandler
     return btn
 }
@@ -58,10 +58,16 @@ export const updateDisplayMode = (id, mode) => {
     el.style.display = mode
 }
 
-export const createDiv = (id,classNames, text) => {
+export const createDiv = (id = "",classNames = "",  text = "") => {
     const el = createHTMLElement("div", id, classNames)
     if(text !== undefined)
         el.textContent = text
+    return el
+}
+
+export const createTextArea = (id = "",classNames = "", changeHandler) => {
+    const el = createHTMLElement("textArea",id,classNames)
+    el.onchange = changeHandler
     return el
 }
 

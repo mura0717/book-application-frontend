@@ -1,5 +1,5 @@
-import * as Factory from "../../../../shared/factories/elementFactory.js";
-import * as Comments from "../userComments/userComments.js";
+import * as Factory from "../../../../../shared/factories/elementFactory.js";
+import * as Comments from "../../userComments/userComments.js";
 
 export const updateAverageRating = () => {
     const rating = getAverageRating()
@@ -17,10 +17,14 @@ export const updateWithStars = (el,stars) => {
     }
 }
 
-export const createStarElements = () => {
+export const createStarElements = value => {
     let stars = []
-    for (let i = 0;i<5;i++)
-        stars.push(Factory.createDiv("","bad-star"))
+    for (let i = 0;i<5;i++){
+        if(i < value)
+            stars.push(Factory.createDiv("","good-star"))
+        else
+            stars.push(Factory.createDiv("","bad-star"))
+    }
     return stars
 }
 
