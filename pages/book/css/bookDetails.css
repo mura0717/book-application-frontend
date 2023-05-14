@@ -3,12 +3,10 @@
     font-style: normal;
     font-weight: 700;
     font-size: 3rem;
-    line-height: 3.5rem;
+    line-height: 3rem;
     white-space: pre-wrap;
     color: #000000;
-    margin-top: 1.5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    height: min-content;
 }
 
 #book-title::-webkit-scrollbar{
@@ -20,11 +18,9 @@
     justify-self: end;
     border-radius: 7px;
     width: 400px;
-    height: 644px;
     display: grid;
     align-items: center;
     justify-content: center;
-    background-color: lightgray;
 }
 
 #book-authors{
@@ -34,6 +30,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     color: #565656;
+    height: min-content;
 }
 
 #descr-cont{

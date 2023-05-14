@@ -1,9 +1,3 @@
-export const updateImageElement = (id, imageUrl) => {
-    let el = document.getElementById(id)
-    el.style.background = `url('${imageUrl}')`
-    el.style.backgroundSize = "cover"
-}
-
 export const appendChildTo = (id,childElement) => {
     let el = document.getElementById(id)
     el.appendChild(childElement)
@@ -86,9 +80,15 @@ export const createParagraph = (text,id,classNames) => {
     return el
 }
 
-const createHTMLElement = (tagName, id, classNames) => {
+export const createImageElement = (id,imageUrl) => {
+    const el = createHTMLElement("img",id)
+    el.src = imageUrl
+    return el
+}
+
+const createHTMLElement = (tagName, id, classNames = "") => {
     const el = document.createElement(tagName)
     el.id = id ? id : el.id
-    el.className = classNames ? classNames : ""
+    el.className = classNames
     return el
 }

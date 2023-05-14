@@ -39,10 +39,18 @@ export const addReview = async reviewModel => {
     const comment = await UserComments.addComment(reviewModel)
     if(comment == null)
         return false
+    removePlaceholder()
     const htmlDiv = toHtmlContainer(comment)
     Factory.appendChildTo("comment-cont",htmlDiv)
     BookRatings.updateAverageRating()
     return true
+}
+
+const removePlaceholder = () => {
+    const cont = document.getElementById("comment-cont")
+    const placeholder = document.getElementById("comment-no-reviews")
+    if(placeholder)
+        cont.removeChild(placeholder)
 }
 
 const createCommentSection = () => {
