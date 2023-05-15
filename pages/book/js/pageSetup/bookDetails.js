@@ -16,12 +16,19 @@ const setupContent = () => {
     Factory.updateTextContent("book-title",book.title)
     Factory.updateTextContent("book-authors",formatAuthors(book.authors))
     Factory.updateInnerHtml("descr-cont",book.description)
-    Factory.updateInnerHtml("poster-cont","")
-    Factory.updateImageElement("poster-cont",book.image)
+    updateBookPoster(book.image)
     if(book.buyLink !== null){
         Factory.showElement("buy-btn",true)
         Factory.addOnclickHandler("buy-btn",() => window.location.href = book.buyLink)
     }
+}
+
+const updateBookPoster = (imageUrl) => {
+    Factory.updateInnerHtml("poster-cont","")
+    const img = Factory.createImageElement("book-poster",imageUrl)
+    img.width = "400"
+    Factory.appendChildTo("poster-cont",img)
+    
 }
 
 const setupEventHandlers = () => {

@@ -143,6 +143,32 @@ export default class FetchClient {
       return undefined;
     }
   }
+
+  /**
+   * Make a DELETE request to the targetted endpoint with authorization
+   * @param {string} endpoint
+   * @param {object} body
+   * @example const data = await fetchClient.deleteWithAuth("/users", {"username": "test", "password": "1234"})
+   */
+  async deleteWithAuth(endpoint, body) {
+    if (!hasToken()) {
+      console.trace("No token found");
+      return;
+    }
+    try {
+      return await fetch(`${this.baseURL}${endpoint}`, {
+        method: "DELETE",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then(handleHttpErrors);
+    } catch (err) {
+      console.log(err);
+      return undefined;
+    }
+  }
 }
 
 function hasToken() {

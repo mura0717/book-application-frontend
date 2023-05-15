@@ -58,7 +58,7 @@ export const initNavLoginButtons = async () => {
     window.dispatchEvent(logoutEvent);
     return;
   }
-
+  
   const data = await fetchClient.getWithAuth("/auth/checkhealth");
   if (!data || data === false) {
     window.dispatchEvent(logoutEvent);
