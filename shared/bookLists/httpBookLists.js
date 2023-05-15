@@ -1,4 +1,5 @@
 import {fetchClient} from "../../utils.js";
+import {getUsername} from "../users/bookUsers.js";
 
 export const getBookLists = async () => {
     const response = await fetchClient.getWithAuth("/bookLists")
@@ -10,7 +11,8 @@ export const getBookLists = async () => {
 export const addToBookList = async (reference, listReference) => {
     const body = {
         bookId : reference,
-        bookListId : listReference
+        bookListId : listReference,
+        username : getUsername() ?? ""
     }
     const response = await fetchClient.patchWithAuth("/bookLists/addToBookList",body)
     if(!response)
