@@ -129,7 +129,7 @@ function deleteListModal() {
   modalTitle.textContent = "Slet bogliste";
   modalBody.innerHTML = DOMPurify.sanitize(`<p>Er du sikker på at du vil slette boglisten?</p>`);
   modalFooter.innerHTML = DOMPurify.sanitize(
-    `<button id="confirmDeleteButton-id" type="button" class="btn btn-danger">Ja, Slet</button>`
+    `<button id="confirmDeleteButton-id" type="button" class="btn btn-danger">Ja, slet</button>`
   );
   modal.show();
   return modal;
