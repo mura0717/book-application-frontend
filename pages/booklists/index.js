@@ -1,6 +1,6 @@
-import * as Factory from "../../shared/factories/elementFactory.js";
+import * as ElementFactory from "../../shared/factories/elementFactory.js";
+import * as ElementUpdate from "../../shared/factories/elementUpdate.js";
 import * as UserBookLists from "../../shared/bookLists/userBookLists.js";
-import { getBookList } from "../../shared/bookLists/httpBookLists.js";
 
 export const initBookLists = async () => {
   const bookLists = await UserBookLists.getBookLists();
@@ -13,7 +13,7 @@ export const initBookLists = async () => {
 
 function setUpListTotal(bookLists) {
   const listCount = bookLists.length;
-  Factory.updateTextContent("listCount-id", listCount + " Boglister");
+  ElementUpdate.updateTextContent("listCount-id", listCount + " Boglister");
 }
 
 function setUpBookLists(bookLists) {
@@ -86,7 +86,7 @@ const requestCreateList = async (modal) => {
     response.createdAt = new Date();
     response.listCount = 0;
     const div = createListElement(response);
-    Factory.appendChildTo("bookLists-id", div);
+    ElementUpdate.appendChildTo("bookLists-id", div);
     modal.hide();
   };
 };
@@ -166,7 +166,7 @@ const handleEditList = () => {
         alert("No list ID found for the selected booklist.");
         return;
       }
-      const bookList = await getBookList(listId);
+      const bookList = await UserBookLists.getBookList(listId);
       if (!bookList) {
         alert("Could not fetch the book list from the server.");
         return;
@@ -202,10 +202,13 @@ const requestEditList = async (modal, listId) => {
     const newName = nameInput.value;
     if (newName === "") {
       alert("Du skal angive en titel");
+      return
     }
     const response = await UserBookLists.editBookList(listId, newName);
     if (!response) {
       alert("Kunne ikke finde boglisten.");
+      // This should be considered critical. Should redirect to an error page
+      return
     }
     modal.hide();
     window.location.reload();

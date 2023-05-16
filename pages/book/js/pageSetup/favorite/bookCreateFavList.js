@@ -1,11 +1,12 @@
-import * as Factory from "./../../../../../shared/factories/elementFactory.js";
+import * as ElementFactory from "./../../../../../shared/factories/elementFactory.js";
+import * as ElementUpdate from "./../../../../../shared/factories/elementUpdate.js";
 import * as UserBookLists from "../../../../../shared/bookLists/userBookLists.js"
 
 let showForm = false
 
 export const setupCreateFavoriteButton = () => {
-    Factory.addOnclickHandler("show-create-fav-form",showFormHandler)
-    Factory.addOnclickHandler("create-fav-list-btn",requestCreateList)
+    ElementUpdate.addOnclickHandler("show-create-fav-form",showFormHandler)
+    ElementUpdate.addOnclickHandler("create-fav-list-btn",requestCreateList)
 }
 
 const showFormHandler = () => {
@@ -39,9 +40,9 @@ const requestCreateList = async () => {
         alert(response.message)
         return
     }
-    const option = Factory.createOption(response.title,response.id)
+    const option = ElementFactory.createOption(response.title,response.id)
     removeEmptyNotify()
-    Factory.appendChildTo("list-sel",option)
+    ElementUpdate.appendChildTo("list-sel",option)
     document.getElementById("create-fav-ipt").value = ""
     hideCreateForm()
 }
