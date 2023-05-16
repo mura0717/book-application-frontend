@@ -1,6 +1,5 @@
 import * as ElementFactory from "./../../../../../shared/factories/elementFactory.js";
 import * as ElementUpdate from "./../../../../../shared/factories/elementUpdate.js";
-import * as UserComments from "../../userComments/userComments.js";
 import * as UserBooks from "../../userBooks/userBooks.js"
 import * as BookRatings from "./bookRatings.js";
 import {signedIn} from "../../../../../shared/users/bookUsers.js";
@@ -34,7 +33,7 @@ export const addReview = async reviewModel => {
     if(reviewModel.rating < 1)
         return false
     reviewModel.bookReference = UserBooks.getBook().reference
-    const comment = await UserComments.addComment(reviewModel)
+    const comment = await BookComments.addComment(reviewModel)
     if(comment == null)
         return false
     removePlaceholder()
@@ -53,7 +52,7 @@ const removePlaceholder = () => {
 }
 
 const createCommentSection = () => {
-    const comments = UserComments.getComments()
+    const comments = BookComments.getComments()
     if(comments.length === 0)
         return
     ElementUpdate.updateInnerHtml("comment-cont")
@@ -81,7 +80,7 @@ const updateElement = (el,reviewModel) => {
 
 const deleteComment = async (el,reviewModel) => {
     const parent = document.getElementById("comment-cont")
-    if(!await UserComments.removeComment(reviewModel.reviewId))
+    if(!await BookComments.removeComment(reviewModel.reviewId))
         return
     parent.removeChild(el)
     BookRatings.updateAverageRating()
@@ -89,6 +88,6 @@ const deleteComment = async (el,reviewModel) => {
 }
 
 const updateCommentsCount = () => {
-    const count = UserComments.getCommentsCount()
+    const count = BookComments.getCommentsCount()
     ElementUpdate.updateTextContent("comment-count",`${count} anmeldelser`)
 }
