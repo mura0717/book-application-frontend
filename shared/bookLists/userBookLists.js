@@ -13,3 +13,9 @@ export const alreadyAdded = async (reference, listReference) => await BookLists.
 export const fetchBookList = async id => await BookLists.getBookList(id)
 
 export const createBookList = async title => await BookLists.createBookList(title)
+
+export const deleteBookList = async id => await BookLists.deleteBookList(id)
+
+export const getBookList = async id => await BookLists.getBookList(id)
+
+export const editBookList = async (id, title) => await BookLists.editBookList(id, title)
