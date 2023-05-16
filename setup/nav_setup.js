@@ -14,13 +14,12 @@ window.addEventListener("login", () => {
                 </li>
                 <li class="dropdown-item d-flex flex-row" style="cursor: pointer;" id="logout_btn">
                     <i class="bi bi-box-arrow-left"></i>
-                    <div href="/" style="text-decoration: none; padding-left: 6px;" class="text-danger">Logout</div>
+                    <div style="text-decoration: none; padding-left: 6px;" class="text-danger">Logout</div>
                 </li>
             </ul>
         </div>
     `;
-  document.getElementById("nav-buttons").innerHTML =
-    DOMPurify.sanitize(userStr);
+  document.getElementById("nav-buttons").innerHTML = DOMPurify.sanitize(userStr);
 
   document.getElementById("logout_btn").onclick = () => {
     window.dispatchEvent(logoutEvent);
@@ -34,7 +33,7 @@ window.addEventListener("logout", () => {
             <a
             class="px-2 py-2 py-md-1 rounded-1 text-light nav-link bg-dark"
             style="font-size: 14px"
-            href="/login"
+            href="/#/login"
             data-navigo
             >Login</a
             >
@@ -43,7 +42,7 @@ window.addEventListener("logout", () => {
             <a
             class="px-2 py-2 py-md-1 rounded-1 text-light nav-link bg-primary"
             style="font-size: 14px"
-            href="/signup"
+            href="/#/signup"
             data-navigo
             >Opret</a
             >
@@ -51,6 +50,7 @@ window.addEventListener("logout", () => {
     `;
   document.getElementById("nav-buttons").innerHTML = DOMPurify.sanitize(btnStr);
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
 });
 
 export const initNavLoginButtons = async () => {
@@ -58,7 +58,7 @@ export const initNavLoginButtons = async () => {
     window.dispatchEvent(logoutEvent);
     return;
   }
-  
+
   const data = await fetchClient.getWithAuth("/auth/checkhealth");
   if (!data || data === false) {
     window.dispatchEvent(logoutEvent);
