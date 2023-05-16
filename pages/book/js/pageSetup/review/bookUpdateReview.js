@@ -2,12 +2,16 @@ import * as Factory from "../../../../../shared/factories/elementFactory.js";
 import * as BookRatings from "./bookRatings.js";
 
 let parentContainer = null
-let reviewModel
+let reviewModel = {
+    rating : 0,
+    review : "",
+    reviewId : "",
+    bookReference : ""
+}
 
 export const showReviewForm = (parent,resultHandler) => {
     if(parent.innerHTML !== "")
         return
-    reviewModel = emptyModel()
     parentContainer = parent
     show(resultHandler)
 }
@@ -63,14 +67,5 @@ const appendRatingSymbols = (el) => {
             BookRatings.updateStarElements(stars,rating)
         }
         el.appendChild(star)
-    }
-}
-
-const emptyModel = () => {
-    return {
-        rating : 0,
-        review : "",
-        reviewId : "",
-        bookReference : ""
     }
 }

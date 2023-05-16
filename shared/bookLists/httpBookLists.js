@@ -1,4 +1,6 @@
-import { fetchClient } from "../../utils.js";
+import {fetchClient} from "../../utils.js";
+import {getUsername} from "../users/bookUsers.js";
+
 
 export const getBookLists = async () => {
   const response = await fetchClient.getWithAuth("/bookLists");
@@ -45,28 +47,6 @@ export const exists = async (reference, listReference) => {
   if (!response) return false;
   return response;
 };
-
-/*
-    Til Kaan:
-    Ex. fail:
-        
-        {
-            status : false,
-            message : "Booklist already exists",
-            title : null,
-            id : null,
-            listCount : 0,
-        }
-    ex. success:
-    
-        {
-            status : true,
-            message : "",
-            title : "The game",
-            id : Abbcd89,
-            listCount : 3,
-        }
- */
 
 export const createBookList = async (title) => {
   const body = { title: title };

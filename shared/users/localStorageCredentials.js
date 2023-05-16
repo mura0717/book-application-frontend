@@ -19,6 +19,8 @@ export const get = () => {
     return credentials
 }
 
+export const getUsername = () => localStorage.getItem("username")
+
 export const clear = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("token")

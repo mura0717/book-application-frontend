@@ -1,5 +1,5 @@
 import {fetchClient} from "../../utils.js";
-import {clear, get, update} from "./localStorageCredentials.js";
+import * as UserImp from "./localStorageCredentials.js";
 
 const loginEvent = new Event("login");
 const logoutEvent = new Event("logout");
@@ -10,21 +10,21 @@ export const login = async (username, password) => {
     });
     if(res === undefined)
         return false
-    update(res.user,res.token)
+    UserImp.update(res.username,res.token)
     window.dispatchEvent(loginEvent)
     return true
 }
 
 export const logout = () => {
-    clear()
+    UserImp.clear()
     window.dispatchEvent(logoutEvent)
     
 }
 
 export const updateCredentials = (username, token) => {
-    return update(username,token)
+    return UserImp.update(username,token)
 }
 
-export const getCredentials = () => get()
+export const getUsername = () => UserImp.getUsername()
 
-export const signedIn = () => get() !== undefined
+export const signedIn = () => UserImp.get() !== undefined

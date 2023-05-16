@@ -187,7 +187,7 @@ function editListModal() {
   modalBody.innerHTML = DOMPurify.sanitize(
     `<input id="editListInput-input" type="text" class="form-control" placeholder="Ny Titel på bogliste">`
   );
-  modalFooter.innerHTML = DOMPurify.sanitze(
+  modalFooter.innerHTML = DOMPurify.sanitize(
     `<button id="editListButton-confirm" type="button" class="btn btn-primary">Gem</button>`
   );
   modal.show();
