@@ -1,9 +1,10 @@
-import * as Factory from '../../shared/factories/elementFactory.js';
+import * as ElementFactory from '../../shared/factories/elementFactory.js';
+import * as ElementUpdate from '../../shared/factories/elementUpdate.js';
 import * as BookLists from '../../shared/bookLists/userBookLists.js';
 
 export const initBookList = id => {
     BookLists.fetchBookList(id).then((bookList)=>{
-        Factory.updateTextContent("listName-id",bookList.title)
+        ElementUpdate.updateTextContent("listName-id",bookList.title)
         setUpBooks(bookList)
         setUpListTotal(bookList)
     })
@@ -38,6 +39,6 @@ function createBookElement (book){
 
 function setUpListTotal (bookList){
     const booksCount = bookList.books.length;
-    Factory.updateTextContent("booksCount-id", booksCount + " Bøger");
+    ElementUpdate.updateTextContent("booksCount-id", booksCount + " Bøger");
 
 }
