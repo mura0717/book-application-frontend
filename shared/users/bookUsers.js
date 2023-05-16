@@ -27,4 +27,6 @@ export const updateCredentials = (username, token) => {
 
 export const getUsername = () => UserImp.getUsername()
 
-export const signedIn = () => UserImp.get() !== undefined
+export const signedIn = () => UserImp.signedIn()
+
+export const isActiveUser = username => UserImp.getUsername() === username

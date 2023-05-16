@@ -6,31 +6,28 @@ import * as BookRatings from "./bookRatings.js";
 import {signedIn} from "../../../../../shared/users/bookUsers.js";
 import * as ReviewForm from "./bookUpdateReview.js";
 import {toHtmlContainer} from "./bookComment.js";
+import * as BookComments from "../../userComments/userComments.js";
 
 export const setupBookComments = async () => {
+    await BookComments.fetchComments(UserBooks.getBook().reference)
     showAddButton()
-    await UserComments.fetchComments(UserBooks.getBook().reference)
     createCommentSection()
+    updateCommentsCount()
 }
 
 const showAddButton = () => {
     if (!signedIn())
         return;
-    const btn = ElementFactory.createButton("create-comment-btn", "",
-        "Opret anmeldelse",handleAdd)
+    const btn = ElementFactory.createButton("create-comment-btn", "", "Opret anmeldelse",handleAdd)
     ElementUpdate.appendChildTo("comment-section-bar", btn)
 }
 
 const handleAdd = () => {
     const cont = document.getElementById("create-form-wrapper")
-    if(!ReviewForm.isVisible()){
+    if(!ReviewForm.isVisible())
         ReviewForm.showReviewForm(cont,addReview)
-        ElementUpdate.updateTextContent("create-comment-btn","Luk")
-    }
-    else{
+    else
         ReviewForm.closeReviewForm()
-        ElementUpdate.updateTextContent("create-comment-btn","Opret anmeldelse")
-    }
 }
 
 export const addReview = async reviewModel => {
@@ -41,9 +38,10 @@ export const addReview = async reviewModel => {
     if(comment == null)
         return false
     removePlaceholder()
-    const htmlDiv = toHtmlContainer(comment)
+    const htmlDiv = toHtmlContainer(comment,updateComment,deleteComment)
     ElementUpdate.appendChildTo("comment-cont",htmlDiv)
     BookRatings.updateAverageRating()
+    updateCommentsCount()
     return true
 }
 
@@ -58,10 +56,39 @@ const createCommentSection = () => {
     const comments = UserComments.getComments()
     if(comments.length === 0)
         return
-    ElementUpdate.updateInnerHtml("comment-cont", "")
-    for (let i = 0; i < comments.length; i++) {
-        const comment = comments.at(i)
-        const commentItem = toHtmlContainer(comment)
+    ElementUpdate.updateInnerHtml("comment-cont")
+    comments.forEach(comment => {
+        const commentItem = toHtmlContainer(comment,updateComment,deleteComment)
         ElementUpdate.appendChildTo("comment-cont",commentItem)
-    }
+    })
+}
+
+const updateComment = async (el,reviewModel) => {
+    const comment =  await BookComments.addComment(reviewModel)
+    if(comment == null)
+        return false
+    updateElement(el,comment)
+    BookRatings.updateAverageRating()
+    return true
+}
+
+const updateElement = (el,reviewModel) => {
+    const reviewText = el.querySelector(".comment-text")
+    reviewText.textContent = reviewModel.review
+    const ratingElement = el.querySelector(".comment-rating")
+    BookRatings.updateWithStars(ratingElement,reviewModel.rating)
+}
+
+const deleteComment = async (el,reviewModel) => {
+    const parent = document.getElementById("comment-cont")
+    if(!await UserComments.removeComment(reviewModel.reviewId))
+        return
+    parent.removeChild(el)
+    BookRatings.updateAverageRating()
+    updateCommentsCount()
+}
+
+const updateCommentsCount = () => {
+    const count = UserComments.getCommentsCount()
+    ElementUpdate.updateTextContent("comment-count",`${count} anmeldelser`)
 }

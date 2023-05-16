@@ -21,6 +21,8 @@ export const get = () => {
 
 export const getUsername = () => localStorage.getItem("username")
 
+export const signedIn = () => localStorage.getItem("token") !== null
+
 export const clear = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("token")

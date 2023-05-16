@@ -1,6 +1,6 @@
 export const updateTextContent = (id, content) => document.getElementById(id).textContent = content
 
-export const updateInnerHtml = (id, content) => document.getElementById(id).innerHTML = DOMPurify.sanitize(content)
+export const updateInnerHtml = (id, content = "") => document.getElementById(id).innerHTML = DOMPurify.sanitize(content)
 
 export const updateDisplayMode = (id, mode) => {
     const el = document.getElementById(id)

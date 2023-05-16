@@ -1,7 +1,7 @@
 
 let userComments = []
 
-export const fetchComments = async bookReference => {
+export const fetchRestrictedComments = async bookReference => {
     userComments = [
         {
             "review" : "Hold da ferie en ringe performance af FC København i dag. Øv bøv.",

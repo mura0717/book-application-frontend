@@ -1,35 +1,26 @@
 import * as Factory from "../../../../../shared/factories/elementFactory.js";
 import * as BookRatings from "./bookRatings.js";
+import * as ElementUpdate from "../../../../../shared/factories/elementUpdate.js";
 
 let parentContainer = null
-let reviewModel = {
-    rating : 0,
-    review : "",
-    reviewId : "",
-    bookReference : ""
-}
+let reviewModel
 
-export const showReviewForm = (parent,resultHandler) => {
+export const showReviewForm = (parent,resultHandler, model) => {
     if(parent.innerHTML !== "")
         return
     parentContainer = parent
+    reviewModel = model ?? emptyModel()
+    ElementUpdate.updateTextContent("create-comment-btn","Luk")
     show(resultHandler)
 }
 
 export const isVisible = () => parentContainer != null && parentContainer.innerHTML !== ""
 
-export const updateReviewForm = (parent,model,resultHandler) => {
-    if(parent.innerHTML !== "")
-        return
-    parentContainer = parent
-    reviewModel = model
-    show(resultHandler)
-}
-
 export const closeReviewForm = () => {
     window.scroll(0,520)
     const cont = document.getElementById("create-comment-form")
     parentContainer.removeChild(cont)
+    ElementUpdate.updateTextContent("create-comment-btn","Opret anmeldelse")
 }
 
 const show = (resultHandler) => {
@@ -67,5 +58,14 @@ const appendRatingSymbols = (el) => {
             BookRatings.updateStarElements(stars,rating)
         }
         el.appendChild(star)
+    }
+}
+
+const emptyModel = () => {
+    return {
+        rating : 0,
+            review : "",
+        reviewId : "",
+        bookReference : ""
     }
 }
