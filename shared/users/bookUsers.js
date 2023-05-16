@@ -21,12 +21,22 @@ export const logout = () => {
     
 }
 
-export const updateCredentials = (username, token) => {
-    return UserImp.update(username,token)
-}
-
 export const getUsername = () => UserImp.getUsername()
 
 export const signedIn = () => UserImp.signedIn()
 
-export const isActiveUser = username => UserImp.getUsername() === username
+export const signUp = async credentials => {
+    const response = await UserImp.signUp(credentials)
+    if(!response.message){
+        return {
+            status : true,
+            credentials : response
+        }
+    }
+    else{
+        return {
+            status : false,
+            message : response.message
+        }
+    }
+}
