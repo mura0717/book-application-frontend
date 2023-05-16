@@ -23,7 +23,7 @@ export const getListTitles = async () => {
     if(!response)
         return []
     return response
-}
+}       
 
 export const getBookList = async (id) => {
     const query = `?id=${id}`
@@ -77,6 +77,14 @@ export const exists = async (reference, listReference) => {
 export const createBookList = async title => {
     const body = {title : title}
     const response = await fetchClient.postWithAuth("/bookLists/create",body)
+    if(!response)
+        return {status : false, message : "Connection error"}
+    return response
+}
+
+export const deleteBookList = async id => {
+    const body = {id : id}
+    const response = await fetchClient.deleteWithAuth("/bookLists/delete",body)
     if(!response)
         return {status : false, message : "Connection error"}
     return response

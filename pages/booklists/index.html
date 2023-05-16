@@ -1,31 +1,72 @@
 <template>
     <h2 id="bookListsPage-title">Min Lister af Boglister</h2>
 
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-primary me-md-2" type="button" id="addListButton-id" data-toggle="modal" data-target="#createListModal">Tilføj Ny List</button>
+    </div>
+
     <div id="listCount-id" style="margin-bottom: 2em"></div>
     <div class="container-fluid">
       <ol class="list-group list-group" id="bookLists-id">
       </ol>
     </div>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-primary me-md-2" type="button" id="addListButton-id" data-toggle="modal" data-target="#createListModal">Tilføj Ny List</button>
-    </div>
-  
-
+    <!--Create A List Modal-->
     <div class="modal" tabindex="-1" role="dialog" id="createListModal-id">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Ny list</h5>
+            <h5 class="modal-title"></h5>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control" id="listNameInput-id" placeholder="Enter list name">
+            <input type="text" class="form-control" id="listNameInput-id">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="createListButton-id">Create List</button>
+            <button type="button" class="btn btn-primary" id="createListButton-id"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Delete A List Modal-->
+    <div class="modal" tabindex="-1" role="dialog" id="deleteListModal-id">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="confirmDeleteButton-id"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+     <!--Edit List Modal-->
+     <div class="modal" tabindex="-1" role="dialog" id="editListModal-id">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" id="editedListNameInput-id">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="updateListButton-id"></button>
           </div>
         </div>
       </div>
