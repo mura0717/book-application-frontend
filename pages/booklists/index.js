@@ -1,4 +1,3 @@
-import * as ElementFactory from "../../shared/factories/elementFactory.js";
 import * as ElementUpdate from "../../shared/factories/elementUpdate.js";
 import * as UserBookLists from "../../shared/bookLists/userBookLists.js";
 
@@ -105,7 +104,7 @@ const handleDeleteList = () => {
         alert("No list ID found for the selected book list.");
         return;
       }
-      const bookList = await getBookList(listId);
+      const bookList = await UserBookLists.getBookList(listId);
       if (!bookList) {
         alert("Could not fetch the book list from the server.");
         return;
@@ -205,8 +204,8 @@ const requestEditList = async (modal, listId) => {
       return
     }
     const response = await UserBookLists.editBookList(listId, newName);
-    if (!response) {
-      alert("Kunne ikke finde boglisten.");
+    if (!response.status) {
+      alert(response.message);
       // This should be considered critical. Should redirect to an error page
       return
     }
