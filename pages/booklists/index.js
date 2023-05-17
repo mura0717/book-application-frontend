@@ -1,4 +1,3 @@
-import * as ElementFactory from "../../shared/factories/elementFactory.js";
 import * as ElementUpdate from "../../shared/factories/elementUpdate.js";
 import * as UserBookLists from "../../shared/bookLists/userBookLists.js";
 
@@ -11,11 +10,12 @@ export const initBookLists = async () => {
   handleEditList();
 };
 
+// Set up total lists
 function setUpListTotal(bookLists) {
   const listCount = bookLists.length;
   ElementUpdate.updateTextContent("listCount-id", listCount + " Boglister");
 }
-
+// Set up booklists as a list
 function setUpBookLists(bookLists) {
   const populatedListsElement = document.getElementById("bookLists-id");
   for (let i = 0; i < bookLists.length; i++) {
@@ -25,6 +25,7 @@ function setUpBookLists(bookLists) {
   }
 }
 
+// Create booklist as single element in list
 function createListElement(bookList) {
   const formattedDate = new Date(bookList.createdAt).toLocaleDateString();
   const html = `
@@ -48,6 +49,7 @@ function createListElement(bookList) {
   return listElement;
 }
 
+// Create Booklist
 const handleCreateList = () => {
   const addListButton = document.getElementById("addListButton-id");
   addListButton.onclick = async () => {
@@ -91,70 +93,12 @@ const requestCreateList = async (modal) => {
   };
 };
 
-const handleDeleteList = () => {
-  const populatedListsElement = document.getElementById("bookLists-id");
-  populatedListsElement.addEventListener("click", async (event) => {
-    if (event.target.matches("#deleteListButton-id")) {
-      const bookListItem = event.target.closest(".list-group-item");
-      if (!bookListItem) {
-        alert("Could not find the book list item to delete.");
-        return;
-      }
-      const listId = bookListItem.getAttribute("data-id");
-      if (!listId) {
-        alert("No list ID found for the selected book list.");
-        return;
-      }
-      const bookList = await getBookList(listId);
-      if (!bookList) {
-        alert("Could not fetch the book list from the server.");
-        return;
-      }
-
-      const modal = deleteListModal();
-      const confirmDeleteButton = document.getElementById("confirmDeleteButton-id");
-      confirmDeleteButton.onclick = async () => {
-        modal.hide();
-        await requestDeleteList(listId);
-      };
-    }
-  });
-};
-
-function deleteListModal() {
-  const modal = new bootstrap.Modal(document.getElementById("deleteListModal-id"));
-  const modalTitle = document.querySelector("#deleteListModal-id .modal-title");
-  const modalBody = document.querySelector("#deleteListModal-id .modal-body");
-  const modalFooter = document.querySelector("#deleteListModal-id .modal-footer");
-
-  modalTitle.textContent = "Slet bogliste";
-  modalBody.innerHTML = DOMPurify.sanitize(`<p>Er du sikker på at du vil slette boglisten?</p>`);
-  modalFooter.innerHTML = DOMPurify.sanitize(
-    `<button id="confirmDeleteButton-id" type="button" class="btn btn-danger">Ja, Slet</button>`
-  );
-  modal.show();
-  return modal;
-}
-
-const requestDeleteList = async (listId) => {
-  if (listId === "") {
-    alert("Boglisten med det ID findes ikke.");
-    return;
-  }
-  try {
-    const bookList = await UserBookLists.deleteBookList(listId);
-    window.location.reload();
-    if (!bookList) {
-      alert("Kunne ikke finde boglisten.");
-    }
-  } catch (error) {
-    console.error("An error occurred during the delete operation:", error);
-  }
-};
-
+// Edit Booklist
 const handleEditList = () => {
+  //Click event
   const populatedListsElement = document.getElementById("bookLists-id");
   populatedListsElement.addEventListener("click", async (event) => {
+    //Errors
     if (event.target.matches("#editListButton")) {
       const bookListItem = event.target.closest(".list-group-item");
       if (!bookListItem) {
@@ -171,6 +115,7 @@ const handleEditList = () => {
         alert("Could not fetch the book list from the server.");
         return;
       }
+      //Modal init
       const modal = editListModal(listId);
       requestEditList(modal, listId);
     }
@@ -201,12 +146,12 @@ const requestEditList = async (modal, listId) => {
   saveListButton.onclick = async () => {
     const newName = nameInput.value;
     if (newName === "") {
-      alert("Du skal angive en titel");
+      alert("You must provide a title.");
       return
     }
     const response = await UserBookLists.editBookList(listId, newName);
-    if (!response) {
-      alert("Kunne ikke finde boglisten.");
+    if (!response.status) {
+      alert(response.message);
       // This should be considered critical. Should redirect to an error page
       return
     }
@@ -214,3 +159,70 @@ const requestEditList = async (modal, listId) => {
     window.location.reload();
   };
 };
+
+// Delete Booklist
+const handleDeleteList = () => {
+  //Click event
+  const populatedListsElement = document.getElementById("bookLists-id");
+  populatedListsElement.addEventListener("click", async (event) => {
+    //Errors
+    if (event.target.matches("#deleteListButton-id")) {
+      const bookListItem = event.target.closest(".list-group-item");
+      if (!bookListItem) {
+        alert("Could not find the book list item to delete.");
+        return;
+      }
+      const listId = bookListItem.getAttribute("data-id");
+      if (!listId) {
+        alert("No list ID found for the selected book list.");
+        return;
+      }
+      const bookList = await UserBookLists.getBookList(listId);
+      if (!bookList) {
+        alert("Could not fetch the book list from the server.");
+        return;
+      }
+
+      //Modal init
+      const modal = deleteListModal();
+      const confirmDeleteButton = document.getElementById("confirmDeleteButton-id");
+      confirmDeleteButton.onclick = async () => {
+        modal.hide();
+        await requestDeleteList(listId);
+      };
+    }
+  });
+};
+
+function deleteListModal() {
+  const modal = new bootstrap.Modal(document.getElementById("deleteListModal-id"));
+  const modalTitle = document.querySelector("#deleteListModal-id .modal-title");
+  const modalBody = document.querySelector("#deleteListModal-id .modal-body");
+  const modalFooter = document.querySelector("#deleteListModal-id .modal-footer");
+
+  modalTitle.textContent = "Slet bogliste";
+  modalBody.innerHTML = DOMPurify.sanitize(`<p>Er du sikker på at du vil slette boglisten?</p>`);
+  modalFooter.innerHTML = DOMPurify.sanitize(
+    `<button id="confirmDeleteButton-id" type="button" class="btn btn-danger">Ja, slet</button>`
+  );
+  modal.show();
+  return modal;
+}
+
+const requestDeleteList = async (listId) => {
+  if (listId === "") {
+    alert("Booklist with that ID does not exist.");
+    return;
+  }
+  try {
+    const bookList = await UserBookLists.deleteBookList(listId);
+    window.location.reload();
+    if (!bookList) {
+      alert("Error deleting booklist.");
+    }
+  } catch (error) {
+    console.error("An error occurred during the delete operation:", error);
+  }
+};
+
+

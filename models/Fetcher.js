@@ -1,10 +1,7 @@
 import { handleHttpErrors } from "../utils.js";
+import {baseURL} from "./apiInfo.js";
 
 export default class FetchClient {
-  constructor() {
-    this.baseURL = "http://localhost:8080/api";
-  }
-
   /**
    * Make a GET request to the targetted endpoint
    * @param {string} endpoint
@@ -12,7 +9,7 @@ export default class FetchClient {
    */
   async get(endpoint) {
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +29,7 @@ export default class FetchClient {
    */
   async post(endpoint, body) {
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -53,7 +50,7 @@ export default class FetchClient {
    */
 
   async patch(endpoint, body) {
-    return await fetch(`${this.baseURL}${endpoint}`, {
+    return await fetch(`${baseURL}${endpoint}`, {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: {
@@ -80,7 +77,7 @@ export default class FetchClient {
       return;
     }
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +101,7 @@ export default class FetchClient {
       return;
     }
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -130,7 +127,7 @@ export default class FetchClient {
       return;
     }
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "PATCH",
         body: JSON.stringify(body),
         headers: {
@@ -156,7 +153,7 @@ export default class FetchClient {
       return;
     }
     try {
-      return await fetch(`${this.baseURL}${endpoint}`, {
+      return await fetch(`${baseURL}${endpoint}`, {
         method: "DELETE",
         body: JSON.stringify(body),
         headers: {

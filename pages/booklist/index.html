@@ -2,4 +2,24 @@
   <h2 id="listName-id"></h2>
   <div id="booksCount-id" style="margin-bottom: 2em"></div>
   <ol class="list-group list-group" id="books-id"></ol>
+
+  <!--Remove Book Modal-->
+  <div class="modal" tabindex="-1" role="dialog" id="removeBookModal-id">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="confirmRemoveButton-id"></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

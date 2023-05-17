@@ -66,7 +66,6 @@
 }
 
 #fav-btn-added:hover{
-    scale: 1.25;
     border:1px solid white;
     box-shadow: white 0 0 15px;
     border-radius: 6px;

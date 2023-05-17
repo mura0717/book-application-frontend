@@ -1,54 +1,32 @@
-import {fetchClient} from "../../utils.js";
-import {login} from "../../shared/users/bookUsers.js";
-
+import * as User from "../../shared/users/bookUsers.js";
 
 export const initSignup = () => {
-
     const form = document.querySelector("form");
     form.onsubmit = handleSignUp;
 };
 
 async function handleSignUp(e) {
-    
     e.preventDefault();
 
-    const body = fetchInputValues();
+    const credentials = fetchInputValues();
 
-    if (!isValidEmail(body.email)){
+    if (!isValidEmail(credentials.email)){
         handleErrorModal("Please enter a valid email.")
         return;
     }
 
-    try{
-        const response = await fetchClient.post("/user-with-role", body)
+    const response = await User.signUp(credentials)
 
-        if (response){
-            showSuccessModal();
-            addLoginEventListener(body.username, body.password);
-            
-        } else { 
-            handleErrorModal("Sign up failed. Try again.");
-            clearForm();
-        }
+    if (response.status){
+        showSuccessModal();
+        addLoginEventListener(credentials.username, credentials.password);
 
-    } catch (error) {
-        const responseMessage = error?.message;
-        console.log(responseMessage)
-        let errorMessage = "Sign up failed.";
-
-        if (responseMessage.includes("This username is taken")) {
-            errorMessage = "This user name is already taken.";
-        } else if (responseMessage.includes("email already exists")) {
-            errorMessage = "This email is already registered.";
-        }
-
-        handleErrorModal(errorMessage);
-        clearForm();
+    } else {
+        handleErrorModal(response.message);
     }
 }
    
 function fetchInputValues() {
-
     const usernameInput = document.getElementById("input-username").value;
     const emailInput = document.getElementById("input-email").value;
     const passwordInput = document.getElementById("input-password").value;
@@ -56,29 +34,25 @@ function fetchInputValues() {
     return {
         username: usernameInput,
         email: emailInput,
-        password: passwordInput,
+        password: passwordInput
     };
 };
 
 function showSuccessModal(){
-
     const modal = new bootstrap.Modal(document.getElementById("signUp-modal"));
     modal.show();
-
-    
 }
 
 function addLoginEventListener(username, password) {
     const loginButton = document.getElementById("login-button");
     loginButton.addEventListener("click", async () => {
-        login(username, password);
+        await User.login(username, password);
         window.router.navigate("/");
 });
 }
 
 
 function handleErrorModal(errorMessage){
-
     const modal = new bootstrap.Modal(document.getElementById("error-modal"));
     const modalTitle = document.querySelector("#error-modal .modal-title");
     const modalBody = document.querySelector("#error-modal .modal-body");
@@ -92,9 +66,4 @@ function handleErrorModal(errorMessage){
 function isValidEmail(email) {
     const emailRegex = /\S+@\S+\.\S+/;
     return emailRegex.test(email);
-}
-
-  function clearForm(){
-    const form = document.getElementById("form");
-    form.reset();
 }

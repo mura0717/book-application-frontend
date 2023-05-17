@@ -1,14 +1,13 @@
 import * as Factory from "../../../../../shared/factories/elementFactory.js";
 import * as BookRatings from "./bookRatings.js";
 import * as ReviewForm from "./bookUpdateReview.js"
-import * as BookComments from "../../userComments/userComments.js"
 
-export const toHtmlContainer = comment => {
+export const toHtmlContainer = (comment,updateHandler, deleteHandler) => {
     const commentItem = Factory.createDiv("","comment-item")
     let menu
     if(comment.editable){
         menu = userMenu()
-        setupUpdateHandler(commentItem,menu,comment)
+        setupCommentMenu(commentItem,menu,comment,updateHandler, deleteHandler)
     }
     else{
         menu = Factory.createDiv("","user-logo")
@@ -38,33 +37,12 @@ const userMenu = () => {
     return el
 }
 
-const setupUpdateHandler = (model,menuElement, comment) => {
+const setupCommentMenu = (model,menuElement, comment, updateHandler, deleteHandler) => {
     const formCont = document.getElementById("create-form-wrapper")
-    const buttons = menuElement.getElementsByClassName("menu-btn")
-    const updateButton = buttons.item(0)
-    updateButton.onclick = () => ReviewForm.updateReviewForm(formCont,comment,
-        async reviewModel => await updateComment(model,reviewModel))
-    const removeButton = buttons.item(1)
-    removeButton.onclick = async () => await deleteComment(model,comment)
-}
-
-const updateComment = async (el,reviewModel) => {
-    const comment =  await BookComments.addComment(reviewModel) 
-    if(comment == null)
-        return false
-    updateElement(el,comment)
-    return true
-}
-
-const updateElement = (el,reviewModel) => {
-    const reviewText = el.querySelector(".comment-text")
-    reviewText.textContent = reviewModel.review
-    const ratingElement = el.querySelector(".comment-rating")
-    BookRatings.updateWithStars(ratingElement,reviewModel.rating)
-}
-
-const deleteComment = async (el,reviewModel) => {
-    const parent = document.getElementById("comment-cont")
-    if(await BookComments.removeComment(reviewModel.reviewId))
-        parent.removeChild(el)
+    const menuEntries = menuElement.getElementsByClassName("menu-btn")
+    const updateEntry = menuEntries.item(0)
+    updateEntry.onclick = () => ReviewForm.showReviewForm(formCont,
+        async reviewModel => await updateHandler(model,reviewModel),comment)
+    const deleteEntry = menuEntries.item(1)
+    deleteEntry.onclick = async () => await deleteHandler(model,comment)
 }

@@ -1,3 +1,5 @@
+import {handleHttpErrors} from "../../utils.js";
+import {baseURL} from "../../models/apiInfo.js";
 
 export const update = (username, token) => {
     if(localStorage){
@@ -9,19 +11,25 @@ export const update = (username, token) => {
     return true
 }
 
-export const get = () => {
-    const credentials = {
-        username : localStorage.getItem("username"),
-        token : localStorage.getItem("token")
-    }
-    if(credentials.username == null || credentials.token == null)
-        return undefined
-    return credentials
-}
-
 export const getUsername = () => localStorage.getItem("username")
+
+export const signedIn = () => localStorage.getItem("token") !== null
 
 export const clear = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("token")
-} 
+}
+
+export const signUp = async credentials => {
+    try {
+        return await fetch(`${baseURL}/user-with-role`, {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(handleHttpErrors);
+    } catch (err) {
+        return err
+    }
+}
