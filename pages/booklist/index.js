@@ -67,11 +67,7 @@ const handleRemoveBook = (bookListId) => {
           alert("No ID found for the selected book.");
           return;
         };
-        const bookList = await UserBookLists.getBookList(bookListId);
-        if (!bookList) {
-          alert("Could not establish connection with the booklist from the server.");
-          return;
-        }
+
     //Modal init
         const modal = removeBookModal();
         const confirmRemoveButton = document.getElementById("confirmRemoveButton-id");
