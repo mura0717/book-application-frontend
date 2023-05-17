@@ -1,4 +1,5 @@
 import { fetchClient } from "../utils.js";
+import {clearCredentials} from "../shared/users/bookUsers.js";
 
 export const loginEvent = new Event("login");
 export const logoutEvent = new Event("logout");
@@ -49,8 +50,7 @@ window.addEventListener("logout", () => {
         </li>
     `;
   document.getElementById("nav-buttons").innerHTML = DOMPurify.sanitize(btnStr);
-  localStorage.removeItem("token");
-  localStorage.removeItem("username");
+  clearCredentials()
 });
 
 export const initNavLoginButtons = async () => {

@@ -18,8 +18,9 @@ export const login = async (username, password) => {
 export const logout = () => {
     UserImp.clear()
     window.dispatchEvent(logoutEvent)
-    
 }
+
+export const clearCredentials = () => UserImp.clear()
 
 export const getUsername = () => UserImp.getUsername()
 
