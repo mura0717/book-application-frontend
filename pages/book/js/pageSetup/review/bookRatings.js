@@ -49,6 +49,6 @@ const average = (comments) => {
         return 0
     const sum = comments
         .map(c => c.rating)
-        .reduce((r, acc) => r*(1/count),0)
-    return Math.floor(sum)
+        .reduce((r, acc) => acc + r,0)
+    return Math.floor(sum/count)
 }
