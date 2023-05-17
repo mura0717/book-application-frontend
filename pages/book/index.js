@@ -8,7 +8,7 @@ import {updateAverageRating} from "./js/pageSetup/review/bookRatings.js";
 export const initBook = async (referenceId) => {
     setupPlaceholders()
     await Books.fetchBookDetails(referenceId)
-    //initRecommendations().then()
+    initRecommendations().then()
     await initBookDetails()
     await initReviewDetails()
 };
